@@ -508,6 +508,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="Properties\PublishProfiles\ProsessPiloteneSignicatWebApi - PreProd.pubxml" />
+    <None Include="Properties\PublishProfiles\ProsessPiloteneSignicatWebApi-PreProd - Web Deploy.pubxml" />
     <None Include="Resources\prosesspilotene_logo_horizontal.png" />
     <None Include="Resources\ProsessPilotene-logo.png" />
     <None Include="Resources\signicat-logo.png" />
