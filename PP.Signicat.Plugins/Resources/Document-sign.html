@@ -1,0 +1,719 @@
+﻿<html>
+<head>
+    <script type="text/javascript" src="ClientGlobalContext.js.aspx"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src="pp_notify.js"></script>
+    <script src="pp_signicatcrm.js"></script>
+    <script src="pp_signicatapi.js"></script>
+    <link rel="stylesheet" type="text/css" href="pp_signicat.css">
+
+    <title>Document signing</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div class="container">
+        <div class="row clearfix">
+
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6  column col-sm-offset-0 col-md-offset-2 col-lg-offset-3">
+
+                <form class="form-horizontal">
+                    <fieldset>
+                        <legend>
+                            <img class="img-responsive img-rounded" src="pp_signicatsendlogo.png" />
+                        </legend>
+                        <!--<div class="wrapper col-md-12">
+                            <img class="img-responsive img-rounded" src="pp_signicatsendlogo.pn" />
+                        </div>-->
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="selectsignmetod" data-toggle="tooltip" data-placement="top" title="Chose a method for signing the documents.">Signing method</label>
+                                    <div class="col-md-6">
+                                        <select id="selectsignmetod" name="selectsignmetod" class="form-control">
+                                            <option value="1">BankID/BankID Mobil</option>
+                                            <option value="2">SMS/E-mail OTP</option>
+                                            <option value="3">Social</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label class="col-md-3 control-label" for="radios5" data-toggle="tooltip" data-placement="top" title="The user will have to authenticate before seeing the document.">Authenticate to view?</label>
+                                <div class="col-md-3" id="radios5">
+                                    <label class="radio-inline" for="radios-9">
+                                        <input type="radio" name="radios5" id="radios-9" value="9">
+                                        Yes
+                                    </label>
+                                    <label class="radio-inline" for="radios-10">
+                                        <input type="radio" name="radios5" id="radios-10" value="10" checked="checked">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!--<div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="authmetod" data-toggle="tooltip" data-placement="top" title="Chose a method for authentication before viewing the documents.">Authenticate to view</label>
+                                    <div class="col-md-6">
+                                        <select id="authmetod" name="authmetod" class="form-control">
+                                            <option value="0">None</option>
+                                            <option value="1">BankID</option>
+                                            <option value="2">BankID Mobil</option>
+                                            <option value="3">Social</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <!-- Text input-->
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="daystolive" data-toggle="tooltip" data-placement="top" title="How long will the documents be available for signing.">Expiration</label>
+                                    <div class="col-md-3">
+                                        <input id="daystolive" name="daystolive" type="number" value="60" placeholder="Days" class="form-control input-md">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Multiple Radios (inline) -->
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label class="col-md-3 control-label" for="radios1" data-toggle="tooltip" data-placement="top" title="An email will be sent to you when a document is signed.">Notification?</label>
+                                <div class="col-md-3" id="radios1">
+                                    <label class="radio-inline" for="radios-0">
+                                        <input type="radio" name="radios1" id="radios-0" value="1">
+                                        Yes
+                                    </label>
+                                    <label class="radio-inline" for="radios-1">
+                                        <input type="radio" name="radios1" id="radios-1" value="2" checked="checked">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label class="col-md-3 control-label" for="radios2" data-toggle="tooltip" data-placement="top" title="The uploaded documents will be saved in CRM notes.">Save original?</label>
+                                <div class="col-md-3" id="radios2">
+                                    <label class="radio-inline" for="radios-2">
+                                        <input type="radio" name="radios2" id="radios-2" value="3">
+                                        Yes
+                                    </label>
+                                    <label class="radio-inline" for="radios-3">
+                                        <input type="radio" name="radios2" id="radios-3" value="4" checked="checked">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label class="col-md-3 control-label" for="radios6" data-toggle="tooltip" data-placement="top" title="The signed documents will be sent as a copy to the signatories.">Send copy?</label>
+                                <div class="col-md-3" id="radios6">
+                                    <label class="radio-inline" for="radios-11">
+                                        <input type="radio" name="radios6" id="radios-11" value="11">
+                                        Yes
+                                    </label>
+                                    <label class="radio-inline" for="radios-12">
+                                        <input type="radio" name="radios6" id="radios-12" value="12" checked="checked">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="radios3" data-toggle="tooltip" data-placement="top" title="The signed documents will be saved in the Sharepoint Document Location of the parent record.">Save in Sharepoint</label>
+                                    <div class="col-md-3" id="radios3">
+                                        <label class="radio-inline" for="radios-4">
+                                            <input type="radio" name="radios3" id="radios-4" value="5">
+                                            Yes
+                                        </label>
+                                        <label class="radio-inline" for="radios-5">
+                                            <input type="radio" name="radios3" id="radios-5" value="6" checked="checked">
+                                            No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!--Email-->
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="subject">Subject</label>
+                            <div class="col-md-9">
+                                <input id="subject" name="subject" type="text" placeholder="Email header" class="form-control input-md">
+                            </div>
+                            <!--<label class="col-md-3 control-label" for="email">Avsender</label>
+                            <div class="col-md-3">
+                                <input id="email" name="email" type="text" placeholder="example@mail.com" class="form-control input-md">
+                            </div>-->
+                        </div>
+
+                        <!-- Textarea -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="message">Message</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" id="message" name="message" placeholder="Email message"></textarea>
+                            </div>
+                        </div>
+
+                        <!--File upload local-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="filetosend" data-toggle="tooltip" data-placement="top" title="Chose a file from your local computer.">Select file(s)</label>
+                            <div class="col-md-9">
+                                <input type="file" accept="application/pdf" class="form-control-file" id="filetosend" multiple data-toggle="tooltip" data-placement="top" title="Chose a file from your local computer.">
+                                <small id="fileHelp" class="form-text text-muted">Plase attach file(s) you want to send for signing.</small>
+                                <div id="filenames"></div>
+                            </div>
+                        </div>
+
+                        <!--Recipients-->
+                        <hr />
+
+                        <div class="form-group" id="saveonlymergedDiv" hidden>
+                            <label class="col-md-3 control-label" for="radios4" data-toggle="tooltip" data-placement="top" title="If NO, the all the signed documents inclusive the merged ones will be saved in CRM notes.">Save only merged?</label>
+                            <div class="col-md-3" id="radios4">
+                                <label class="radio-inline" for="radios-6">
+                                    <input type="radio" name="radios4" id="radios-6" value="7" checked="checked">
+                                    Yes
+                                </label>
+                                <label class="radio-inline" for="radios-7">
+                                    <input type="radio" name="radios4" id="radios-7" value="8">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="search" data-toggle="tooltip" data-placement="top" title="These contacts will receive an email for signing the documents.">Recipients</label>
+                            <!--<div class="col-md-9">
+                                <input id="search" name="search" type="text" class="form-control autocomplete" placeholder="Search in contacts...">
+                                <input id="contactInfo" name="contactInfo" hidden type="text">
+                            </div>-->
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-search btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                            <span class="label-icon">Search</span>
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul id="searchMenu" class="dropdown-menu pull-left" role="menu">
+                                            <li>
+                                                <a id="account" href="#">
+                                                    <span class="glyphicon glyphicon-book"></span>
+                                                    <span class="label-icon">Accounts</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a id="contact" href="#">
+                                                    <span class="glyphicon glyphicon-user"></span>
+                                                    <span class="label-icon">Contacts</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <input id="search" name="search" type="text" class="form-control autocomplete" placeholder="Search in contacts or accounts...">
+                                    <input id="contactInfo" name="contactInfo" hidden type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        </br>
+                        </br>
+
+                        <table id="recipients" class="table table-bordered table-inverse">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Type</th>
+                                    <th>Name</th>
+                                    <th>Company</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                        <!-- Button (Double) -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="btnSubmit"></label>
+                            <div class="col-md-8">
+                                <button id="submit" type="submit" name="btnSubmit" class="btn btn-primary">Send</button>
+                                <button id="btnCancel" name="cancel" class="btn btn-danger">Cancel</button>
+                                <img src="pp_loading.gif" id="loading-indicator" style="display:none" />
+                                <button id="btnDone" name="done" class="btn btn-success">Done</button>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="container">
+            <!--<p class="text-muted credit">Ta kontakt med <a href="http://www.prosesspilotene.no">Prosesspilotene</a>.</p>-->
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script>
+
+    $("form").submit(function (e) {
+        e.preventDefault();
+    });
+
+    $(function () {
+
+        var obj = getDataParam();
+        var entityid = obj.entityid;
+        var docLocExists = CheckDocLocation(entityid);
+
+        if (!docLocExists) {
+            $("#radios-4").attr('disabled', true);
+            $("#radios-4").notify("This record has no Sharepoint location.", "info", { clickToHide: true, autoHide: true, position: "top" });
+        }
+
+        $('[data-toggle="tooltip"]').tooltip();
+        $('#btnDone').hide();
+
+        $(window).keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        $(".input-group-btn .dropdown-menu li a").click(function () {
+            var selText = $(this).html();
+            //working version - for single button //
+            //$('.btn:first-child').html(selText+'<span class="caret"></span>');
+
+            //working version - for multiple buttons //
+            $(this).parents('.input-group-btn').find('.btn-search').html(selText);
+        });
+    });
+
+    var searchIn = null;
+    $('.input-group-btn .dropdown-menu li a').click(function () {
+        searchIn = null;
+        var selectedLi = $(this).attr('id');
+        searchIn = selectedLi;
+        $('html, body').scrollTop($(document).height());
+    });
+
+    $('table').on('click', 'tr a#delete', function (e) {
+        e.preventDefault();
+        $(this).closest('tr').remove();
+
+        var rowCount = $('#recipients tr').length;
+        if (rowCount <= 2)
+            $("#saveonlymergedDiv").hide();
+    });
+
+    $("input[type=file]").change(function () {
+        $("#filenames").empty();
+        var files = $(this).prop("files");
+        var names = $.map(files, function (val) { return val.name; });
+        if (names.length == 1)
+            return;
+
+        $.each(names, function (index, name) {
+            $("#filenames").append(" - " + name);
+        });
+    });
+
+    $('#search').bind("enterKey", function (e) {
+        AddContact();
+    });
+
+    $('#search').keyup(function (e) {
+        if (e.keyCode == 13) {
+            AddContact();
+        }
+    });
+
+    $('#search').keyup(function (e) { if (e.keyCode == 8) $('#search').val(''); })
+
+    $('#search').click(function () {
+        var obj = getDataParam();
+        var serverUrl = obj.serverurl;
+        var ODATA_ENDPOINT = "/XRMServices/2011/OrganizationData.svc";
+        var url = serverUrl + ODATA_ENDPOINT;
+
+        if (searchIn == null) {
+            $("#search").notify("Please chose a search entity!", "warning", { clickToHide: true, autoHide: true, position: "top" });
+            return;
+        }
+
+        if (searchIn == "contact")
+            $('#search').autocomplete({
+                minLength: 3,
+                delay: 500,
+                autoFocus: true,
+                async: false,
+                source: function (request, response) {
+                    $.ajax({
+                        type: "GET",
+                        url: url + "/ContactSet?$select=ParentCustomerId,ContactId,EMailAddress1,FullName,MobilePhone&$filter=substringof('"
+                            + $("#search").val() + "',EMailAddress1) or  substringof('" + $("#search").val() + "',FullName) or  substringof('"
+                            + $("#search").val() + "',FirstName) or  substringof('" + $("#search").val() + "',LastName) or  substringof('"
+                            + $("#search").val() + "',MobilePhone)&$top=50&$orderby=FullName asc",
+                        datatype: "json",
+                        // jsonp will allow you to make cross domain calls
+                        beforeSend: function (XMLHttpRequest) {
+                            XMLHttpRequest.setRequestHeader("Accept", "application/json");
+                        },
+                        async: true,
+                        success: function (data) {
+                            var results = data.d.results;
+
+                            var objArr = [];
+                            $.each(results, function (key, item) {
+                                var value = searchIn + "&" + item.ContactId + "&" + item.EMailAddress1 + "&" + item.ParentCustomerId.Name + "&" + item.MobilePhone;
+
+                                var labelValue = item.FullName;
+                                if (item.ParentCustomerId.Name != null)
+                                    labelValue += " - " + item.ParentCustomerId.Name;
+                                if (item.EMailAddress1 != null)
+                                    labelValue += " - " + item.EMailAddress1;
+                                if (item.MobilePhone != null)
+                                    labelValue += " - " + item.MobilePhone;
+
+                                var obj = {};
+                                obj.value = value;
+                                obj.label = labelValue;
+                                objArr.push(obj);
+                            });
+
+                            response($.map(objArr, function (item) {
+                                return {
+                                    label: item.label,
+                                    value: item.value
+                                };
+                            }));
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            $.notify('No search results!' + textStatus, "error");
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    if (ui != null && ui.item != null) {
+                        event.preventDefault();
+                        var label = ui.item.label;
+                        $("#search").val(label);
+                        $("#contactInfo").val(ui.item.value);
+                        return false;
+                    }
+                },
+                focus: function (event, ui) {
+                    event.preventDefault();
+                    $("#search").val(ui.item.label);
+                }
+            });
+
+        else if (searchIn == "account")
+            $('#search').autocomplete({
+                minLength: 3,
+                delay: 500,
+                autoFocus: true,
+                async: false,
+                source: function (request, response) {
+                    $.ajax({
+                        type: "GET",
+                        url: url + "/AccountSet?$select=AccountId,EMailAddress1,Name,ParentAccountId,Telephone1&$filter=substringof('"
+                            + $("#search").val() + "',EMailAddress1) or  substringof('" + $("#search").val()
+                            + "',Name) or substringof('" + $("#search").val() + "',Telephone1)&$top=50&$orderby=Name asc",
+                        datatype: "json",
+                        // jsonp will allow you to make cross domain calls
+                        beforeSend: function (XMLHttpRequest) {
+                            XMLHttpRequest.setRequestHeader("Accept", "application/json");
+                        },
+                        async: true,
+                        success: function (data) {
+                            var results = data.d.results;
+
+                            var objArr = [];
+                            $.each(results, function (key, item) {
+                                var value = searchIn + "&" + item.AccountId + "&" + item.EMailAddress1 + "&" + item.ParentAccountId.Name + "&" + item.Telephone1;
+
+                                var labelValue = item.Name;
+                                if (item.ParentAccountId.Name != null)
+                                    labelValue += " - " + item.ParentAccountId.Name;
+                                if (item.EMailAddress1 != null)
+                                    labelValue += " - " + item.EMailAddress1;
+                                if (item.Telephone1 != null)
+                                    labelValue += " - " + item.Telephone1;
+
+                                var obj = {};
+                                obj.value = value;
+                                obj.label = labelValue;
+                                objArr.push(obj);
+                            });
+
+                            response($.map(objArr, function (item) {
+                                return {
+                                    label: item.label,
+                                    value: item.value
+                                };
+                            }));
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            $.notify('No search results!' + textStatus, "error");
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    if (ui != null && ui.item != null) {
+                        event.preventDefault();
+                        var label = ui.item.label;
+                        $("#search").val(label);
+                        $("#contactInfo").val(ui.item.value);
+                        return false;
+                    }
+                },
+                focus: function (event, ui) {
+                    event.preventDefault();
+                    $("#search").val(ui.item.label);
+                }
+            });
+    });
+
+    function AddContact() {
+        var contactinfo = $("#contactInfo").val();
+        var fullname = $("#search").val();
+        fullname = fullname.split('-').shift();
+
+        var rowCount = $('#recipients tr').length;
+        var values = contactinfo.split('&');
+        var entitylogicalname = values[0];
+        var customerid = values[1];
+        var email = values[2];
+        var parentaccountname = values[3];
+        var mobile = values[4];
+
+        if (customerid == '') {
+            $("#search").notify("No customer is chosen.", "warning", { clickToHide: true, autoHide: true, position: "top" });
+            return;
+        }
+
+        if (email == 'null') {
+            $("#search").notify("The customer must have an email address.", "warning", { clickToHide: true, autoHide: true, position: "buttom" });
+            return;
+        }
+
+        var hit = false;
+        $("#recipients").find("tr").each(function () {
+
+            if ($(this).find(".email").html() == email) {
+                $("#search").notify("A customer with the same email is allready added!", "warning", { clickToHide: true, autoHide: true, position: "buttom" });
+                hit = true;
+                return false;
+            }
+        });
+
+        if (hit)
+            return;
+
+        $("#recipients tbody").append(
+            '<tr id="' + customerid + '"><th scope="row">' + rowCount + '</th><td class="type">' +
+            entitylogicalname + '</td><td>' + fullname + '</td><td>' + parentaccountname
+            + '</td><td class="email">' + email + '</td><td class="mobile">' + mobile +
+            '</td><td><a class="btn btn-default" role="button" id="delete"><span class="glyphicon glyphicon-trash"></span></a></td></tr>');
+        $('#search').val('');
+
+        var rowCount = $('#recipients tr').length;
+        if (rowCount > 2)
+            $("#saveonlymergedDiv").show();
+
+    }
+
+    $("#submit").click(function (e) {
+        $('#loading-indicator').show();
+
+        if ($("#subject").val() === '') {
+            $("#subject").notify('You must write a subject!', "warning");
+            $('#loading-indicator').hide();
+            return;
+        }
+
+        if ($("#message").val() === '') {
+            $("#message").notify('You must write a message!', "warning");
+            $('#loading-indicator').hide();
+            return;
+        }
+
+        var obj = getDataParam();
+        var entityname = obj.entityname;
+        var entityid = obj.entityid;
+        var serverUrl = obj.serverurl;
+        var userId = obj.userid;
+        var orgname = obj.orgname;
+
+        var data = new FormData();
+        var files = $("#filetosend").get(0).files;
+        var signingmetod = $("#selectsignmetod").val();
+        //var authmetod = $("#authmetod").val();
+        var daystolive = $("#daystolive").val();
+        var saveoriginalfile;
+        var saveinsp;
+        var saveonlymerged;
+        allowedFileTypes = ["application/pdf"];
+
+        // Add the uploaded image content to the form data collection
+        if (files.length > 0) {
+            for (var x = 0; x < files.length; x++) {
+                if (allowedFileTypes.indexOf(files[x].type) == -1) {
+                    $('#filetosend').notify('Only PDF is allowed!', "warning");
+                    $('#loading-indicator').hide();
+                    return;
+                }
+                data.append("file" + x, files[x]);
+            }
+
+            data.append("SigningMetod", signingmetod);
+            //data.append("Authmetod", authmetod);
+            data.append("Daystolive", daystolive);
+            data.append("CustomerOrg", orgname);
+
+            var contactEmail = [];
+            var contactMobile = [];
+            var customers = [];
+
+            $("#recipients").find("tr").each(function () {
+                var obj = {};
+                obj.id = this.id;
+                obj.entityLogicalName = $(this).find(".type").html();
+                customers.push(obj);
+            });
+            $("#recipients").find("tr").each(function () {
+                contactEmail.push($(this).find(".email").html());
+                //contactMobile.push($(this).find(".mobile").html());
+            });
+
+            customers.shift();
+            contactEmail.shift();
+            //contactMobile.shift();
+
+            if (customers.length === 0) {
+                $("#recipients").notify('You must add recipients!', "warning");
+                $('#loading-indicator').hide();
+                return;
+            }
+
+            var senderEmail = GetUserMail(userId);
+
+            var radiovalue1 = $("#radios1 input[type='radio']:checked").val();
+            var radiovalue2 = $("#radios2 input[type='radio']:checked").val();
+            var radiovalue3 = $("#radios3 input[type='radio']:checked").val();
+            var radiovalue4 = $("#radios4 input[type='radio']:checked").val();
+            var radiovalue5 = $("#radios5 input[type='radio']:checked").val();
+            var radiovalue6 = $("#radios6 input[type='radio']:checked").val();
+
+            var authmetod;
+            if (radiovalue5 == 9) {
+                if (signingmetod == 1) //BankID
+                    authmetod = 1;
+                if (signingmetod == 2)//Sms/E-mail
+                    authmetod = 2;
+                if (signingmetod == 3)//Social
+                    authmetod = 3;
+            }
+            else if (radiovalue5 == 10)
+                authmetod = 0;
+
+            data.append("Authmetod", authmetod);
+
+            if (radiovalue1 == 1)
+                data.append("NotifyMe", true);
+            else if (radiovalue1 == 2)
+                data.append("NotifyMe", false);
+
+            if (radiovalue2 == 3)
+                saveoriginalfile = true;
+            else if (radiovalue2 == 4)
+                saveoriginalfile = false;
+
+            if (radiovalue3 == 5)
+                saveinsp = true;
+            else if (radiovalue3 == 6)
+                saveinsp = false;
+
+            if (radiovalue4 == 7)
+                saveonlymerged = true;
+            else if (radiovalue4 == 8)
+                saveonlymerged = false;
+
+            data.append("SenderEmail", senderEmail);
+            data.append("RecipientEmails", contactEmail);
+            //data.append("RecipientMobiles", contactMobile);
+            var apiurl = GetConfigValue("Signicat", "webapiurl");
+            //var apiurl = "http://localhost:43632/";
+
+            $.ajax({
+                type: "POST",
+                //async: true,
+                url: apiurl + "api/SignRequest/PostCRM",
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (sdsurls) {
+                    //$.notify('The documet(s) are sent to Signicat!', "info");
+                    createRecord(sdsurls, "pp_documentsigningSet", files, customers,
+                        saveoriginalfile, saveinsp, saveonlymerged);
+                    //$.notify('Request is sent to Signicat!', "success");
+                    $.notify('Request is sent to Signicat!', 'success', {
+                        clickToHide: true,
+                        autoHide: false,
+                        globalPosition: 'top right'
+                    });
+                    //$("#submit").notify("Done", "info", { clickToHide: false, autoHide: false, position: "right" });
+                    $('#loading-indicator').hide();
+                    $('#btnCancel').hide();
+                    $('#submit').hide();
+                    $('#btnDone').show();
+                    //closeWindow().delay(5000);
+                },
+                error: function (request, status, error) {
+                    $.notify('Error connecting to Signicat!', "error");
+                    $('#loading-indicator').hide();
+                }
+            });
+        }
+
+        if (files.length == 0) {
+            $('#filetosend').notify('You must chose a document!', "warning");
+            $('#loading-indicator').hide();
+        }
+    });
+
+    $("#btnCancel").click(function () {
+        closeWindow();
+    });
+
+    $("#btnDone").click(function () {
+        closeWindow();
+    });
+</script>

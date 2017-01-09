@@ -3,7 +3,43 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PP.Signicat.CredentialManager", "PP.Signicat.CredentialManager\PP.Signicat.CredentialManager.csproj", "{E4506415-A7FD-4F3C-88DA-3B650F1D6E71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PP.Signicat.Plugins", "PP.Signicat.Plugins\PP.Signicat.Plugins.csproj", "{F98078A3-9D68-41DE-BB43-12745E33724A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PP.Signicat.UnisolatedPlugins", "PP.Signicat.UnisolatedPlugins\PP.Signicat.UnisolatedPlugins.csproj", "{F901B871-F09F-402E-8492-18AABC0D5D59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProsessPilotene.Signicat.WebApi", "ProsessPilotene.Signicat.WebApi\ProsessPilotene.Signicat.WebApi.csproj", "{549D9449-1AE8-4FFB-BE25-BC3760503F3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordAddInSignicat", "WordAddInSignicat\WordAddInSignicat.csproj", "{5CE85F54-595F-4A96-9FA8-6F8CBCFE35A0}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4506415-A7FD-4F3C-88DA-3B650F1D6E71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4506415-A7FD-4F3C-88DA-3B650F1D6E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4506415-A7FD-4F3C-88DA-3B650F1D6E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4506415-A7FD-4F3C-88DA-3B650F1D6E71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F98078A3-9D68-41DE-BB43-12745E33724A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F98078A3-9D68-41DE-BB43-12745E33724A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F98078A3-9D68-41DE-BB43-12745E33724A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F98078A3-9D68-41DE-BB43-12745E33724A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F901B871-F09F-402E-8492-18AABC0D5D59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F901B871-F09F-402E-8492-18AABC0D5D59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F901B871-F09F-402E-8492-18AABC0D5D59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F901B871-F09F-402E-8492-18AABC0D5D59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{549D9449-1AE8-4FFB-BE25-BC3760503F3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{549D9449-1AE8-4FFB-BE25-BC3760503F3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{549D9449-1AE8-4FFB-BE25-BC3760503F3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{549D9449-1AE8-4FFB-BE25-BC3760503F3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CE85F54-595F-4A96-9FA8-6F8CBCFE35A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CE85F54-595F-4A96-9FA8-6F8CBCFE35A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CE85F54-595F-4A96-9FA8-6F8CBCFE35A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CE85F54-595F-4A96-9FA8-6F8CBCFE35A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

@@ -1,0 +1,72 @@
+﻿.ui-menu .ui-menu-item a.ui-corner-all:hover, .ui-menu .ui-menu-item a.ui-corner-all:focus, .ui-menu .ui-menu-item a.ui-corner-all:active {
+    background: #ff8a00 !important;
+    color: #000;
+    border-radius: 0;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    background: #ff8a00;
+    border: none;
+    color: #000;
+    border-radius: 0;
+    font-weight: normal;
+}
+
+.ui-autocomplete {
+    position: absolute;
+    z-index: 1000;
+    cursor: default;
+    padding: 0;
+    margin-top: 2px;
+    list-style: none;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+    .ui-autocomplete > li {
+        padding: 3px 20px;
+    }
+
+        .ui-autocomplete > li.ui-state-focus {
+            background-color: #DDD;
+        }
+
+.ui-helper-hidden-accessible {
+    display: none;
+}
+
+.required .control-label:not(span):before, td.required:before {
+    content: '* ';
+    color: #F00;
+    font-weight: bold;
+}
+
+label.control-label span:after {
+    font-family: FontAwesome;
+    color: #1E91CF;
+    content: "\f059";
+    font-size: 10px;
+    cursor: pointer;
+    margin-left: 4px;
+}
+
+/* nav bar search box - drop down menu button */
+.navbar .navbar-search .dropdown-menu {
+    min-width: 25px;
+}
+
+.dropdown-menu .label-icon {
+    margin-left: 5px;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: inherit;
+    transition: all .5s;
+}

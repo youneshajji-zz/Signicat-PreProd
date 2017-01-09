@@ -1,0 +1,96 @@
+﻿@model IEnumerable<PP.Signicat.CredentialManager.Models.TransactionModel>
+
+<article>
+    <section>
+        <table id="transactionTable" class="table table-striped datatable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.period)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.subscription)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.countertotal)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.counteruniqueusers)
+                    </th>
+                    <th>Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.period)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.subscription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.countertotal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.counteruniqueusers)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Detail", new {subscription = item.PartitionKey, period = item.RowKey})"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </section>
+    <footer>
+        @*<a class="btn btn-default" role="button" href="@Url.Action("Create")">
+            <span class="glyphicon glyphicon-plus"></span>
+        </a>*@
+    </footer>
+</article>
+
+@section Scripts {
+    
+@Scripts.Render("~/bundles/scripts")
+@Styles.Render("~/Content/css")
+
+    <script type="text/javascript">
+        $(function () {
+            initTable("#transactionTable");
+        });
+
+        function initTable(div) {
+            $(div).DataTable({
+                "processing": true,
+                "info": false,
+                "paging": true,
+                "order": [[4, "asc"]],
+                "columnDefs": [
+                    {
+                        "targets": 'nosort',
+                        "orderable": false
+                    }
+                ],
+
+                "language": {
+                    "info": "Show page _PAGE_ of _PAGES_",
+                    "infoEmpty": "Nothing to show",
+                    "infoFiltered": "(Filterede by _MAX_ records)",
+                    "lengthMenu": 'Show _MENU_',
+                    "search": "Search",
+                    "zeroRecords": "Nothing found",
+
+                    "paginate": {
+                        "first": "First",
+                        "last": "Last",
+                        "next": "Next",
+                        "previous": "Previous"
+                    }
+                }
+            });
+        }
+    </script>
+}
