@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="https://id.signicat.com/definitions/wsdl/Document-v2" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="DocumentService" targetNamespace="https://id.signicat.com/definitions/wsdl/Document-v2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="https://id.signicat.com/definitions/wsdl/Document-v3" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="DocumentService" targetNamespace="https://id.signicat.com/definitions/wsdl/Document-v3" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
-    <xs:schema elementFormDefault="qualified" targetNamespace="https://id.signicat.com/definitions/wsdl/Document-v2" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:schema elementFormDefault="qualified" targetNamespace="https://id.signicat.com/definitions/wsdl/Document-v3" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="add-notification-request">
         <xs:complexType>
           <xs:sequence>
@@ -64,6 +64,23 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="create-usersession-request">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="service" type="xs:string" />
+            <xs:element name="password" type="xs:string" />
+            <xs:element name="user-session" type="tns:user-session" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="create-usersession-response">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="user-session-id" type="xs:string" />
+            <xs:element minOccurs="0" name="artifact" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="delete-request-request">
         <xs:complexType>
           <xs:sequence>
@@ -118,6 +135,22 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element minOccurs="0" maxOccurs="unbounded" name="task" nillable="true" type="tns:task-info" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="get-packaging-task-status-request">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="service" type="xs:string" />
+            <xs:element name="password" type="xs:string" />
+            <xs:element maxOccurs="unbounded" name="request-id" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="get-packaging-task-status-response">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="packaging-task-status-info" type="tns:packaging-task-status-info" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -256,6 +289,36 @@
           <xs:element minOccurs="0" default="true" name="case-sensitive" type="xs:boolean" />
         </xs:sequence>
       </xs:complexType>
+      <xs:complexType name="packaging-task-status-info">
+        <xs:sequence>
+          <xs:element name="request-id" type="xs:string" />
+          <xs:element name="packaging-task-id" type="xs:string" />
+          <xs:element name="packaging-task-status" type="tns:packaging-task-status" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="packaging-document-status" type="tns:packaging-document-status" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="packaging-document-status">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="result-uri" type="xs:string" />
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" use="required" />
+      </xs:complexType>
+      <xs:complexType name="user-session">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="language" type="xs:string" />
+          <xs:element minOccurs="0" name="on-session-postpone" type="xs:string" />
+          <xs:element minOccurs="0" name="on-session-complete" type="xs:string" />
+          <xs:element minOccurs="0" name="on-session-cancel" type="xs:string" />
+          <xs:element maxOccurs="unbounded" name="session-task" type="tns:session-task-info" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="session-task-info">
+        <xs:sequence />
+        <xs:attribute name="request-id" type="xs:string" use="required" />
+        <xs:attribute name="task-id" type="xs:string" use="required" />
+        <xs:attribute name="order" type="xs:integer" use="required" />
+        <xs:attribute name="description" type="xs:string" />
+      </xs:complexType>
       <xs:complexType name="task">
         <xs:sequence>
           <xs:element minOccurs="0" name="subject-ref" type="xs:string" />
@@ -265,11 +328,15 @@
           <xs:element maxOccurs="unbounded" name="document-action" type="tns:document-action" />
           <xs:element minOccurs="0" maxOccurs="unbounded" name="notification" nillable="true" type="tns:notification" />
           <xs:element minOccurs="0" name="authentication" type="tns:authentication" />
-          <xs:element minOccurs="0" maxOccurs="unbounded" name="signature" nillable="true" type="tns:signature" />
           <xs:element minOccurs="0" name="on-task-postpone" type="xs:string" />
           <xs:element minOccurs="0" name="on-task-complete" type="xs:string" />
           <xs:element minOccurs="0" name="on-task-cancel" type="xs:string" />
           <xs:element minOccurs="0" maxOccurs="unbounded" name="depends-on-task" type="xs:string" />
+          <xs:element minOccurs="0" name="profile" type="xs:string" />
+          <xs:element minOccurs="0" name="language" type="xs:string" />
+          <xs:element minOccurs="0" name="configuration" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="signature" nillable="true" type="tns:signature" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="authentication-based-signature" type="tns:authentication-based-signature" />
         </xs:sequence>
         <xs:attribute name="id" type="xs:string" use="required" />
         <xs:attribute name="bundle" type="xs:boolean" />
@@ -350,6 +417,14 @@
           </xs:extension>
         </xs:complexContent>
       </xs:complexType>
+      <xs:complexType name="packaging-result-document">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:document">
+            <xs:sequence />
+            <xs:attribute name="ref-packaging-task-id" type="xs:string" use="required" />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
       <xs:complexType name="archive-document">
         <xs:complexContent mixed="false">
           <xs:extension base="tns:document">
@@ -387,7 +462,22 @@
       <xs:complexType name="signature">
         <xs:sequence>
           <xs:element minOccurs="0" name="dialog" type="tns:dialog" />
-          <xs:element maxOccurs="unbounded" name="method" type="xs:string" />
+          <xs:element maxOccurs="unbounded" name="method" type="tns:method" />
+        </xs:sequence>
+        <xs:attribute name="if-authentication" type="xs:string" />
+        <xs:attribute name="responsive" type="xs:boolean" />
+      </xs:complexType>
+      <xs:complexType name="method">
+        <xs:simpleContent>
+          <xs:extension base="xs:string">
+            <xs:attribute name="handwritten" type="xs:boolean" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="authentication-based-signature">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dialog" type="tns:dialog" />
+          <xs:element maxOccurs="unbounded" name="method" type="tns:method" />
         </xs:sequence>
         <xs:attribute name="if-authentication" type="xs:string" />
       </xs:complexType>
@@ -404,6 +494,7 @@
           <xs:element minOccurs="0" name="days-until-deletion" type="xs:int" />
           <xs:element minOccurs="0" default="native" name="sdo-format" type="xs:string" />
           <xs:element minOccurs="0" name="account" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="packaging-task" type="tns:packaging-task" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="sender">
@@ -412,6 +503,20 @@
           <xs:element minOccurs="0" name="first-name" type="xs:string" />
           <xs:element minOccurs="0" name="last-name" type="xs:string" />
         </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="packaging-task">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="packaging-notification" type="tns:notification" />
+          <xs:element maxOccurs="unbounded" name="packaging-task-document" type="tns:packaging-task-document" />
+        </xs:sequence>
+        <xs:attribute name="packaging-task-id" type="xs:string" use="required" />
+        <xs:attribute name="method" type="xs:string" use="required" />
+        <xs:attribute name="send-to-archive" type="xs:boolean" />
+      </xs:complexType>
+      <xs:complexType name="packaging-task-document">
+        <xs:sequence />
+        <xs:attribute name="task-id" type="xs:string" use="required" />
+        <xs:attribute name="document-id" type="xs:string" use="required" />
       </xs:complexType>
       <xs:complexType name="task-info">
         <xs:sequence />
@@ -441,7 +546,7 @@
       <xs:complexType name="task-status-info">
         <xs:sequence>
           <xs:element name="request-id" type="xs:string" />
-          <xs:element name="task-id" type="xs:string" />
+          <xs:element minOccurs="0" name="task-id" type="xs:string" />
           <xs:element name="task-status" type="tns:task-status" />
           <xs:element minOccurs="0" name="client-reference" type="xs:string" />
           <xs:element minOccurs="0" name="client-status" type="xs:string" />
@@ -476,6 +581,7 @@
           <xs:enumeration value="completed" />
           <xs:enumeration value="rejected" />
           <xs:enumeration value="expired" />
+          <xs:enumeration value="deleted" />
         </xs:restriction>
       </xs:simpleType>
       <xs:simpleType name="notification-type">
@@ -521,6 +627,13 @@
           <xs:enumeration value="greater-than" />
         </xs:restriction>
       </xs:simpleType>
+      <xs:simpleType name="packaging-task-status">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="created" />
+          <xs:enumeration value="failed" />
+          <xs:enumeration value="completed" />
+        </xs:restriction>
+      </xs:simpleType>
       <xs:simpleType name="document-action-type">
         <xs:restriction base="xs:string">
           <xs:enumeration value="sign" />
@@ -554,20 +667,23 @@
   <wsdl:message name="getTaskCount">
     <wsdl:part name="request" element="tns:get-task-count-request" />
   </wsdl:message>
+  <wsdl:message name="getPackagingTaskStatus">
+    <wsdl:part name="request" element="tns:get-packaging-task-status-request" />
+  </wsdl:message>
   <wsdl:message name="deleteRequest">
     <wsdl:part name="delete-request-request" element="tns:delete-request-request" />
   </wsdl:message>
   <wsdl:message name="getTask">
     <wsdl:part name="get-task-request" element="tns:get-task-request" />
   </wsdl:message>
+  <wsdl:message name="setClientStatusResponse" />
   <wsdl:message name="getStatusResponse">
     <wsdl:part name="response" element="tns:get-status-response" />
   </wsdl:message>
-  <wsdl:message name="setClientStatusResponse" />
-  <wsdl:message name="disableNotificationResponse" />
   <wsdl:message name="disableTask">
     <wsdl:part name="request" element="tns:disable-task-request" />
   </wsdl:message>
+  <wsdl:message name="disableNotificationResponse" />
   <wsdl:message name="findTasks">
     <wsdl:part name="find-tasks-request" element="tns:find-tasks-request" />
   </wsdl:message>
@@ -575,14 +691,20 @@
     <wsdl:part name="delete-request-response" element="tns:delete-request-response" />
   </wsdl:message>
   <wsdl:message name="addNotificationResponse" />
+  <wsdl:message name="createArtifact">
+    <wsdl:part name="request" element="tns:create-artifact-request" />
+  </wsdl:message>
+  <wsdl:message name="getPackagingTaskStatusResponse">
+    <wsdl:part name="response" element="tns:get-packaging-task-status-response" />
+  </wsdl:message>
   <wsdl:message name="setClientStatus">
     <wsdl:part name="request" element="tns:set-client-status-request" />
   </wsdl:message>
   <wsdl:message name="getRequestResponse">
     <wsdl:part name="get-request-response" element="tns:get-request-response" />
   </wsdl:message>
-  <wsdl:message name="createArtifact">
-    <wsdl:part name="request" element="tns:create-artifact-request" />
+  <wsdl:message name="createUserSessionResponse">
+    <wsdl:part name="create-usersession-response" element="tns:create-usersession-response" />
   </wsdl:message>
   <wsdl:message name="getRequestHistoryResponse">
     <wsdl:part name="response" element="tns:get-request-history-response" />
@@ -592,6 +714,9 @@
   </wsdl:message>
   <wsdl:message name="getTaskCountResponse">
     <wsdl:part name="response" element="tns:get-task-count-response" />
+  </wsdl:message>
+  <wsdl:message name="createUserSession">
+    <wsdl:part name="create-usersession-request" element="tns:create-usersession-request" />
   </wsdl:message>
   <wsdl:message name="getTaskResponse">
     <wsdl:part name="get-task-response" element="tns:get-task-response" />
@@ -605,11 +730,14 @@
   <wsdl:message name="getRequest">
     <wsdl:part name="get-request-request" element="tns:get-request-request" />
   </wsdl:message>
+  <wsdl:message name="disableNotification">
+    <wsdl:part name="request" element="tns:disable-notification-request" />
+  </wsdl:message>
   <wsdl:message name="getStatus">
     <wsdl:part name="request" element="tns:get-status-request" />
   </wsdl:message>
-  <wsdl:message name="disableNotification">
-    <wsdl:part name="request" element="tns:disable-notification-request" />
+  <wsdl:message name="addTask">
+    <wsdl:part name="request" element="tns:add-task-request" />
   </wsdl:message>
   <wsdl:message name="createArtifactResponse">
     <wsdl:part name="response" element="tns:create-artifact-response" />
@@ -620,17 +748,14 @@
   <wsdl:message name="getRequestHistory">
     <wsdl:part name="request" element="tns:get-request-history-request" />
   </wsdl:message>
-  <wsdl:message name="addTask">
-    <wsdl:part name="request" element="tns:add-task-request" />
-  </wsdl:message>
   <wsdl:portType name="DocumentEndPoint">
-    <wsdl:operation name="setClientStatus">
-      <wsdl:input name="setClientStatus" message="tns:setClientStatus" />
-      <wsdl:output name="setClientStatusResponse" message="tns:setClientStatusResponse" />
-    </wsdl:operation>
     <wsdl:operation name="createArtifact">
       <wsdl:input name="createArtifact" message="tns:createArtifact" />
       <wsdl:output name="createArtifactResponse" message="tns:createArtifactResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setClientStatus">
+      <wsdl:input name="setClientStatus" message="tns:setClientStatus" />
+      <wsdl:output name="setClientStatusResponse" message="tns:setClientStatusResponse" />
     </wsdl:operation>
     <wsdl:operation name="addNotification">
       <wsdl:input name="addNotification" message="tns:addNotification" />
@@ -640,9 +765,17 @@
       <wsdl:input name="getTaskCount" message="tns:getTaskCount" />
       <wsdl:output name="getTaskCountResponse" message="tns:getTaskCountResponse" />
     </wsdl:operation>
+    <wsdl:operation name="getPackagingTaskStatus">
+      <wsdl:input name="getPackagingTaskStatus" message="tns:getPackagingTaskStatus" />
+      <wsdl:output name="getPackagingTaskStatusResponse" message="tns:getPackagingTaskStatusResponse" />
+    </wsdl:operation>
     <wsdl:operation name="deleteRequest">
       <wsdl:input name="deleteRequest" message="tns:deleteRequest" />
       <wsdl:output name="deleteRequestResponse" message="tns:deleteRequestResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="createUserSession">
+      <wsdl:input name="createUserSession" message="tns:createUserSession" />
+      <wsdl:output name="createUserSessionResponse" message="tns:createUserSessionResponse" />
     </wsdl:operation>
     <wsdl:operation name="getTask">
       <wsdl:input name="getTask" message="tns:getTask" />
@@ -664,40 +797,40 @@
       <wsdl:input name="findTasks" message="tns:findTasks" />
       <wsdl:output name="findTasksResponse" message="tns:findTasksResponse" />
     </wsdl:operation>
-    <wsdl:operation name="getStatus">
-      <wsdl:input name="getStatus" message="tns:getStatus" />
-      <wsdl:output name="getStatusResponse" message="tns:getStatusResponse" />
-    </wsdl:operation>
     <wsdl:operation name="disableNotification">
       <wsdl:input name="disableNotification" message="tns:disableNotification" />
       <wsdl:output name="disableNotificationResponse" message="tns:disableNotificationResponse" />
     </wsdl:operation>
-    <wsdl:operation name="getRequestHistory">
-      <wsdl:input name="getRequestHistory" message="tns:getRequestHistory" />
-      <wsdl:output name="getRequestHistoryResponse" message="tns:getRequestHistoryResponse" />
+    <wsdl:operation name="getStatus">
+      <wsdl:input name="getStatus" message="tns:getStatus" />
+      <wsdl:output name="getStatusResponse" message="tns:getStatusResponse" />
     </wsdl:operation>
     <wsdl:operation name="addTask">
       <wsdl:input name="addTask" message="tns:addTask" />
       <wsdl:output name="addTaskResponse" message="tns:addTaskResponse" />
     </wsdl:operation>
+    <wsdl:operation name="getRequestHistory">
+      <wsdl:input name="getRequestHistory" message="tns:getRequestHistory" />
+      <wsdl:output name="getRequestHistoryResponse" message="tns:getRequestHistoryResponse" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="DocumentServiceSoapBinding" type="tns:DocumentEndPoint">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="setClientStatus">
-      <soap:operation soapAction="" style="document" />
-      <wsdl:input name="setClientStatus">
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="setClientStatusResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="createArtifact">
       <soap:operation soapAction="" style="document" />
       <wsdl:input name="createArtifact">
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="createArtifactResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setClientStatus">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="setClientStatus">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setClientStatusResponse">
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -719,12 +852,30 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getPackagingTaskStatus">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getPackagingTaskStatus">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getPackagingTaskStatusResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="deleteRequest">
       <soap:operation soapAction="" style="document" />
       <wsdl:input name="deleteRequest">
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="deleteRequestResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createUserSession">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="createUserSession">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="createUserSessionResponse">
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -773,15 +924,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getStatus">
-      <soap:operation soapAction="" style="document" />
-      <wsdl:input name="getStatus">
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="getStatusResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="disableNotification">
       <soap:operation soapAction="" style="document" />
       <wsdl:input name="disableNotification">
@@ -791,12 +933,12 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getRequestHistory">
+    <wsdl:operation name="getStatus">
       <soap:operation soapAction="" style="document" />
-      <wsdl:input name="getRequestHistory">
+      <wsdl:input name="getStatus">
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="getRequestHistoryResponse">
+      <wsdl:output name="getStatusResponse">
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -809,10 +951,19 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getRequestHistory">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getRequestHistory">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getRequestHistoryResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="DocumentService">
     <wsdl:port name="DocumentServiceEndPointPort" binding="tns:DocumentServiceSoapBinding">
-      <soap:address location="https://preprod.signicat.com/ws/documentservice-v2" />
+      <soap:address location="https://preprod.signicat.com/ws/documentservice-v3" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

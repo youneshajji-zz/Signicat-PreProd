@@ -696,6 +696,19 @@
     <Content Include="Service References\SignicatPreProd\PP.Signicat.WebApi.SignicatPreProd.taskstatusinfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Service References\SignicatPreProd\DocumentService1.wsdl" />
+    <Content Include="Service References\SignicatPreProd\PP.Signicat.WebApi.SignicatPreProd.createusersessionresponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SignicatPreProd\PP.Signicat.WebApi.SignicatPreProd.createUserSessionResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SignicatPreProd\PP.Signicat.WebApi.SignicatPreProd.getPackagingTaskStatusResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SignicatPreProd\PP.Signicat.WebApi.SignicatPreProd.packagingtaskstatusinfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\SignicatPreProd\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -755,7 +768,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Service References\SignicatPreProd\DocumentService.wsdl" />
     <Content Include="Views\Shared\SignCallBack.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
