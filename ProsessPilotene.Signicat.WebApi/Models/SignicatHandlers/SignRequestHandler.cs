@@ -235,11 +235,14 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 {
                     new signature
                     {
-                        method = new string[]
-                        {
-                            // The name of the signature method(s)                                            
-                            signingInfoSigningMetodText
-                        }
+                        responsive = true,
+                                        method = new method[]
+                                        {
+                                            new method
+                                            {
+                                               Value = signingInfoSigningMetodText
+                                            }
+                                        }
                     }
                 };
                 return signature;
@@ -252,12 +255,18 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 {
                     new signature
                     {
-                        method = new string[]
-                        {
-                            // The name of the signature method(s)                                            
-                            signingInfoSigningMetodText,
-                            "nbid-mobil"
-                        }
+                        responsive = true,
+                                        method = new method[]
+                                        {
+                                            new method
+                                            {
+                                               Value = "nbid"
+                                            },
+                                            new method
+                                            {
+                                               Value = "nbid-mobil"
+                                            }
+                                        }
                     }
                 };
                 return signature;

@@ -85,9 +85,17 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                                 {
                                     new signature
                                     {
-                                        method = new string[]
+                                        responsive = true,
+                                        method = new method[]
                                         {
-                                            "nbid", "nbid-mobil"
+                                            new method
+                                            {
+                                               Value = "nbid"
+                                            },
+                                            new method
+                                            {
+                                               Value = "nbid-mobil"
+                                            }
                                         }
                                     }
                                 },

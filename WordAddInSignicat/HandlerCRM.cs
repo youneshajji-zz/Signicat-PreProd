@@ -303,9 +303,9 @@ namespace WordAddInSignicat
         {
             try
             {
-                var query = new QueryExpression("pp_settingkey");
+                var query = new QueryExpression("pp_signicatsettings");
                 query.ColumnSet = new ColumnSet("pp_value");
-                query.Criteria.AddCondition("pp_key", ConditionOperator.Equal, key);
+                query.Criteria.AddCondition("pp_name", ConditionOperator.Equal, key);
                 var results = crm.RetrieveMultiple(query);
 
                 if (results.Entities.Count == 1)
