@@ -77,7 +77,7 @@ function createRecord(sdsurls, odataSetName, files, customers, saveoriginalfile,
     if (daystolive != "")
         entity.pp_daystolive = daystolive;
 
-    //var entitynames = GetConfigValue("Signicat", "entitylogicalnames");
+    //var entitynames = GetConfigValue("entitylogicalnames");
     //var entitynameArray = entitynames.split(',');
 
     //$.each(entitynameArray, function (index, value) {
