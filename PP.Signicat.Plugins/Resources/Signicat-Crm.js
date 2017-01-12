@@ -1,5 +1,8 @@
-﻿function DocumentSign() {
+﻿var userLCid;
 
+function DocumentSign() {
+
+    userLCid = Xrm.Page.context.getUserLcid();
     var entityid = Xrm.Page.data.entity.getId();
     var entitytypename = Xrm.Page.data.entity.getEntityName();
     var serverUrl = Xrm.Page.context.getClientUrl();
@@ -16,7 +19,9 @@
 
     var orgName = Xrm.Page.context.getOrgUniqueName();
 
-    var params = "entityid=" + entityid + "&entityname=" + entitytypename + "&serverurl=" + serverUrl + "&userid=" + userid + "&username=" + username + "&name=" + name + "&orgname=" + orgName;
+    var params = "entityid=" + entityid + "&entityname=" + entitytypename + "&serverurl="
+        + serverUrl + "&userid=" + userid + "&username=" + username + "&name=" + name
+        + "&orgname=" + orgName + "&lcid=" + userLCid;
     var customParameters = encodeURIComponent(params);
     //Xrm.Utility.openWebResource("pp_documentsign.htm", customParameters, 700, 620);
 
@@ -67,7 +72,10 @@ function GetConfigValue(value) {
             }
         },
         error: function (xhr, textStatus, errorThrown) {
-            Xrm.Page.ui.setFormNotification("Error getting config setting!: " + errorThrown, "ERROR");
+            if (userLCid == "1033")
+                Xrm.Page.ui.setFormNotification("Error getting setting value!: " + errorThrown, "ERROR");
+            if (userLCid == "1044")
+                Xrm.Page.ui.setFormNotification("Feil ved opphenting av setting verdi!: " + errorThrown, "ERROR");
         }
     });
 

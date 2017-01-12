@@ -5,27 +5,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+    <!--Jquery translator plugin-->
+    <script src="pp_translate.js"></script>
+    <script src="pp_signicattranslation.js"></script>
     <script src="pp_notify.js"></script>
     <script src="pp_signicatcrm.js"></script>
     <script src="pp_signicatapi.js"></script>
     <link rel="stylesheet" type="text/css" href="pp_signicat.css">
-
     <title>Document signing</title>
     <meta charset="utf-8">
 </head>
 <body>
     <div class="container">
         <div class="row clearfix">
-
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6  column col-sm-offset-0 col-md-offset-2 col-lg-offset-3">
-
                 <form class="form-horizontal">
                     <fieldset>
                         <legend>
@@ -37,122 +35,100 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="selectsignmetod" data-toggle="tooltip" data-placement="top" title="Chose a method for signing the documents.">Signing method</label>
+                                    <label id="lblselectsignmetod" class="col-md-3 control-label" for="selectsignmetod" data-toggle="tooltip" data-placement="top" title="Chose a method for signing the documents.">Signing method</label>
                                     <div class="col-md-6">
                                         <select id="selectsignmetod" name="selectsignmetod" class="form-control">
-                                            <option value="1">BankID/BankID Mobil</option>
+                                            <option value="1">BankID/BankID Mobile</option>
                                             <option value="2">SMS/E-mail OTP</option>
                                             <option value="3">Social</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-sm-4">
-                                <label class="col-md-3 control-label" for="radios5" data-toggle="tooltip" data-placement="top" title="The user will have to authenticate before seeing the document.">Authenticate to view?</label>
+                                <label id="lblauth" class="col-md-3 control-label" for="radios5" data-toggle="tooltip" data-placement="top" title="The user will have to authenticate before seeing the document.">Authenticate to view?</label>
                                 <div class="col-md-3" id="radios5">
-                                    <label class="radio-inline" for="radios-9">
+                                    <label id="lblradios-9" class="radio-inline" for="radios-9">
                                         <input type="radio" name="radios5" id="radios-9" value="9">
                                         Yes
                                     </label>
-                                    <label class="radio-inline" for="radios-10">
+                                    <label id="lblradios-10" class="radio-inline" for="radios-10">
                                         <input type="radio" name="radios5" id="radios-10" value="10" checked="checked">
                                         No
                                     </label>
                                 </div>
                             </div>
 
-                            <!--<div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label" for="authmetod" data-toggle="tooltip" data-placement="top" title="Chose a method for authentication before viewing the documents.">Authenticate to view</label>
-                                    <div class="col-md-6">
-                                        <select id="authmetod" name="authmetod" class="form-control">
-                                            <option value="0">None</option>
-                                            <option value="1">BankID</option>
-                                            <option value="2">BankID Mobil</option>
-                                            <option value="3">Social</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>-->
-                            <!-- Text input-->
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="daystolive" data-toggle="tooltip" data-placement="top" title="How long will the documents be available for signing.">Expiration</label>
+                                    <label id="lbldaystolive" class="col-md-3 control-label" for="daystolive" data-toggle="tooltip" data-placement="top" title="How long will the documents be available for signing.">Expiration</label>
                                     <div class="col-md-3">
                                         <input id="daystolive" name="daystolive" type="number" value="60" placeholder="Days" class="form-control input-md">
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <!-- Multiple Radios (inline) -->
                         <div class="row">
                             <div class="col-sm-3">
-                                <label class="col-md-3 control-label" for="radios1" data-toggle="tooltip" data-placement="top" title="An email will be sent to you when a document is signed.">Notification?</label>
+                                <label id="lblnotify" class="col-md-3 control-label" for="radios1" data-toggle="tooltip" data-placement="top" title="An email will be sent to you when a document is signed.">Notification?</label>
                                 <div class="col-md-3" id="radios1">
-                                    <label class="radio-inline" for="radios-0">
+                                    <label id="lblradios-0" class="radio-inline" for="radios-0">
                                         <input type="radio" name="radios1" id="radios-0" value="1">
                                         Yes
                                     </label>
-                                    <label class="radio-inline" for="radios-1">
+                                    <label id="lblradios-1" class="radio-inline" for="radios-1">
                                         <input type="radio" name="radios1" id="radios-1" value="2" checked="checked">
                                         No
                                     </label>
                                 </div>
                             </div>
-
                             <div class="col-sm-3">
-                                <label class="col-md-3 control-label" for="radios2" data-toggle="tooltip" data-placement="top" title="The uploaded documents will be saved in CRM notes.">Save original?</label>
+                                <label id="lblsaveorg" class="col-md-3 control-label" for="radios2" data-toggle="tooltip" data-placement="top" title="The uploaded documents will be saved in CRM notes.">Save original?</label>
                                 <div class="col-md-3" id="radios2">
-                                    <label class="radio-inline" for="radios-2">
+                                    <label id="lblradios-2" class="radio-inline" for="radios-2">
                                         <input type="radio" name="radios2" id="radios-2" value="3">
                                         Yes
                                     </label>
-                                    <label class="radio-inline" for="radios-3">
+                                    <label id="lblradios-3" class="radio-inline" for="radios-3">
                                         <input type="radio" name="radios2" id="radios-3" value="4" checked="checked">
                                         No
                                     </label>
                                 </div>
                             </div>
-
                             <div class="col-sm-3">
-                                <label class="col-md-3 control-label" for="radios6" data-toggle="tooltip" data-placement="top" title="The signed documents will be sent as a copy to the signatories.">Send copy?</label>
+                                <label id="lblsendcopy" class="col-md-3 control-label" for="radios6" data-toggle="tooltip" data-placement="top" title="The signed documents will be sent as a copy to the signatories.">Send copy?</label>
                                 <div class="col-md-3" id="radios6">
-                                    <label class="radio-inline" for="radios-11">
+                                    <label id="lblradios-11" class="radio-inline" for="radios-11">
                                         <input type="radio" name="radios6" id="radios-11" value="11">
                                         Yes
                                     </label>
-                                    <label class="radio-inline" for="radios-12">
+                                    <label id="lblradios-12" class="radio-inline" for="radios-12">
                                         <input type="radio" name="radios6" id="radios-12" value="12" checked="checked">
                                         No
                                     </label>
                                 </div>
                             </div>
 
-
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="radios3" data-toggle="tooltip" data-placement="top" title="The signed documents will be saved in the Sharepoint Document Location of the parent record.">Save in Sharepoint</label>
+                                    <label id="lblsaveinsp" class="col-md-3 control-label" for="radios3" data-toggle="tooltip" data-placement="top" title="The signed documents will be saved in the Sharepoint Document Location of the parent record.">Save in Sharepoint?</label>
                                     <div class="col-md-3" id="radios3">
-                                        <label class="radio-inline" for="radios-4">
+                                        <label id="lblradios-4" class="radio-inline" for="radios-4">
                                             <input type="radio" name="radios3" id="radios-4" value="5">
                                             Yes
                                         </label>
-                                        <label class="radio-inline" for="radios-5">
+                                        <label id="lblradios-5" class="radio-inline" for="radios-5">
                                             <input type="radio" name="radios3" id="radios-5" value="6" checked="checked">
                                             No
                                         </label>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
                         <!--Email-->
-
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="subject">Subject</label>
+                            <label id="lblsubject" class="col-md-3 control-label" for="subject">Subject</label>
                             <div class="col-md-9">
                                 <input id="subject" name="subject" type="text" placeholder="Email header" class="form-control input-md">
                             </div>
@@ -161,44 +137,39 @@
                                 <input id="email" name="email" type="text" placeholder="example@mail.com" class="form-control input-md">
                             </div>-->
                         </div>
-
                         <!-- Textarea -->
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="message">Message</label>
+                            <label id="lblmessage" class="col-md-3 control-label" for="message">Message</label>
                             <div class="col-md-9">
                                 <textarea class="form-control" id="message" name="message" placeholder="Email message"></textarea>
                             </div>
                         </div>
-
                         <!--File upload local-->
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="filetosend" data-toggle="tooltip" data-placement="top" title="Chose a file from your local computer.">Select file(s)</label>
+                            <label id="lblselectfiles" class="col-md-3 control-label" for="filetosend" data-toggle="tooltip" data-placement="top" title="Chose a file from your local computer.">Select file(s)</label>
                             <div class="col-md-9">
                                 <input type="file" accept="application/pdf" class="form-control-file" id="filetosend" multiple data-toggle="tooltip" data-placement="top" title="Chose a file from your local computer.">
                                 <small id="fileHelp" class="form-text text-muted">Plase attach file(s) you want to send for signing.</small>
                                 <div id="filenames"></div>
                             </div>
                         </div>
-
                         <!--Recipients-->
                         <hr />
-
                         <div class="form-group" id="saveonlymergedDiv" hidden>
-                            <label class="col-md-3 control-label" for="radios4" data-toggle="tooltip" data-placement="top" title="If NO, the all the signed documents inclusive the merged ones will be saved in CRM notes.">Save only merged?</label>
+                            <label id="lblsavemerged" class="col-md-3 control-label" for="radios4" data-toggle="tooltip" data-placement="top" title="If NO, then all the signed documents inclusive the merged ones will be saved in CRM notes.">Save only merged?</label>
                             <div class="col-md-3" id="radios4">
-                                <label class="radio-inline" for="radios-6">
+                                <label id="lblradios-6" class="radio-inline" for="radios-6">
                                     <input type="radio" name="radios4" id="radios-6" value="7" checked="checked">
                                     Yes
                                 </label>
-                                <label class="radio-inline" for="radios-7">
+                                <label id="lblradios-7" class="radio-inline" for="radios-7">
                                     <input type="radio" name="radios4" id="radios-7" value="8">
                                     No
                                 </label>
                             </div>
                         </div>
-
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="search" data-toggle="tooltip" data-placement="top" title="These contacts will receive an email for signing the documents.">Recipients</label>
+                            <label id="lblrecipeints" class="col-md-3 control-label" for="search" data-toggle="tooltip" data-placement="top" title="These contacts will receive an email for signing the documents.">Recipients</label>
                             <!--<div class="col-md-9">
                                 <input id="search" name="search" type="text" class="form-control autocomplete" placeholder="Search in contacts...">
                                 <input id="contactInfo" name="contactInfo" hidden type="text">
@@ -208,31 +179,29 @@
                                     <div class="input-group-btn">
                                         <button type="button" class="btn btn-search btn-default dropdown-toggle" data-toggle="dropdown">
                                             <span class="glyphicon glyphicon-search"></span>
-                                            <span class="label-icon">Search</span>
+                                            <span id="spansearch" class="label-icon">Search</span>
                                             <span class="caret"></span>
                                         </button>
                                         <ul id="searchMenu" class="dropdown-menu pull-left" role="menu">
                                             <li>
                                                 <a id="account" href="#">
                                                     <span class="glyphicon glyphicon-book"></span>
-                                                    <span class="label-icon">Accounts</span>
+                                                    <span id="spanaccounts" class="label-icon">Accounts</span>
                                                 </a>
                                             </li>
                                             <li>
                                                 <a id="contact" href="#">
                                                     <span class="glyphicon glyphicon-user"></span>
-                                                    <span class="label-icon">Contacts</span>
+                                                    <span id="spancontacts" class="label-icon">Contacts</span>
                                                 </a>
                                             </li>
                                         </ul>
                                     </div>
-
                                     <input id="search" name="search" type="text" class="form-control autocomplete" placeholder="Search in contacts or accounts...">
                                     <input id="contactInfo" name="contactInfo" hidden type="text">
                                 </div>
                             </div>
                         </div>
-
                         </br>
                         </br>
 
@@ -241,16 +210,15 @@
                                 <tr>
                                     <th></th>
                                     <th>Type</th>
-                                    <th>Name</th>
-                                    <th>Company</th>
+                                    <th id="thname">Name</th>
+                                    <th id="thcompany">Company</th>
                                     <th>Email</th>
-                                    <th>Mobile</th>
+                                    <th id="thmobile">Mobile</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
-
                         <!-- Button (Double) -->
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="btnSubmit"></label>
@@ -261,23 +229,18 @@
                                 <button id="btnDone" name="done" class="btn btn-success">Done</button>
                             </div>
                         </div>
-
                     </fieldset>
                 </form>
             </div>
-
         </div>
     </div>
-
     <div id="footer">
         <div class="container">
             <!--<p class="text-muted credit">Ta kontakt med <a href="http://www.prosesspilotene.no">Prosesspilotene</a>.</p>-->
         </div>
     </div>
-
 </body>
 </html>
-
 <script>
 
     $("form").submit(function (e) {
@@ -288,11 +251,14 @@
 
         var obj = getDataParam();
         var entityid = obj.entityid;
+        var lcid = obj.lcid;
         var docLocExists = CheckDocLocation(entityid);
+
+        HandleTranslation(lcid);
 
         if (!docLocExists) {
             $("#radios-4").attr('disabled', true);
-            $("#radios-4").notify("This record has no Sharepoint location.", "info", { clickToHide: true, autoHide: true, position: "top" });
+            $("#radios-4").notify($.translate.get_text('doclocnotify'), "info", { clickToHide: true, autoHide: true, position: "top" });
         }
 
         $('[data-toggle="tooltip"]').tooltip();
@@ -354,7 +320,7 @@
         }
     });
 
-    $('#search').keyup(function (e) { if (e.keyCode == 8) $('#search').val(''); })
+    $('#search').keyup(function (e) { if (e.keyCode == 8) $('#search').val(''); });
 
     $('#search').click(function () {
         var obj = getDataParam();
@@ -363,7 +329,7 @@
         var url = serverUrl + ODATA_ENDPOINT;
 
         if (searchIn == null) {
-            $("#search").notify("Please chose a search entity!", "warning", { clickToHide: true, autoHide: true, position: "top" });
+            $("#search").notify($.translate.get_text('searchnotify'), "warning", { clickToHide: true, autoHide: true, position: "top" });
             return;
         }
 
@@ -415,7 +381,7 @@
                             }));
                         },
                         error: function (xhr, textStatus, errorThrown) {
-                            $.notify('No search results!' + textStatus, "error");
+                            $.notify($.translate.get_text('noresultnotify') + textStatus, "error");
                         }
                     });
                 },
@@ -481,7 +447,7 @@
                             }));
                         },
                         error: function (xhr, textStatus, errorThrown) {
-                            $.notify('No search results!' + textStatus, "error");
+                            $.notify($.translate.get_text('noresultnotify') + textStatus, "error");
                         }
                     });
                 },
@@ -515,20 +481,26 @@
         var mobile = values[4];
 
         if (customerid == '') {
-            $("#search").notify("No customer is chosen.", "warning", { clickToHide: true, autoHide: true, position: "top" });
+            $("#search").notify($.translate.get_text('emptycustomernotify'), "warning", { clickToHide: true, autoHide: true, position: "top" });
             return;
         }
 
         if (email == 'null') {
-            $("#search").notify("The customer must have an email address.", "warning", { clickToHide: true, autoHide: true, position: "buttom" });
+            $("#search").notify($.translate.get_text('emptyemailnotify'), "warning", { clickToHide: true, autoHide: true, position: "buttom" });
             return;
         }
 
         var hit = false;
         $("#recipients").find("tr").each(function () {
+            if (email.IsNullOrUndefined) {
+                $("#search").notify($.translate.get_text('noresultnotify'), "warning", { clickToHide: true, autoHide: true, position: "buttom" });
+                hit = true;
+                return false;
+            }
+
 
             if ($(this).find(".email").html() == email) {
-                $("#search").notify("A customer with the same email is allready added!", "warning", { clickToHide: true, autoHide: true, position: "buttom" });
+                $("#search").notify($.translate.get_text('customeraddednotify'), "warning", { clickToHide: true, autoHide: true, position: "buttom" });
                 hit = true;
                 return false;
             }
@@ -554,13 +526,13 @@
         $('#loading-indicator').show();
 
         if ($("#subject").val() === '') {
-            $("#subject").notify('You must write a subject!', "warning");
+            $("#subject").notify($.translate.get_text('emptysubjectnotify'), "warning");
             $('#loading-indicator').hide();
             return;
         }
 
         if ($("#message").val() === '') {
-            $("#message").notify('You must write a message!', "warning");
+            $("#message").notify($.translate.get_text('emptymessagenotify'), "warning");
             $('#loading-indicator').hide();
             return;
         }
@@ -586,7 +558,7 @@
         if (files.length > 0) {
             for (var x = 0; x < files.length; x++) {
                 if (allowedFileTypes.indexOf(files[x].type) == -1) {
-                    $('#filetosend').notify('Only PDF is allowed!', "warning");
+                    $('#filetosend').notify($.translate.get_text('onlypdfnotify'), "warning");
                     $('#loading-indicator').hide();
                     return;
                 }
@@ -618,7 +590,7 @@
             //contactMobile.shift();
 
             if (customers.length === 0) {
-                $("#recipients").notify('You must add recipients!', "warning");
+                $("#recipients").notify('addrecipientsnotify', "warning");
                 $('#loading-indicator').hide();
                 return;
             }
@@ -684,7 +656,7 @@
                     createRecord(sdsurls, "pp_documentsigningSet", files, customers,
                         saveoriginalfile, saveinsp, saveonlymerged);
                     //$.notify('Request is sent to Signicat!', "success");
-                    $.notify('Request is sent to Signicat!', 'success', {
+                    $.notify($.translate.get_text('requestsentnotify'), 'success', {
                         clickToHide: true,
                         autoHide: false,
                         globalPosition: 'top right'
@@ -697,14 +669,14 @@
                     //closeWindow().delay(5000);
                 },
                 error: function (request, status, error) {
-                    $.notify('Error connecting to Signicat!', "error");
+                    $.notify($.translate.get_text('errorconnnotify'), "error");
                     $('#loading-indicator').hide();
                 }
             });
         }
 
         if (files.length == 0) {
-            $('#filetosend').notify('You must chose a document!', "warning");
+            $('#filetosend').notify($.translate.get_text('nofilenotify'), "warning");
             $('#loading-indicator').hide();
         }
     });

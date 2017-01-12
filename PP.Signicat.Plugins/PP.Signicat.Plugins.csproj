@@ -74,6 +74,8 @@
     <Content Include="Resources\Signicat-Crm.js" />
     <Content Include="Resources\signicat-logo.png" />
     <Content Include="Resources\Signicat.css" />
+    <Content Include="Resources\SignicatTranslation.js" />
+    <Content Include="Resources\translate.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SignicatPluginsKey.snk" />

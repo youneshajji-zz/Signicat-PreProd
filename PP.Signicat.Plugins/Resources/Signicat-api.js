@@ -17,7 +17,7 @@ function CheckDocLocation(entityid) {
                 hasValue = true;
         },
         error: function (xhr, textStatus, errorThrown) {
-            alert(textStatus + " " + errorThrown);
+            $.notify($.translate.get_text('notcreatednotify') + errorThrown, "error");
         }
     });
 
@@ -67,7 +67,7 @@ function createRecord(sdsurls, odataSetName, files, customers, saveoriginalfile,
     entity.pp_subject = subject;
     entity.pp_message = message;
     //entity.EmailAddress = email;
-    entity.statuscode = { Value: 778380000 };    
+    entity.statuscode = { Value: 778380000 };
     entity.pp_authentication = { Value: authmetod };
     entity.pp_saveindocumentlocation = saveinsp;
     entity.pp_saveonlymerged = saveonlymerged;
@@ -153,7 +153,7 @@ function createRecord(sdsurls, odataSetName, files, customers, saveoriginalfile,
             if (saveoriginalfile) {
                 for (var i = 0; i < files.length; i++) {
                     (function (file) {
-                        AddNotes(serverUrl, "Original document " + (i + 1), "The document is uploaded by " + username, docsignid, "pp_documentsigning", files[i], "application/pdf");
+                        AddNotes(serverUrl, $.translate.get_text('orginialdoc') + (i + 1), $.translate.get_text('uploadedby') + username, docsignid, "pp_documentsigning", files[i], "application/pdf");
                     })(files[i]);
                 }
             }
@@ -161,7 +161,7 @@ function createRecord(sdsurls, odataSetName, files, customers, saveoriginalfile,
             SendEmails(docsignid, serverUrl);
         },
         error: function (XmlHttpRequest, textStatus, errorThrown) {
-            $.notify('The document signing is not created, error: ' + errorThrown, "error");
+            $.notify($.translate.get_text('notcreatednotify') + errorThrown, "error");
         }
     });
 }
@@ -185,7 +185,7 @@ function SendEmails(documentsigningid, serverUrl) {
             //$.notify('Mails are being sent now!', "success");
         },
         error: function (xhr, textStatus, errorThrown) {
-            $.notify('Could not send email, error: ' + errorThrown, "error");
+            $.notify($.translate.get_text('emailsendnotify') + errorThrown, "error");
         }
     });
 }
@@ -233,7 +233,7 @@ function CreateSignicatUrl(docsignid, sdsurl, serverUrl, customer) {
             return newEntityId;
         },
         error: function (xhr, textStatus, errorThrown) {
-            $.notify('Error creating Signicat Result, error: ' + errorThrown, "error");
+            $.notify($.translate.get_text('errorsignicatresultnotify') + errorThrown, "error");
             $('#loading-indicator').hide();
         }
     });
@@ -267,7 +267,7 @@ function AssociateCustomers(documentsigningid, customers, serverUrl) {
                     //$.notify('Contact is added!', "success");
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    $.notify('Assosiation failed! Error: ' + errorThrown, "error");
+                    $.notify($.translate.get_text('errorassocnotify') + errorThrown, "error");
                     $('#loading-indicator').hide();
                 }
             });
@@ -316,13 +316,13 @@ function AddNotes(serverUrl, noteSubject, noteText, entityid, entityname, file, 
                 //$.notify("Note with the original document is created: " + file.name, "info");
             },
             error: function (xmlHttpRequest, textStatus, errorThrown) {
-                $.notify("Error creating the note!: " + errorThrown, "error");
+                $.notify($.translate.get_text('errornotecreatenotify') + errorThrown, "error");
                 $('#loading-indicator').hide();
             }
         });
     };
     fileReader.onerror = function (event) {
-        $.notify("Error uploading document to CRM!: " + event.target.error.name, "error");
+        $.notify($.translate.get_text('erroruploadnotify') + event.target.error.name, "error");
         $('#loading-indicator').hide();
     };
     // begin the read operation
@@ -345,7 +345,7 @@ function GetUserMail(userid) {
             email = internalEMailAddress;
         },
         error: function (xhr, textStatus, errorThrown) {
-            $.notify("Cannot find user!: " + errorThrown, "error");
+            $.notify($.translate.get_text('errorfindusernotify') + errorThrown, "error");
             $('#loading-indicator').hide();
         }
     });
@@ -397,6 +397,7 @@ function parseDataValue(datavalue) {
         obj.username = vals[4][1];
         obj.name = vals[5][1];
         obj.orgname = vals[6][1];
+        obj.lcid = vals[7][1];
 
         return obj;
     }
@@ -407,7 +408,7 @@ function parseDataValue(datavalue) {
 
 function noParams() {
     var message = document.createElement("p");
-    setText(message, "No data parameter was passed to this page");
+    setText(message, $.translate.get_text('errorparampassnotify'));
 
     document.body.appendChild(message);
 }
