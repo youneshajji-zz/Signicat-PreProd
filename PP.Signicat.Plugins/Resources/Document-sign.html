@@ -548,6 +548,7 @@
         var files = $("#filetosend").get(0).files;
         var signingmetod = $("#selectsignmetod").val();
         //var authmetod = $("#authmetod").val();
+        
         var daystolive = $("#daystolive").val();
         var saveoriginalfile;
         var saveinsp;
@@ -569,6 +570,8 @@
             //data.append("Authmetod", authmetod);
             data.append("Daystolive", daystolive);
             data.append("CustomerOrg", orgname);
+            data.append("SendSMS", "yes");
+            
 
             var contactEmail = [];
             var contactMobile = [];
@@ -582,12 +585,12 @@
             });
             $("#recipients").find("tr").each(function () {
                 contactEmail.push($(this).find(".email").html());
-                //contactMobile.push($(this).find(".mobile").html());
+                contactMobile.push($(this).find(".mobile").html());
             });
 
             customers.shift();
             contactEmail.shift();
-            //contactMobile.shift();
+            contactMobile.shift();
 
             if (customers.length === 0) {
                 $("#recipients").notify('addrecipientsnotify', "warning");
@@ -640,7 +643,7 @@
 
             data.append("SenderEmail", senderEmail);
             data.append("RecipientEmails", contactEmail);
-            //data.append("RecipientMobiles", contactMobile);
+            data.append("RecipientMobiles", contactMobile);
             var apiurl = GetConfigValue("webapiurl");
             //var apiurl = "http://localhost:43632/";
 
@@ -669,7 +672,7 @@
                     //closeWindow().delay(5000);
                 },
                 error: function (request, status, error) {
-                    $.notify($.translate.get_text('errorconnnotify'), "error");
+                    $.notify($.translate.get_text('errorconnnotify') + ". Error: " + error, "error");
                     $('#loading-indicator').hide();
                 }
             });

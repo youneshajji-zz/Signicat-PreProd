@@ -176,7 +176,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                         {
                             id = "sub_" + i,
                             email = recipients[i].email,
-                            mobile = "2222222"//recipients[i].mobile
+                            mobile = !string.IsNullOrWhiteSpace(recipients[i].mobile) ? recipients[i].mobile : ""
                             //nationalid = recipients[i].ssn //National id mustbe inserted
                         },
                         notification = new[]

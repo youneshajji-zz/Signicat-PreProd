@@ -72,7 +72,7 @@ namespace PP.Signicat.WebApi.Controllers
                         signHereUrlList.Add(url);
 
                         return signHereUrlList;
-                    } 
+                    }
                 }
             }
 
@@ -98,13 +98,13 @@ namespace PP.Signicat.WebApi.Controllers
                 // Get the uploaded recipients
                 var recipients = new List<ContactInfo>();
                 var postedRecipientEmails = HttpContext.Current.Request.Params["RecipientEmails"];
-                //var postedRecipientMobiles = HttpContext.Current.Request.Params["RecipientMobiles"];
+                var postedRecipientMobiles = HttpContext.Current.Request.Params["RecipientMobiles"];
                 //var postedRecipientSSN = HttpContext.Current.Request.Params["RecipientSSN"];
 
                 if (postedRecipientEmails != null)
                 {
                     var recipientEmailList = postedRecipientEmails.Split(',');
-                    //var recipientMobileList = postedRecipientMobiles.Split(',');
+                    var recipientMobileList = postedRecipientMobiles.Split(',');
                     //var recipientSSNList = postedRecipientSSN.Split(',');
 
                     for (int i = 0; i < recipientEmailList.Length; i++)
@@ -114,7 +114,7 @@ namespace PP.Signicat.WebApi.Controllers
 
                         var contactInfo = new ContactInfo();
                         contactInfo.email = recipientEmailList[i];
-                        //contactInfo.mobile = recipientMobileList[i];
+                        contactInfo.mobile = recipientMobileList[i];
                         //contactInfo.ssn = recipientSSNList[i];
                         recipients.Add(contactInfo);
                     }
@@ -128,6 +128,7 @@ namespace PP.Signicat.WebApi.Controllers
                 var signingMetod = HttpContext.Current.Request.Params["SigningMetod"];
                 //var description = HttpContext.Current.Request.Params["Description"];
                 var daystolive = HttpContext.Current.Request.Params["Daystolive"];
+                var sendSMS = HttpContext.Current.Request.Params["SendSMS"];
                 signingInfo.signingMetodText = "nbid";
 
                 if (daystolive == "")
@@ -167,9 +168,9 @@ namespace PP.Signicat.WebApi.Controllers
                     // a request has been completed
                     for (int i = 0; i < request.request[0].task.Length; i++)
                     {
-                        //var callbackOnTaskCompleteUrl = "https://prosesspilotenesignicatwebapi.azurewebsites.net:443/api/Callback/GetSigning?orgname=" + customerorg + "&requestId=${requestId}&taskId=${taskId}";
-                        var callbackOnTaskCompleteUrl = "https://prosesspilotenesignicatwebapi.azurewebsites.net:443/api/Callback/Landingpage";
-                        var callbackNotificationUrl = "https://prosesspilotenesignicatwebapi.azurewebsites.net:443/api/Callback/GetSigning?orgname=" + customerorg;
+                        //var callbackOnTaskCompleteUrl = "https://prosesspilotenesignicatwebapi-preprod.azurewebsites.net:443/api/Callback/GetSigning?orgname=" + customerorg + "&requestId=${requestId}&taskId=${taskId}";
+                        var callbackOnTaskCompleteUrl = "https://prosesspilotenesignicatwebapi-preprod.azurewebsites.net:443/api/Callback/Landingpage";
+                        var callbackNotificationUrl = "https://prosesspilotenesignicatwebapi-preprod.azurewebsites.net:443/api/Callback/GetSigning?orgname=" + customerorg;
                         request.request[0].task[i].ontaskcomplete = callbackOnTaskCompleteUrl;
 
                         request.request[0].task[i].notification = new[]
@@ -194,13 +195,13 @@ namespace PP.Signicat.WebApi.Controllers
 
                     if (signingInfo.authMetod == "1") //BankID
                     {
-                        for (int i = 0; i < request.request[0].task.Length; i++)
-                        {
-                            request.request[0].task[i].authentication = new authentication
-                            {
-                                method = new string[] { "nbid", "nbid-mobil" }
-                            };
-                        }
+                        //for (int i = 0; i < request.request[0].task.Length; i++)
+                        //{
+                        //    request.request[0].task[i].authentication = new authentication
+                        //    {
+                        //        method = new string[] { "nbid", "nbid-mobil" }
+                        //    };
+                        //}
                     }
 
                     if (signingInfo.authMetod == "2") //SMS Email OTP
@@ -225,26 +226,48 @@ namespace PP.Signicat.WebApi.Controllers
                         }
                     }
 
-                    try
-                    {
+                    //try
+                    //{
 
                         createrequestresponse response;
                         using (var client = new DocumentEndPointClient())
                         {
                             response = client.createRequest(request);
                         }
+
                         for (int i = 0; i < request.request[0].task.Length; i++)
                         {
-                            signHereUrlList.Add(
-                                String.Format(
-                                    "https://preprod.signicat.com/std/docaction/prosesspilotene?request_id={0}&task_id={1}",
-                                    response.requestid[0], request.request[0].task[i].id));
+                            var url = String.Format(
+                                "https://preprod.signicat.com/std/docaction/prosesspilotene?request_id={0}&task_id={1}",
+                                response.requestid[0], request.request[0].task[i].id);
+                            signHereUrlList.Add(url);
+
+                            if (sendSMS == "yes")
+                            {
+                                request.request[0].task[i].notification = new[]
+                                {
+                                    new notification
+                                    {
+                                        notificationid = "send_sms_" + i,
+                                        type = notificationtype.SMS,
+                                        recipient = request.request[0].task[i].subject.mobile,//"48209393",
+                                        message = "Signer dette: " + url,
+                                        schedule = new []
+                                        {
+                                            new schedule
+                                            {
+                                                stateis = taskstatus.created
+                                            }
+                                        }
+                                    }
+                                };
+                            }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new Exception(ex.Message);
-                    }
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    throw new Exception(ex.Message);
+                    //}
                 }
             }
 

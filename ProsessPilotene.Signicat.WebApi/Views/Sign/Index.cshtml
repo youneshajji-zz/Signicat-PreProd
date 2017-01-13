@@ -2,6 +2,8 @@
 <div>
     <h2>Signicat applicaton</h2>
 
+    <button id="post">Test signing</button>
+    <input type="file" accept="application/pdf" class="form-control-file" id="filetosend" multiple data-toggle="tooltip" data-placement="top" title="Chose a file from your local computer.">
 
     <button id="send">Test callback</button>
 
@@ -11,9 +13,56 @@
 <script>
     var uri = 'api/SignRequest/PostCRM';
 
+    $("#post").click(function () {
+
+        var data = new FormData();
+        var files = $("#filetosend").get(0).files;
+
+        // Add the uploaded image content to the form data collection
+        if (files.length > 0) {
+            for (var x = 0; x < files.length; x++) {
+                data.append("file" + x, files[x]);
+            }
+
+            data.append("SigningMetod", "1");
+            //data.append("Daystolive", "");
+            data.append("CustomerOrg", "org11ece0c8");
+            data.append("SendSMS", "yes");
+
+
+            //1 //BankID
+            //2 //Sms/E-mail
+            //3 //Social
+            data.append("Authmetod", "1");
+            data.append("NotifyMe", false);
+            data.append("SenderEmail", "younes.hajji@prosesspilotene.no");
+            data.append("RecipientEmails", "younes.hajji@prosesspilotene.no");
+            data.append("RecipientMobiles", "48209393");
+
+            $.ajax({
+                type: "POST",
+                //async: true,
+                url: "http://localhost:44444/api/SignRequest/PostCRM",
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (sdsurls) {
+                    $.notify("Done", 'success', {
+                        clickToHide: true,
+                        autoHide: false,
+                        globalPosition: 'top right'
+                    });
+                },
+                error: function (request, status, error) {
+                    $.notify("Error: " + request.status, "error");
+                }
+            });
+        }
+    });
+
     $("#send")
         .click(function () {
-                var data = { orgname: "processpilots", requestId: "1112201648t4o5iryjmtb0g9f4zlgi2435ext808c7pyl2732la2zubpk6", taskId: "task_1" };
+            var data = { orgname: "processpilots", requestId: "1112201648t4o5iryjmtb0g9f4zlgi2435ext808c7pyl2732la2zubpk6", taskId: "task_1" };
 
             $.ajax({
                 type: "GET",

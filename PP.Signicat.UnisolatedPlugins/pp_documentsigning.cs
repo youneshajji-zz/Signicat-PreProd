@@ -90,6 +90,8 @@ namespace PP.Signicat.UnisolatedPlugins
                 if (context.MessageName.ToUpper() == "UPDATE")
                 {
                     OptionSetValue statusCode = entity.Attributes["statuscode"] as OptionSetValue;
+                    var user = context.InitiatingUserId;
+                    var lcid = RetrieveUserUiLanguageCode(service, user);
 
                     if (statusCode.Value != 778380000)
                         return;
@@ -101,7 +103,7 @@ namespace PP.Signicat.UnisolatedPlugins
                             var signicatTasks = GetRelatedSigningTask(entity.Id, service);
                             foreach (var task in signicatTasks.Entities)
                             {
-                                SendEmail(entity, task, service);
+                                SendEmail(entity, task, lcid, service);
                             }
                             return;
                         }
@@ -138,7 +140,7 @@ namespace PP.Signicat.UnisolatedPlugins
             return service.RetrieveMultiple(query);
         }
 
-        private void SendEmail(Entity documentsigning, Entity task, IOrganizationService service)
+        private void SendEmail(Entity documentsigning, Entity task, int lcid, IOrganizationService service)
         {
             try
             {
@@ -149,7 +151,13 @@ namespace PP.Signicat.UnisolatedPlugins
                 //var accountRef = (EntityReference)task.Attributes["pp_accountid"];
                 var customerRef = (EntityReference)task.Attributes["pp_customerid"];
                 var link = task.Attributes["pp_sdsurl"].ToString();
-                var url = "<br/><a href='" + link + "'><img alt='Click here' src='" + linkBtnImg + "'></a>";
+                var url = "";
+                if (lcid == 1033)
+                    url = "<br/><a href='" + link + "'><img alt='Click here' src='" + linkBtnImg + "'></a>";
+                else if (lcid == 1044)
+                    url = "<br/><a href='" + link + "'><img alt='Klikk her' src='" + linkBtnImg + "'></a>";
+                else
+                    url = "<br/><a href='" + link + "'><img alt='Click here' src='" + linkBtnImg + "'></a>";
 
 
                 //var _userId = GetSenderId(documentsigning, service);
@@ -184,7 +192,12 @@ namespace PP.Signicat.UnisolatedPlugins
                     //newText = regex.Replace(newText, "<br />" + "<br />");                    
                     newText += description;
                     newText += "<br/><br/><br/>" + url + "<br/><br/><br/>";
-                    newText += "<br/> With Regards / Med vennlig Hilsen<br/>";
+                    if (lcid == 1033)
+                        newText += "<br/> With Regards<br/>";
+                    else if (lcid == 1044)
+                        newText += "<br/> Med vennlig Hilsen<br/>";
+                    else
+                        newText += "<br/> With Regards<br/>";
                     newText += senderRef.Name;
 
                     email["description"] = newText;
@@ -206,6 +219,20 @@ namespace PP.Signicat.UnisolatedPlugins
             {
                 throw new InvalidPluginExecutionException("An error occurred in sending email.", ex);
             }
+        }
+
+        //From the SDK: http://msdn.microsoft.com/en-us/library/hh670609.aspx
+        private static int RetrieveUserUiLanguageCode(IOrganizationService service, Guid userId)
+        {
+            var userSettingsQuery = new QueryExpression("usersettings");
+            userSettingsQuery.ColumnSet.AddColumns("uilanguageid", "systemuserid");
+            userSettingsQuery.Criteria.AddCondition("systemuserid", ConditionOperator.Equal, userId);
+            var userSettings = service.RetrieveMultiple(userSettingsQuery);
+            if (userSettings.Entities.Count > 0)
+            {
+                return (int)userSettings.Entities[0]["uilanguageid"];
+            }
+            return 0;
         }
     }
 
