@@ -30,9 +30,12 @@ namespace PP.Signicat.WebApi.Controllers
         // GET: api/Callback/GetLandingPage
         [ActionName("Landingpage")]
         [HttpGet]
-        public HttpResponseMessage Get()
+        public HttpResponseMessage Get(int lcid)
         {
             var viewPath = HttpContext.Current.Server.MapPath(@"~/Views/Shared/SignCallBack.cshtml");
+            if (lcid == 1044)
+                viewPath = HttpContext.Current.Server.MapPath(@"~/Views/Shared/SignCallBackNB.cshtml");
+
             var template = File.ReadAllText(viewPath);
             var parsedView = Razor.Parse(template);
 

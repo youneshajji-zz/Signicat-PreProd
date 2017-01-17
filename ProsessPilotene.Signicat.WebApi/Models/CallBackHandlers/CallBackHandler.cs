@@ -102,7 +102,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                                     new CRMHandler().SendEmail(documentsigning.ToEntityReference(), senderRef,
                                         padesurl, name, customer, lcid, service);
                                 }
-                                
+
                             }
                         }
 
@@ -111,7 +111,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                         //Signed
                     }
                 }
-                
+
                 CheckOverAllStatus(documentsigning.ToEntityReference(), regardingRef, saveinsp, sendcopy,
                     senderRef, orgname, lcid, service);
                 return HttpStatusCode.OK;
@@ -245,7 +245,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                         if (lcid == 1044)
                             mergedTitle = "Sammenslått dokument";
 
-                        new CRMHandler().CreateSignicatResult(docsignRef, null, padesurl, mergedTitle + 
+                        new CRMHandler().CreateSignicatResult(docsignRef, null, padesurl, mergedTitle +
                             ": " + tempList[0].name, service);
                         new CRMHandler().CreateAnnotations(padesurl, tempList[0].name, mergedTitle,
                             docsignRef.Id, docsignRef.LogicalName, lcid, service);

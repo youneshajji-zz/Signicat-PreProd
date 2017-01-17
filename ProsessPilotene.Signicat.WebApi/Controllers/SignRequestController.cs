@@ -171,7 +171,7 @@ namespace PP.Signicat.WebApi.Controllers
                     for (int i = 0; i < request.request[0].task.Length; i++)
                     {
                         //var callbackOnTaskCompleteUrl = "https://prosesspilotenesignicatwebapi-preprod.azurewebsites.net:443/api/Callback/GetSigning?orgname=" + customerorg + "&requestId=${requestId}&taskId=${taskId}";
-                        var callbackOnTaskCompleteUrl = "https://prosesspilotenesignicatwebapi-preprod.azurewebsites.net:443/api/Callback/Landingpage";
+                        var callbackOnTaskCompleteUrl = "https://prosesspilotenesignicatwebapi-preprod.azurewebsites.net:443/api/Callback/Landingpage?lcid=" + signingInfo.LCID;
                         var callbackNotificationUrl = "https://prosesspilotenesignicatwebapi-preprod.azurewebsites.net:443/api/Callback/GetSigning?orgname=" + customerorg;
                         request.request[0].task[i].ontaskcomplete = callbackOnTaskCompleteUrl;
 
