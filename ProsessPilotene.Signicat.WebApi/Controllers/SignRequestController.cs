@@ -229,40 +229,47 @@ namespace PP.Signicat.WebApi.Controllers
                     //try
                     //{
 
-                        createrequestresponse response;
-                        using (var client = new DocumentEndPointClient())
-                        {
-                            response = client.createRequest(request);
-                        }
+                    createrequestresponse response;
+                    using (var client = new DocumentEndPointClient())
+                    {
+                        response = client.createRequest(request);
+                    }
 
-                        for (int i = 0; i < request.request[0].task.Length; i++)
-                        {
-                            var url = String.Format(
-                                "https://preprod.signicat.com/std/docaction/prosesspilotene?request_id={0}&task_id={1}",
-                                response.requestid[0], request.request[0].task[i].id);
-                            signHereUrlList.Add(url);
+                    for (int i = 0; i < request.request[0].task.Length; i++)
+                    {
+                        var url = String.Format(
+                            "https://preprod.signicat.com/std/docaction/prosesspilotene?request_id={0}&task_id={1}",
+                            response.requestid[0], request.request[0].task[i].id);
+                        signHereUrlList.Add(url);
 
-                            if (sendSMS == "yes")
+                        var phonenr = request.request[0].task[i].subject.mobile;
+
+                        if (sendSMS == "yes" && !string.IsNullOrWhiteSpace(phonenr))
+                        {
+                            using (var client = new DocumentEndPointClient())
                             {
-                                request.request[0].task[i].notification = new[]
+                                var smsnotify = new notification
                                 {
-                                    new notification
-                                    {
-                                        notificationid = "send_sms_" + i,
-                                        type = notificationtype.SMS,
-                                        recipient = request.request[0].task[i].subject.mobile,//"48209393",
-                                        message = "Signer dette: " + url,
-                                        schedule = new []
-                                        {
-                                            new schedule
-                                            {
-                                                stateis = taskstatus.created
-                                            }
-                                        }
-                                    }
+                                    notificationid = "send_sms_" + i,
+                                    type = notificationtype.SMS,
+                                    recipient = phonenr,
+                                    message = "Signer dette: " + url
                                 };
+
+                                var notifyReq = new addnotificationrequest
+                                {
+                                    service = "prosesspilotene",
+                                    notification = smsnotify,
+                                    password = "Bond007",
+                                    requestid = response.requestid[0],
+                                    taskid = request.request[0].task[i].id
+                                };
+
+
+                                client.addNotification(notifyReq);
                             }
                         }
+                    }
                     //}
                     //catch (Exception ex)
                     //{

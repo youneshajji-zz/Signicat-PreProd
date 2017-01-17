@@ -260,11 +260,11 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                                         {
                                             new method
                                             {
-                                               Value = "nbid"
+                                               Value = "nbid-sign"
                                             },
                                             new method
                                             {
-                                               Value = "nbid-mobil"
+                                               Value = "nbid-mobil-sign"
                                             }
                                         }
                     }
