@@ -148,7 +148,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
         /// <param name="entityname"></param>
         /// <param name="service"></param>
         internal HttpStatusCode CreateAnnotations(string signicatUrl, string name, string subject, Guid entityid,
-            string entityname, IOrganizationService service)
+            string entityname, int lcid, IOrganizationService service)
         {
             try
             {
@@ -161,10 +161,17 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                 Entity Annotation = new Entity("annotation");
                 Annotation.Attributes["objectid"] = new EntityReference(entityname, entityid);
                 Annotation.Attributes["objecttypecode"] = entityname;
-                Annotation.Attributes["subject"] = "Signed: " + subject;
+                if (lcid == 1044)
+                    Annotation.Attributes["subject"] = "Signert: " + subject;
+                else
+                    Annotation.Attributes["subject"] = "Signed: " + subject;
                 Annotation.Attributes["documentbody"] = encodedData;
                 Annotation.Attributes["mimetype"] = @"application/pdf";
-                Annotation.Attributes["notetext"] = "The document is signed by using the Signicat technology.";
+
+                if (lcid == 1044)
+                    Annotation.Attributes["notetext"] = "Dette dokumentet er signert ved bruk av Signicat teknologi.";
+                else
+                    Annotation.Attributes["notetext"] = "The document is signed by using the Signicat technology.";
                 Annotation.Attributes["filename"] = name + ".pdf";
 
                 service.Create(Annotation);
@@ -250,7 +257,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
         }
 
         public void SendSignedMergedCopy(EntityReference docsignRef, EntityReference senderRef,
-            string padesurl, string name, IOrganizationService service)
+            string padesurl, string name, int lcid, IOrganizationService service)
         {
             try
             {
@@ -259,7 +266,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                 foreach (var task in tasks.Entities)
                 {
                     var customer = (EntityReference)task.Attributes["pp_customerid"];
-                    SendEmail(docsignRef, senderRef, padesurl, name, customer, service);
+                    SendEmail(docsignRef, senderRef, padesurl, name, customer, lcid, service);
                 }
             }
             catch (Exception ex)
@@ -268,7 +275,8 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
             }
         }
 
-        internal void SendEmail(EntityReference docsignRef, EntityReference senderRef, string padesurl, string name, EntityReference customer, IOrganizationService service)
+        internal void SendEmail(EntityReference docsignRef, EntityReference senderRef, string padesurl,
+            string name, EntityReference customer, int lcid, IOrganizationService service)
         {
             try
             {
@@ -285,10 +293,19 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                 Entity email = new Entity("email");
                 email["to"] = new EntityCollection(listto);
                 email["from"] = new EntityCollection(listfrom);
-                email["subject"] = "Copy of signed document: " + name;
+
+                if (lcid == 1044)
+                    email["subject"] = "Kopi av det signerte dokumentet: " + name;
+                else
+                    email["subject"] = "Copy of signed document: " + name;
+
                 email["directioncode"] = true;
                 email["regardingobjectid"] = new EntityReference(docsignRef.LogicalName, docsignRef.Id);
-                email["description"] = "Hi, This is a copy of the signed document: " + name;
+
+                if (lcid == 1044)
+                    email["description"] = "Hei, dette er en kopi av det signerte dokumentet: " + name;
+                else
+                    email["description"] = "Hi, This is a copy of the signed document: " + name;
 
                 var _emailId = service.Create(email);
 
@@ -347,6 +364,19 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
 
                 }
             }
+        }
+
+        internal int RetrieveUserUiLanguageCode(IOrganizationService service, Guid userId)
+        {
+            var userSettingsQuery = new QueryExpression("usersettings");
+            userSettingsQuery.ColumnSet.AddColumns("uilanguageid", "systemuserid");
+            userSettingsQuery.Criteria.AddCondition("systemuserid", ConditionOperator.Equal, userId);
+            var userSettings = service.RetrieveMultiple(userSettingsQuery);
+            if (userSettings.Entities.Count > 0)
+            {
+                return (int)userSettings.Entities[0]["uilanguageid"];
+            }
+            return 0;
         }
     }
 }

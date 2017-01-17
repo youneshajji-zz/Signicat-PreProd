@@ -125,10 +125,12 @@ namespace PP.Signicat.WebApi.Controllers
                 signingInfo.authMetod = HttpContext.Current.Request.Params["Authmetod"];
                 signingInfo.notifyMe = HttpContext.Current.Request.Params["NotifyMe"];
                 signingInfo.senderMail = HttpContext.Current.Request.Params["SenderEmail"];
+                signingInfo.LCID = Convert.ToInt32(HttpContext.Current.Request.Params["lcid"]);
                 var signingMetod = HttpContext.Current.Request.Params["SigningMetod"];
                 //var description = HttpContext.Current.Request.Params["Description"];
                 var daystolive = HttpContext.Current.Request.Params["Daystolive"];
                 var sendSMS = HttpContext.Current.Request.Params["SendSMS"];
+                var SMSText = HttpContext.Current.Request.Params["SMSText"];
                 signingInfo.signingMetodText = "nbid";
 
                 if (daystolive == "")
@@ -195,13 +197,13 @@ namespace PP.Signicat.WebApi.Controllers
 
                     if (signingInfo.authMetod == "1") //BankID
                     {
-                        //for (int i = 0; i < request.request[0].task.Length; i++)
-                        //{
-                        //    request.request[0].task[i].authentication = new authentication
-                        //    {
-                        //        method = new string[] { "nbid", "nbid-mobil" }
-                        //    };
-                        //}
+                        for (int i = 0; i < request.request[0].task.Length; i++)
+                        {
+                            request.request[0].task[i].authentication = new authentication
+                            {
+                                method = new string[] { "nbid", "nbid-mobil" }
+                            };
+                        }
                     }
 
                     if (signingInfo.authMetod == "2") //SMS Email OTP
@@ -253,7 +255,7 @@ namespace PP.Signicat.WebApi.Controllers
                                     notificationid = "send_sms_" + i,
                                     type = notificationtype.SMS,
                                     recipient = phonenr,
-                                    message = "Signer dette: " + url
+                                    message = SMSText + ": " + url
                                 };
 
                                 var notifyReq = new addnotificationrequest

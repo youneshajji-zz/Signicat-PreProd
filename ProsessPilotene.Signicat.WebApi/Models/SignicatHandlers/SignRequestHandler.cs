@@ -89,10 +89,14 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 if (signingInfo.notifyMe == "true")
                     tasks = AddNotifyMe(signingInfo, tasks);
 
+                var lang = "en";
+                if (signingInfo.LCID == 1044)
+                    lang = "nb";
+
                 var request = new request
                 {
                     clientreference = "cliref1",
-                    language = "nb",
+                    language = lang,
                     profile = "default",
                     //subject = GetSubjects(recipients),
                     task = tasks,
@@ -112,10 +116,19 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
         {
             try
             {
+                var message = "Message from Signicat";
+                var header = "A document or more are signed and will be available in Dynamics 365 shortly!";
+
+                if (signingInfo.LCID == 1044)
+                {
+                    message = "Melding fra Signicat";
+                    header = "Et dokument eller flere har blitt signert og vil snart være tilgjengelig på Dynamics 365!";
+                }
+
                 var notifyme = new notification
                 {
-                    header = "Message from Signicat",
-                    message = "A document or more are signed and will be available in CRM shortly!",
+                    header = header,
+                    message = message,
                     notificationid = "req_com",
                     recipient = signingInfo.senderMail,
                     sender = "noreply@signicat.com",

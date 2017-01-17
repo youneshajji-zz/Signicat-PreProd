@@ -544,6 +544,7 @@
         var serverUrl = obj.serverurl;
         var userId = obj.userid;
         var orgname = obj.orgname;
+        var lcid = obj.lcid;
 
         var data = new FormData();
         var files = $("#filetosend").get(0).files;
@@ -572,6 +573,10 @@
             data.append("Daystolive", daystolive);
             data.append("CustomerOrg", orgname);
             data.append("SendSMS", "yes");
+            data.append("lcid", "lcid");
+
+            var message = $("#message").val();
+            data.append("SMSText", message);
             
 
             var contactEmail = [];
@@ -646,7 +651,6 @@
             data.append("RecipientEmails", contactEmail);
             data.append("RecipientMobiles", contactMobile);
             var apiurl = GetConfigValue("webapiurl");
-            //var apiurl = "http://localhost:43632/";
 
             $.ajax({
                 type: "POST",

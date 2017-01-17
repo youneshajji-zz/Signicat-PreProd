@@ -53,6 +53,8 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                 var saveinsp = (bool)documentsigning["pp_saveindocumentlocation"];
                 var senderRef = (EntityReference)documentsigning["ownerid"];
 
+                var lcid = new CRMHandler().RetrieveUserUiLanguageCode(service, senderRef.Id);
+
                 foreach (var documentsigningtask in documentsigningtasks.Entities)
                 {
                     var sdsurl = documentsigningtask.Attributes["pp_sdsurl"].ToString();
@@ -86,25 +88,32 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
 
                             if (!saveonlymerged)
                             {
+                                var title = "Single document";
+                                if (lcid == 1044)
+                                    title = "Singel dokument";
+
                                 var padesurl = new SignicatHandler().CreatePades(null, documentstatus.resulturi);
-                                new CRMHandler().CreateAnnotations(padesurl, name, "single document",
-                                    documentsigningRef.Id, documentsigningRef.LogicalName, service);
+                                new CRMHandler().CreateAnnotations(padesurl, name, title,
+                                    documentsigningRef.Id, documentsigningRef.LogicalName, lcid, service);
 
                                 if (sendcopy)
                                 {
                                     var customer = (EntityReference)documentsigningtask.Attributes["pp_customerid"];
-                                    new CRMHandler().SendEmail(documentsigning.ToEntityReference(), senderRef, padesurl, name, customer, service);
+                                    new CRMHandler().SendEmail(documentsigning.ToEntityReference(), senderRef,
+                                        padesurl, name, customer, lcid, service);
                                 }
                                 
                             }
                         }
 
-                        new CRMHandler().ChangeDocumentSigningTaskStatus(documentsigningtask.Id, 778380000, service);
+                        new CRMHandler().ChangeDocumentSigningTaskStatus(documentsigningtask.Id, 778380000,
+                            service);
                         //Signed
                     }
                 }
                 
-                CheckOverAllStatus(documentsigning.ToEntityReference(), regardingRef, saveinsp, sendcopy, senderRef, orgname, service);
+                CheckOverAllStatus(documentsigning.ToEntityReference(), regardingRef, saveinsp, sendcopy,
+                    senderRef, orgname, lcid, service);
                 return HttpStatusCode.OK;
             }
             catch (Exception ex)
@@ -122,7 +131,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
         /// <param name="service"></param>
         /// <returns>List of pades url's</returns>
         private HttpStatusCode CheckOverAllStatus(EntityReference docsignRef, EntityReference regardingRef,
-             bool saveinsp, bool sendcopy, EntityReference senderRef, string orgname,
+             bool saveinsp, bool sendcopy, EntityReference senderRef, string orgname, int lcid,
             IOrganizationService service)
         {
             try
@@ -131,7 +140,8 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                 //if all tasks are completed, the return is null
                 if (results.Entities.Count == 0)
                 {
-                    ConvertSdoDocument(docsignRef, regardingRef, saveinsp, sendcopy, senderRef, orgname, service);
+                    ConvertSdoDocument(docsignRef, regardingRef, saveinsp, sendcopy, senderRef, orgname,
+                        lcid, service);
                     return HttpStatusCode.OK;
                 }
                 return HttpStatusCode.NoContent;
@@ -151,7 +161,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
         /// <param name="service"></param>
         /// <returns>List of pades url's</returns>
         private void ConvertSdoDocument(EntityReference docsignRef, EntityReference regardingRef,
-             bool saveinsp, bool sendcopy, EntityReference senderRef, string orgname,
+             bool saveinsp, bool sendcopy, EntityReference senderRef, string orgname, int lcid,
             IOrganizationService service)
         {
             try
@@ -187,6 +197,10 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
 
                 var groups = docList.GroupBy(x => x.name).OrderBy(x => x.Key);
 
+                var title = "Single document";
+                if (lcid == 1044)
+                    title = "Singel dokument";
+
                 foreach (var item in groups)
                 {
                     var tempList = item.ToList();
@@ -195,26 +209,31 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                     {
                         if (tempList[0].padesurl != null)
                         {
-                            new CRMHandler().CreateAnnotations(tempList[0].padesurl, tempList[0].name, "Single document",
-                                docsignRef.Id, docsignRef.LogicalName, service);
+                            new CRMHandler().CreateAnnotations(tempList[0].padesurl, tempList[0].name,
+                                title, docsignRef.Id, docsignRef.LogicalName, lcid, service);
                             if (sendcopy)
-                                new CRMHandler().SendSignedMergedCopy(docsignRef, senderRef, tempList[0].padesurl, tempList[0].name, service);
+                                new CRMHandler().SendSignedMergedCopy(docsignRef, senderRef,
+                                    tempList[0].padesurl, tempList[0].name, lcid, service);
                         }
 
                         else
                         {
-                            new CRMHandler().CreateAnnotations(tempList[0].resulturl, tempList[0].name, "Single document", docsignRef.Id, docsignRef.LogicalName, service);
+                            new CRMHandler().CreateAnnotations(tempList[0].resulturl, tempList[0].name,
+                                title, docsignRef.Id, docsignRef.LogicalName, lcid, service);
                             if (sendcopy)
-                                new CRMHandler().SendSignedMergedCopy(docsignRef, senderRef, tempList[0].padesurl, tempList[0].name, service);
+                                new CRMHandler().SendSignedMergedCopy(docsignRef, senderRef,
+                                    tempList[0].padesurl, tempList[0].name, lcid, service);
                         }
 
 
                         if (saveinsp && regardingRef != null)
                         {
                             if (tempList[0].padesurl != null)
-                                new SharePointHandler().SaveInSP(regardingRef, tempList[0].padesurl, tempList[0].name, orgname, service);
+                                new SharePointHandler().SaveInSP(regardingRef, tempList[0].padesurl,
+                                    tempList[0].name, orgname, service);
                             else
-                                new SharePointHandler().SaveInSP(regardingRef, tempList[0].resulturl, tempList[0].name, orgname, service);
+                                new SharePointHandler().SaveInSP(regardingRef, tempList[0].resulturl,
+                                    tempList[0].name, orgname, service);
                         }
                         continue;
                     }
@@ -222,11 +241,18 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                     var padesurl = new SignicatHandler().CreatePades(tempList, null);
                     if (padesurl != null)
                     {
-                        new CRMHandler().CreateSignicatResult(docsignRef, null, padesurl, "Merged document: " + tempList[0].name, service);
-                        new CRMHandler().CreateAnnotations(padesurl, tempList[0].name, "Merged document", docsignRef.Id, docsignRef.LogicalName, service);
+                        var mergedTitle = "Merged document";
+                        if (lcid == 1044)
+                            mergedTitle = "Sammenslått dokument";
+
+                        new CRMHandler().CreateSignicatResult(docsignRef, null, padesurl, mergedTitle + 
+                            ": " + tempList[0].name, service);
+                        new CRMHandler().CreateAnnotations(padesurl, tempList[0].name, mergedTitle,
+                            docsignRef.Id, docsignRef.LogicalName, lcid, service);
 
                         if (sendcopy)
-                            new CRMHandler().SendSignedMergedCopy(docsignRef, senderRef, padesurl, tempList[0].name, service);
+                            new CRMHandler().SendSignedMergedCopy(docsignRef, senderRef, padesurl,
+                                tempList[0].name, lcid, service);
 
                         if (saveinsp && regardingRef != null)
                             new SharePointHandler().SaveInSP(regardingRef, padesurl, tempList[0].name, orgname, service);

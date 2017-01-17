@@ -7,6 +7,7 @@
         public string authMetod { get; set; }
 
         public int daysToLive { get; set; }
+        public int LCID { get; set; }
         public string signingMetodText { get; set; }
     }
 }
