@@ -38,7 +38,7 @@ namespace PP.Signicat.CredentialManager.Controllers
             {
                 if (model != null)
                 {
-                    var upsert = new TransactionHandler().UpsertTransactions(model);
+                    var upsert = new TransactionHandler().CreateTransactions(model);
                 }
             }
             else return View(model);
@@ -66,7 +66,7 @@ namespace PP.Signicat.CredentialManager.Controllers
             {
                 if (model != null)
                 {
-                    var response = new TransactionHandler().UpsertTransactions(model);
+                    var response = new TransactionHandler().UpdateTransactions(model);
 
                     if (response == null)
                         throw new NotImplementedException("Cannot update the transaction.");

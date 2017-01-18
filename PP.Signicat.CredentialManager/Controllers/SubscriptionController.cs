@@ -29,7 +29,7 @@ namespace PP.Signicat.CredentialManager.Controllers
             {
                 if (model != null)
                 {
-                    var upsert = new SubscriptionHandler().UpsertSubscription(model);
+                    var upsert = new SubscriptionHandler().CreateSubscription(model);
                 }
             }
             else return View(model);
@@ -58,7 +58,7 @@ namespace PP.Signicat.CredentialManager.Controllers
             {
                 if (model != null)
                 {
-                    var response = new SubscriptionHandler().UpsertSubscription(model);
+                    var response = new SubscriptionHandler().UpdateSubscription(model);
 
                     if (response == null)
                         throw new NotImplementedException("Cannot update the subscription.");

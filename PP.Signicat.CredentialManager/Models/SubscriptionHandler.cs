@@ -10,7 +10,7 @@ namespace PP.Signicat.CredentialManager.Models
     public class SubscriptionHandler
     {
         private const string PassPhrase = "SignicatPassPhrase";
-        internal SubscriptionModel UpsertSubscription(SubscriptionModel credentials)
+        internal SubscriptionModel CreateSubscription(SubscriptionModel credentials)
         {
             CloudTable table = ConnectToAzureTableStorage();
 
@@ -41,7 +41,49 @@ namespace PP.Signicat.CredentialManager.Models
                     volumelicense = credentials.volumelicense
                 };
 
-                TableOperation insertOperation = TableOperation.InsertOrMerge(entity);
+                TableOperation insertOperation = TableOperation.Insert(entity);
+                table.Execute(insertOperation);
+
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        internal SubscriptionModel UpdateSubscription(SubscriptionModel credentials)
+        {
+            CloudTable table = ConnectToAzureTableStorage();
+
+            try
+            {
+                var password = "";
+                if (credentials.password.Length < 30)
+                    password = new StringCipher().Encrypt(credentials.password, PassPhrase);
+                else
+                    password = credentials.password;
+
+                var status = Status.Active;
+                if (credentials.status != 0)
+                    status = credentials.status;
+
+                SubscriptionModel entity = new SubscriptionModel(credentials.customer, credentials.subscription)
+                {
+                    orgurl = credentials.orgurl,
+                    discoveryurl = credentials.discoveryurl,
+                    username = credentials.username,
+                    password = password,
+                    domain = credentials.domain,
+                    partner = credentials.partner,
+                    servicestarted = credentials.servicestarted,
+                    serviceended = credentials.serviceended,
+                    subscriptionstatus = (int)status,
+                    usercount = credentials.usercount,
+                    volumelicense = credentials.volumelicense
+                };
+
+                TableOperation insertOperation = TableOperation.Replace(entity);
                 table.Execute(insertOperation);
 
                 return entity;

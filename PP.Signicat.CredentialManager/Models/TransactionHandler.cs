@@ -10,7 +10,7 @@ namespace PP.Signicat.CredentialManager.Models
 {
     public class TransactionHandler
     {
-        internal TransactionModel UpsertTransactions(TransactionModel transaction)
+        internal TransactionModel CreateTransactions(TransactionModel transaction)
         {
             CloudTable table = ConnectToAzureTableStorage();
 
@@ -23,10 +23,10 @@ namespace PP.Signicat.CredentialManager.Models
                     counteruniqueusers = transaction.counteruniqueusers,
                     counterbankid = transaction.counterbankid,
                     countersocial = transaction.countersocial,
-                    counternpid = transaction.countersocial
+                    counternpid = transaction.counternpid,
                 };
 
-                TableOperation insertOperation = TableOperation.InsertOrMerge(entity);
+                TableOperation insertOperation = TableOperation.Insert(entity);
                 table.Execute(insertOperation);
 
                 return entity;
@@ -37,6 +37,32 @@ namespace PP.Signicat.CredentialManager.Models
             }
         }
 
+        internal TransactionModel UpdateTransactions(TransactionModel transaction)
+        {
+            CloudTable table = ConnectToAzureTableStorage();
+
+            try
+            {
+                TransactionModel entity = new TransactionModel(transaction.subscription, transaction.period)
+                {
+                    customer = transaction.customer,
+                    countertotal = transaction.countertotal,
+                    counteruniqueusers = transaction.counteruniqueusers,
+                    counterbankid = transaction.counterbankid,
+                    countersocial = transaction.countersocial,
+                    counternpid = transaction.counternpid,
+                };
+
+                TableOperation insertOperation = TableOperation.Replace(entity);
+                table.Execute(insertOperation);
+
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         internal TransactionModel GetTransaction(string subscription, string period)
         {
