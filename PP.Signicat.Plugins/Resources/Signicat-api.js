@@ -37,8 +37,8 @@ function createRecord(sdsurls, odataSetName, files, customers, saveoriginalfile,
     //var email = $("#email").val();
     var subject = $("#subject").val();
     var message = $("#message").val();
-    var radiovalueAuth = $("#radios5 input[type='radio']:checked").val();
-    var radiovalueSendCopy = $("#radios6 input[type='radio']:checked").val();
+    var radiovalueAuth = $("#radiosAuth input[type='radio']:checked").val();
+    var radiovalueSendCopy = $("#radiosSendCopy input[type='radio']:checked").val();
     //var authmetod = $("#authmetod").val();
     var daystolive = $("#daystolive").val();
     var requestid = sdsurls[0].split('&').shift().split('=').pop();

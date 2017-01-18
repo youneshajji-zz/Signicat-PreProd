@@ -123,20 +123,19 @@ namespace PP.Signicat.WebApi.Controllers
                 var signingInfo = new SigningInfo();
                 var customerorg = HttpContext.Current.Request.Params["CustomerOrg"];
                 signingInfo.authMetod = HttpContext.Current.Request.Params["Authmetod"];
-                signingInfo.notifyMe = HttpContext.Current.Request.Params["NotifyMe"];
+                signingInfo.notifyMe = Convert.ToInt32(HttpContext.Current.Request.Params["NotifyMe"]);
                 signingInfo.senderMail = HttpContext.Current.Request.Params["SenderEmail"];
                 signingInfo.LCID = Convert.ToInt32(HttpContext.Current.Request.Params["lcid"]);
                 var signingMetod = HttpContext.Current.Request.Params["SigningMetod"];
-                //var description = HttpContext.Current.Request.Params["Description"];
-                var daystolive = HttpContext.Current.Request.Params["Daystolive"];
-                var sendSMS = HttpContext.Current.Request.Params["SendSMS"];
-                var SMSText = HttpContext.Current.Request.Params["SMSText"];
+                signingInfo.daysToLive = Convert.ToInt32(HttpContext.Current.Request.Params["Daystolive"]);
+                signingInfo.SendSMS = Convert.ToInt32(HttpContext.Current.Request.Params["SendSMS"]);
+                signingInfo.SMSText = HttpContext.Current.Request.Params["SMSText"];
                 signingInfo.signingMetodText = "nbid";
 
-                if (daystolive == "")
+                if (signingInfo.daysToLive == 0)
                     signingInfo.daysToLive = 60;
                 else
-                    signingInfo.daysToLive = Convert.ToInt32(daystolive);
+                    signingInfo.daysToLive = signingInfo.daysToLive;
 
                 if (postedFiles.Count > 0)
                 {
@@ -154,16 +153,11 @@ namespace PP.Signicat.WebApi.Controllers
                     else if (signingMetod == "3") //Social
                         signingInfo.signingMetodText = "social";
 
+                    else if (signingMetod == "4") //Handwritten
+                        signingInfo.signingMetodText = "handwritten";
+
                     createrequestrequest request = signHandler.GetCreateRequest(uploadedDocuments, recipients,
-                        signingInfo); //easysign -- nbid-sign
-
-                    ////For storing in Signicat archive
-                    //((sdsdocument)request.request[0].document[0]).sendtoarchive = true;
-                    //((sdsdocument)request.request[0].document[0]).sendtoarchiveSpecified = true;
-
-                    //// Archive signed document
-                    //request.request[0].task[0].documentaction[0].sendresulttoarchive = true;
-                    //request.request[0].task[0].documentaction[0].sendresulttoarchiveSpecified = true;
+                        signingInfo); 
 
                     // You can have request level notifications
                     // for example to notify your system when
@@ -228,55 +222,55 @@ namespace PP.Signicat.WebApi.Controllers
                         }
                     }
 
-                    //try
-                    //{
-
-                    createrequestresponse response;
-                    using (var client = new DocumentEndPointClient())
+                    try
                     {
-                        response = client.createRequest(request);
-                    }
 
-                    for (int i = 0; i < request.request[0].task.Length; i++)
-                    {
-                        var url = String.Format(
-                            "https://preprod.signicat.com/std/docaction/prosesspilotene?request_id={0}&task_id={1}",
-                            response.requestid[0], request.request[0].task[i].id);
-                        signHereUrlList.Add(url);
-
-                        var phonenr = request.request[0].task[i].subject.mobile;
-
-                        if (sendSMS == "yes" && !string.IsNullOrWhiteSpace(phonenr))
+                        createrequestresponse response;
+                        using (var client = new DocumentEndPointClient())
                         {
-                            using (var client = new DocumentEndPointClient())
+                            response = client.createRequest(request);
+                        }
+
+                        for (int i = 0; i < request.request[0].task.Length; i++)
+                        {
+                            var url = String.Format(
+                                "https://preprod.signicat.com/std/docaction/prosesspilotene?request_id={0}&task_id={1}",
+                                response.requestid[0], request.request[0].task[i].id);
+                            signHereUrlList.Add(url);
+
+                            var phonenr = request.request[0].task[i].subject.mobile;
+
+                            if (signingInfo.SendSMS == 1 && !string.IsNullOrWhiteSpace(phonenr))
                             {
-                                var smsnotify = new notification
+                                using (var client = new DocumentEndPointClient())
                                 {
-                                    notificationid = "send_sms_" + i,
-                                    type = notificationtype.SMS,
-                                    recipient = phonenr,
-                                    message = SMSText + ": " + url
-                                };
+                                    var smsnotify = new notification
+                                    {
+                                        notificationid = "send_sms_" + i,
+                                        type = notificationtype.SMS,
+                                        recipient = phonenr,
+                                        message = signingInfo.SMSText + " " + url
+                                    };
 
-                                var notifyReq = new addnotificationrequest
-                                {
-                                    service = "prosesspilotene",
-                                    notification = smsnotify,
-                                    password = "Bond007",
-                                    requestid = response.requestid[0],
-                                    taskid = request.request[0].task[i].id
-                                };
+                                    var notifyReq = new addnotificationrequest
+                                    {
+                                        service = "prosesspilotene",
+                                        notification = smsnotify,
+                                        password = "Bond007",
+                                        requestid = response.requestid[0],
+                                        taskid = request.request[0].task[i].id
+                                    };
 
 
-                                client.addNotification(notifyReq);
+                                    client.addNotification(notifyReq);
+                                }
                             }
                         }
                     }
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    throw new Exception(ex.Message);
-                    //}
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
                 }
             }
 

@@ -8,8 +8,9 @@
         'boolyes': ['Yes', 'Ja'],
         'boolyno': ['No', 'Nei'],
         'lblselectsignmetod': ['Signing method', 'Signeringsmetode'],
-        'auth': ['Authenticate to view?', 'Autentiser for å se?'],
+        'auth': ['Authentication?', 'Autentisering?'],
         'lbldaystolive': ['Expiration', 'Frist'],
+        'lblsendsms': ['Send SMS?', 'Send SMS?'],
         'lblnotify': ['Notification?', 'Varsel?'],
         'lblsaveorg': ['Save original?', 'Lagre original?'],
         'lblsendcopy': ['Send copy?', 'Send kopi?'],
@@ -36,6 +37,7 @@
         'lblselectsignmetodtitle': ['Chose a method for signing the documents.', 'Velg en signerings metode'],
         'authtitle': ['The user will have to authenticate before seeing the document.', 'Mottakeren må autentisere seg før han kan se på dokumentet.'],
         'lbldaystolivetitle': ['How long will the documents be available for signing.', 'Hvor lenge skal dokumentet være tilgjengelig for signering'],
+        'lblsendsmstitle': ['Send the link for signing in SMS to the reciever.', 'Send linken for signering via SMS til mottaker.'],
         'lblnotifytitle': ['An email will be sent to you when a document is signed.', 'Du får en epost når en mottaker har signert et dokument.'],
         'lblsaveorgtitle': ['The uploaded documents will be saved in CRM notes.', 'Det vedlagtet dokumentet vil bli lagret på notat feltet i CRM.'],
         'lblsendcopytitle': ['The signed documents will be sent as a copy to the signatories.', 'En kopi av den signerte dokumentet blir sendt til mottaker(e) på epost.'],
@@ -93,6 +95,8 @@
     var noreplaced5 = $('#lblradios-5').html().replace("No", $.translate.get_text('boolyno'));
     var yesreplaced6 = $('#lblradios-6').html().replace("Yes", $.translate.get_text('boolyes'));
     var noreplaced7 = $('#lblradios-7').html().replace("No", $.translate.get_text('boolyno'));
+    var yesreplaced13 = $('#lblradios-13').html().replace("Yes", $.translate.get_text('boolyes'));
+    var noreplaced14 = $('#lblradios-14').html().replace("No", $.translate.get_text('boolyno'));
 
     $('#lblradios-9').html(yesreplaced9);
     $('#lblradios-10').html(noreplaced10);
@@ -106,10 +110,13 @@
     $('#lblradios-5').html(noreplaced5);
     $('#lblradios-6').html(yesreplaced6);
     $('#lblradios-7').html(noreplaced7);
+    $('#lblradios-13').html(yesreplaced13);
+    $('#lblradios-14').html(noreplaced14);
 
     $('#lblselectsignmetod').text($.translate.get_text('lblselectsignmetod'));
     $('#lblauth').text($.translate.get_text('auth'));
     $('#lbldaystolive').text($.translate.get_text('lbldaystolive'));
+    $('#lblsendsms').html($.translate.get_text('lblsendsms'));
     $('#lblnotify').html($.translate.get_text('lblnotify'));
     $('#lblsaveorg').html($.translate.get_text('lblsaveorg'));
     $('#lblsendcopy').html($.translate.get_text('lblsendcopy'));
@@ -136,6 +143,7 @@
     $('#lblselectsignmetod').attr('title', $.translate.get_text('lblselectsignmetodtitle'));
     $('#lblauth').attr('title', $.translate.get_text('authtitle'));
     $('#lbldaystolive').attr('title', $.translate.get_text('lbldaystolivetitle'));
+    $('#lblsendsms').attr('title', $.translate.get_text('lblsendsmstitle'));
     $('#lblnotify').attr('title', $.translate.get_text('lblnotifytitle'));
     $('#lblsaveorg').attr('title', $.translate.get_text('lblsaveorgtitle'));
     $('#lblsendcopy').attr('title', $.translate.get_text('lblsendcopytitle'));

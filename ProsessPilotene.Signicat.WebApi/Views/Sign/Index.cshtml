@@ -24,17 +24,17 @@
                 data.append("file" + x, files[x]);
             }
 
-            data.append("SigningMetod", "1");
+            data.append("SigningMetod", "2");
             //data.append("Daystolive", "");
             data.append("CustomerOrg", "org11ece0c8");
-            data.append("SendSMS", "yes");
+            data.append("SendSMS", 0);
 
 
             //1 //BankID
             //2 //Sms/E-mail
             //3 //Social
-            data.append("Authmetod", "1");
-            data.append("NotifyMe", false);
+            data.append("Authmetod", "0");
+            data.append("NotifyMe", 1);
             data.append("SenderEmail", "younes.hajji@prosesspilotene.no");
             data.append("RecipientEmails", "younes.hajji@prosesspilotene.no");
             data.append("RecipientMobiles", "48209393");
@@ -62,12 +62,12 @@
 
     $("#send")
         .click(function () {
-            var data = { orgname: "processpilots", requestId: "1112201648t4o5iryjmtb0g9f4zlgi2435ext808c7pyl2732la2zubpk6", taskId: "task_1" };
+            var data = { orgname: "org11ece0c8", requestId: "180120174oww83hs01uaqdu6uog4ldj1a02t82tg0elx43bicphjel8fb6", taskId: "task_0_796" };
 
             $.ajax({
                 type: "GET",
                 async: true,
-                url: "api/CallBack/GetSigning",
+                url: "http://localhost:44444/api/CallBack/GetSigning",
                 data: data,
                 contentType: "application/json",
                 success: function () {

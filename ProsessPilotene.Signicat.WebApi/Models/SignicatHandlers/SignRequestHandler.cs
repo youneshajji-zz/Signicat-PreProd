@@ -86,7 +86,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 var tasks = GetTasks(documentInSds, recipients, signingInfo);
                 var documents = GetDocuments(documentInSds, recipients);
 
-                if (signingInfo.notifyMe == "true")
+                if (signingInfo.notifyMe == 1)
                     tasks = AddNotifyMe(signingInfo, tasks);
 
                 var lang = "en";
@@ -242,7 +242,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
 
         private signature[] GetSignatures(string signingInfoSigningMetodText)
         {
-            if (signingInfoSigningMetodText != "nbid")
+            if (signingInfoSigningMetodText != "nbid" && signingInfoSigningMetodText != "handwritten")
             {
                 var signature = new[]
                 {
@@ -253,6 +253,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                                         {
                                             new method
                                             {
+                                                handwritten = true,
                                                Value = signingInfoSigningMetodText
                                             }
                                         }
@@ -273,11 +274,31 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                                         {
                                             new method
                                             {
+                                                handwritten = true,
                                                Value = "nbid-sign"
                                             },
                                             new method
                                             {
                                                Value = "nbid-mobil-sign"
+                                            }
+                                        }
+                    }
+                };
+                return signature;
+            }
+
+            if (signingInfoSigningMetodText == "handwritten")
+            {
+                var signature = new[]
+                {
+                    new signature
+                    {
+                        responsive = true,
+                                        method = new method[]
+                                        {
+                                            new method
+                                            {
+                                               handwritten = true
                                             }
                                         }
                     }

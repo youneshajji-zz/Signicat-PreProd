@@ -33,7 +33,7 @@
                             <img class="img-responsive img-rounded" src="pp_signicatsendlogo.pn" />
                         </div>-->
                         <div class="row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label id="lblselectsignmetod" class="col-md-3 control-label" for="selectsignmetod" data-toggle="tooltip" data-placement="top" title="Chose a method for signing the documents.">Signing method</label>
                                     <div class="col-md-6">
@@ -41,25 +41,26 @@
                                             <option value="1">BankID/BankID Mobile</option>
                                             <option value="2">SMS/E-mail OTP</option>
                                             <option value="3">Social</option>
+                                            <option value="4">Handwritten</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
-                                <label id="lblauth" class="col-md-3 control-label" for="radios5" data-toggle="tooltip" data-placement="top" title="The user will have to authenticate before seeing the document.">Authenticate to view?</label>
-                                <div class="col-md-3" id="radios5">
+                            <div class="col-sm-3">
+                                <label id="lblauth" class="col-md-3 control-label" for="radiosAuth" data-toggle="tooltip" data-placement="top" title="The user will have to authenticate before seeing the document.">Authentication?</label>
+                                <div class="col-md-3" id="radiosAuth">
                                     <label id="lblradios-9" class="radio-inline" for="radios-9">
-                                        <input type="radio" name="radios5" id="radios-9" value="9">
+                                        <input type="radio" name="radiosAuth" id="radios-9" value="9">
                                         Yes
                                     </label>
                                     <label id="lblradios-10" class="radio-inline" for="radios-10">
-                                        <input type="radio" name="radios5" id="radios-10" value="10" checked="checked">
+                                        <input type="radio" name="radiosAuth" id="radios-10" value="10" checked="checked">
                                         No
                                     </label>
                                 </div>
                             </div>
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label id="lbldaystolive" class="col-md-3 control-label" for="daystolive" data-toggle="tooltip" data-placement="top" title="How long will the documents be available for signing.">Expiration</label>
                                     <div class="col-md-3">
@@ -67,44 +68,59 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-sm-3">
+                                <label id="lblsendsms" class="col-md-3 control-label" for="radiosSMS" data-toggle="tooltip" data-placement="top" title="Send the link for signing in SMS to the reciever.">Send SMS?</label>
+                                <div class="col-md-3" id="radiosSMS">
+                                    <label id="lblradios-13" class="radio-inline" for="radios-13">
+                                        <input type="radio" name="radiosSMS" id="radios-13" value="13">
+                                        Yes
+                                    </label>
+                                    <label id="lblradios-14" class="radio-inline" for="radios-14">
+                                        <input type="radio" name="radiosSMS" id="radios-14" value="14" checked="checked">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+
                         </div>
                         <!-- Multiple Radios (inline) -->
                         <div class="row">
                             <div class="col-sm-3">
-                                <label id="lblnotify" class="col-md-3 control-label" for="radios1" data-toggle="tooltip" data-placement="top" title="An email will be sent to you when a document is signed.">Notification?</label>
-                                <div class="col-md-3" id="radios1">
+                                <label id="lblnotify" class="col-md-3 control-label" for="radiosNotify" data-toggle="tooltip" data-placement="top" title="An email will be sent to you when a document is signed.">Notification?</label>
+                                <div class="col-md-3" id="radiosNotify">
                                     <label id="lblradios-0" class="radio-inline" for="radios-0">
-                                        <input type="radio" name="radios1" id="radios-0" value="1">
+                                        <input type="radio" name="radiosNotify" id="radios-0" value="1">
                                         Yes
                                     </label>
                                     <label id="lblradios-1" class="radio-inline" for="radios-1">
-                                        <input type="radio" name="radios1" id="radios-1" value="2" checked="checked">
+                                        <input type="radio" name="radiosNotify" id="radios-1" value="2" checked="checked">
                                         No
                                     </label>
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <label id="lblsaveorg" class="col-md-3 control-label" for="radios2" data-toggle="tooltip" data-placement="top" title="The uploaded documents will be saved in CRM notes.">Save original?</label>
-                                <div class="col-md-3" id="radios2">
+                                <label id="lblsaveorg" class="col-md-3 control-label" for="radiosSaveOrg" data-toggle="tooltip" data-placement="top" title="The uploaded documents will be saved in CRM notes.">Save original?</label>
+                                <div class="col-md-3" id="radiosSaveOrg">
                                     <label id="lblradios-2" class="radio-inline" for="radios-2">
-                                        <input type="radio" name="radios2" id="radios-2" value="3">
+                                        <input type="radio" name="radiosSaveOrg" id="radios-2" value="3">
                                         Yes
                                     </label>
                                     <label id="lblradios-3" class="radio-inline" for="radios-3">
-                                        <input type="radio" name="radios2" id="radios-3" value="4" checked="checked">
+                                        <input type="radio" name="radiosSaveOrg" id="radios-3" value="4" checked="checked">
                                         No
                                     </label>
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <label id="lblsendcopy" class="col-md-3 control-label" for="radios6" data-toggle="tooltip" data-placement="top" title="The signed documents will be sent as a copy to the signatories.">Send copy?</label>
-                                <div class="col-md-3" id="radios6">
+                                <label id="lblsendcopy" class="col-md-3 control-label" for="radiosSendCopy" data-toggle="tooltip" data-placement="top" title="The signed documents will be sent as a copy to the signatories.">Send copy?</label>
+                                <div class="col-md-3" id="radiosSendCopy">
                                     <label id="lblradios-11" class="radio-inline" for="radios-11">
-                                        <input type="radio" name="radios6" id="radios-11" value="11">
+                                        <input type="radio" name="radiosSendCopy" id="radios-11" value="11">
                                         Yes
                                     </label>
                                     <label id="lblradios-12" class="radio-inline" for="radios-12">
-                                        <input type="radio" name="radios6" id="radios-12" value="12" checked="checked">
+                                        <input type="radio" name="radiosSendCopy" id="radios-12" value="12" checked="checked">
                                         No
                                     </label>
                                 </div>
@@ -112,19 +128,20 @@
 
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label id="lblsaveinsp" class="col-md-3 control-label" for="radios3" data-toggle="tooltip" data-placement="top" title="The signed documents will be saved in the Sharepoint Document Location of the parent record.">Save in Sharepoint?</label>
-                                    <div class="col-md-3" id="radios3">
+                                    <label id="lblsaveinsp" class="col-md-3 control-label" for="radiosSaveInSP" data-toggle="tooltip" data-placement="top" title="The signed documents will be saved in the Sharepoint Document Location of the parent record.">Save in Sharepoint?</label>
+                                    <div class="col-md-3" id="radiosSaveInSP">
                                         <label id="lblradios-4" class="radio-inline" for="radios-4">
-                                            <input type="radio" name="radios3" id="radios-4" value="5">
+                                            <input type="radio" name="radiosSaveInSP" id="radios-4" value="5">
                                             Yes
                                         </label>
                                         <label id="lblradios-5" class="radio-inline" for="radios-5">
-                                            <input type="radio" name="radios3" id="radios-5" value="6" checked="checked">
+                                            <input type="radio" name="radiosSaveInSP" id="radios-5" value="6" checked="checked">
                                             No
                                         </label>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         <!--Email-->
                         <div class="form-group">
@@ -156,14 +173,14 @@
                         <!--Recipients-->
                         <hr />
                         <div class="form-group" id="saveonlymergedDiv" hidden>
-                            <label id="lblsavemerged" class="col-md-3 control-label" for="radios4" data-toggle="tooltip" data-placement="top" title="If NO, then all the signed documents inclusive the merged ones will be saved in CRM notes.">Save only merged?</label>
-                            <div class="col-md-3" id="radios4">
+                            <label id="lblsavemerged" class="col-md-3 control-label" for="radiosSaveMerged" data-toggle="tooltip" data-placement="top" title="If NO, then all the signed documents inclusive the merged ones will be saved in CRM notes.">Save only merged?</label>
+                            <div class="col-md-3" id="radiosSaveMerged">
                                 <label id="lblradios-6" class="radio-inline" for="radios-6">
-                                    <input type="radio" name="radios4" id="radios-6" value="7" checked="checked">
+                                    <input type="radio" name="radiosSaveMerged" id="radios-6" value="7" checked="checked">
                                     Yes
                                 </label>
                                 <label id="lblradios-7" class="radio-inline" for="radios-7">
-                                    <input type="radio" name="radios4" id="radios-7" value="8">
+                                    <input type="radio" name="radiosSaveMerged" id="radios-7" value="8">
                                     No
                                 </label>
                             </div>
@@ -259,7 +276,52 @@
 
         if (!docLocExists) {
             $("#radios-4").attr('disabled', true);
-            $("#radios-4").notify($.translate.get_text('doclocnotify'), "info", { clickToHide: true, autoHide: true, position: "top" });
+            //$("#radiosSaveInSP").notify($.translate.get_text('doclocnotify'), "warn",
+            //    { position: "left" });
+            $.notify($.translate.get_text('doclocnotify'), "warn",
+                { clickToHide: true, autoHide: true, position: "top" });
+        }
+
+        var defaultparams = GetConfigValue("signicatparams");
+
+        if (defaultparams != null) {
+            var isDisabled = $("#radios-4").is(':disabled');
+            var arr = defaultparams.split('|');
+            console.log(arr);
+
+            $("#selectsignmetod option[value='" + arr[0] + "']").attr('selected', 'selected');
+
+            if (arr[1] == 1) { //Auth
+                $('input:radio[name="radiosAuth"][value="9"]').prop('checked', true);
+                $('input:radio[name="radiosAuth"][value="10"]').prop('checked', false);
+            }
+
+            $("#daystolive").val(arr[2]);
+
+            if (arr[3] == 1) { //SendSMS
+                $('input:radio[name="radiosSMS"][value="13"]').prop('checked', true);
+                $('input:radio[name="radiosSMS"][value="14"]').prop('checked', false);
+            }
+
+            if (arr[4] == 1) { //Notify
+                $('input:radio[name="radiosNotify"][value="1"]').prop('checked', true);
+                $('input:radio[name="radiosNotify"][value="2"]').prop('checked', false);
+            }
+
+            if (arr[5] == 1) { //Save Original
+                $('input:radio[name="radiosSaveOrg"][value="3"]').prop('checked', true);
+                $('input:radio[name="radiosSaveOrg"][value="4"]').prop('checked', false);
+            }
+
+            if (arr[6] == 1) { //SendCopy
+                $('input:radio[name="radiosSendCopy"][value="11"]').prop('checked', true);
+                $('input:radio[name="radiosSendCopy"][value="12"]').prop('checked', false);
+            }
+
+            if (arr[7] == 1 && !isDisabled) { //Save in SP
+                $('input:radio[name="radiosSaveInSP"][value="5"]').prop('checked', true);
+                $('input:radio[name="radiosSaveInSP"][value="6"]').prop('checked', false);
+            }
         }
 
         $('[data-toggle="tooltip"]').tooltip();
@@ -550,7 +612,7 @@
         var files = $("#filetosend").get(0).files;
         var signingmetod = $("#selectsignmetod").val();
         //var authmetod = $("#authmetod").val();
-        
+
         var daystolive = $("#daystolive").val();
         var saveoriginalfile;
         var saveinsp;
@@ -572,12 +634,11 @@
             //data.append("Authmetod", authmetod);
             data.append("Daystolive", daystolive);
             data.append("CustomerOrg", orgname);
-            data.append("SendSMS", "yes");
             data.append("lcid", lcid);
 
             var message = $("#message").val();
             data.append("SMSText", message);
-            
+
 
             var contactEmail = [];
             var contactMobile = [];
@@ -606,15 +667,16 @@
 
             var senderEmail = GetUserMail(userId);
 
-            var radiovalue1 = $("#radios1 input[type='radio']:checked").val();
-            var radiovalue2 = $("#radios2 input[type='radio']:checked").val();
-            var radiovalue3 = $("#radios3 input[type='radio']:checked").val();
-            var radiovalue4 = $("#radios4 input[type='radio']:checked").val();
-            var radiovalue5 = $("#radios5 input[type='radio']:checked").val();
-            var radiovalue6 = $("#radios6 input[type='radio']:checked").val();
+            var radiosNotify = $("#radiosNotify input[type='radio']:checked").val();
+            var radiosSaveOrg = $("#radiosSaveOrg input[type='radio']:checked").val();
+            var radiosSaveInSP = $("#radiosSaveInSP input[type='radio']:checked").val();
+            var radiosSaveMerged = $("#radiosSaveMerged input[type='radio']:checked").val();
+            var radiosAuth = $("#radiosAuth input[type='radio']:checked").val();
+            var radiosSendCopy = $("#radiosSendCopy input[type='radio']:checked").val();
+            var radiosSMS = $("#radiosSMS input[type='radio']:checked").val();
 
             var authmetod;
-            if (radiovalue5 == 9) {
+            if (radiosAuth == 9) {
                 if (signingmetod == 1) //BankID
                     authmetod = 1;
                 if (signingmetod == 2)//Sms/E-mail
@@ -622,30 +684,35 @@
                 if (signingmetod == 3)//Social
                     authmetod = 3;
             }
-            else if (radiovalue5 == 10)
+            else if (radiosAuth == 10)
                 authmetod = 0;
 
             data.append("Authmetod", authmetod);
 
-            if (radiovalue1 == 1)
-                data.append("NotifyMe", true);
-            else if (radiovalue1 == 2)
-                data.append("NotifyMe", false);
+            if (radiosNotify == 1)
+                data.append("NotifyMe", 1);
+            else if (radiosNotify == 2)
+                data.append("NotifyMe", 0);
 
-            if (radiovalue2 == 3)
+            if (radiosSaveOrg == 3)
                 saveoriginalfile = true;
-            else if (radiovalue2 == 4)
+            else if (radiosSaveOrg == 4)
                 saveoriginalfile = false;
 
-            if (radiovalue3 == 5)
+            if (radiosSaveInSP == 5)
                 saveinsp = true;
-            else if (radiovalue3 == 6)
+            else if (radiosSaveInSP == 6)
                 saveinsp = false;
 
-            if (radiovalue4 == 7)
+            if (radiosSaveMerged == 7)
                 saveonlymerged = true;
-            else if (radiovalue4 == 8)
+            else if (radiosSaveMerged == 8)
                 saveonlymerged = false;
+
+            if (radiosSMS == 13)
+                data.append("SendSMS", 1);
+            else if (radiosSMS == 14)
+                data.append("SendSMS", 0);
 
             data.append("SenderEmail", senderEmail);
             data.append("RecipientEmails", contactEmail);
@@ -664,10 +731,10 @@
                     createRecord(sdsurls, "pp_documentsigningSet", files, customers,
                         saveoriginalfile, saveinsp, saveonlymerged);
                     //$.notify('Request is sent to Signicat!', "success");
-                    $.notify($.translate.get_text('requestsentnotify'), 'success', {
+                    $.notify($.translate.get_text('requestsentnotify'), "success", {
                         clickToHide: true,
                         autoHide: false,
-                        globalPosition: 'top right'
+                        position: 'top'
                     });
                     //$("#submit").notify("Done", "info", { clickToHide: false, autoHide: false, position: "right" });
                     $('#loading-indicator').hide();
