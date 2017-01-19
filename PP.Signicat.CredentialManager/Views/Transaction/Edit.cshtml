@@ -18,16 +18,21 @@
         <div class="form-group">
             @Html.LabelFor(model => model.subscription, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.subscription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.subscription, "", new { @class = "text-danger" })
+                @Html.DisplayFor(model => model.subscription, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.period, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.period, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.period, "", new { @class = "text-danger" })
+                @Html.DisplayFor(model => model.period, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Timestamp, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Timestamp, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
 

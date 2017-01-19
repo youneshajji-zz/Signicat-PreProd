@@ -17,23 +17,37 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="col-lg-6">
+        <div class="col-lg-12">
 
             <div class="form-group">
                 @Html.LabelFor(model => model.customer, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.customer, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.customer, "", new { @class = "text-danger" })
+                <div class="col-md-2">
+                    @Html.DisplayFor(model => model.customer, new { htmlAttributes = new { @class = "form-control" } })
                 </div>
+
+                @Html.LabelFor(model => model.subscription, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.DisplayFor(model => model.subscription, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+                @Html.LabelFor(model => model.Timestamp, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.DisplayFor(model => model.Timestamp, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        @*<div class="form-group">
+
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.subscription, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.subscription, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.subscription, "", new { @class = "text-danger" })
-                </div>
-            </div>
+
+            </div>*@
+
+        <div class="col-lg-6">
 
             <div class="form-group">
                 @Html.LabelFor(model => model.partner, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -75,8 +89,6 @@
                 </div>
             </div>
 
-        </div>
-        <div class="col-lg-6">
             <div class="form-group">
                 @Html.LabelFor(model => model.domain, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -84,6 +96,10 @@
                     @Html.ValidationMessageFor(model => model.domain, "", new { @class = "text-danger" })
                 </div>
             </div>
+
+        </div>
+
+        <div class="col-lg-6">
 
             <div class="form-group">
                 @Html.LabelFor(model => model.servicestarted, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -147,7 +163,7 @@
         $(function () {
             $("form").bind('ajax:complete', function () {
                 alert(1);
-                
+
                 $.notify("Changes are saved!", "success");
             });
 

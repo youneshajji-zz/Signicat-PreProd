@@ -39,5 +39,8 @@ namespace PP.Signicat.CredentialManager.Models
         [Display(Name = "Email/SMS")]
         public int counternpid { get; set; }
 
+        [Display(Name = "Handwritten")]
+        public int counterhandwritten { get; set; }
+
     }
 }

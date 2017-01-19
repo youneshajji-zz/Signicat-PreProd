@@ -17,6 +17,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.counteruniqueusers)
                     </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Timestamp)
+                    </th>
                     <th>Detail</th>
                 </tr>
             </thead>
@@ -35,6 +38,9 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.counteruniqueusers)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Timestamp)
                         </td>
                         <td>
                             <a href="@Url.Action("Detail", new {subscription = item.PartitionKey, period = item.RowKey})"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>

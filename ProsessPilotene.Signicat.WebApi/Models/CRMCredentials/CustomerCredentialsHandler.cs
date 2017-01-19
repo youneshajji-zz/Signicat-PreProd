@@ -49,7 +49,7 @@ namespace PP.Signicat.WebApi.Models.CRMCredentials
 
                 CloudTableClient client = account.CreateCloudTableClient();
 
-                CloudTable table = client.GetTableReference("CustomerCRMCredentials");
+                CloudTable table = client.GetTableReference("CustomerCRMCredentialsPreProd");
                 table.CreateIfNotExists();
                 return table;
             }

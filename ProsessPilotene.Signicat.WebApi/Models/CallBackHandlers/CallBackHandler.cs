@@ -50,6 +50,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                     documentsigning.ToEntityReference(), 1, service); //status sent
                 var regardingRef = new Helpers().GetRegarding(documentsigning, service);
                 var sendcopy = (bool)documentsigning["pp_sendcopy"];
+                var method = (OptionSetValue)documentsigning["pp_signing"];
                 var saveinsp = (bool)documentsigning["pp_saveindocumentlocation"];
                 var senderRef = (EntityReference)documentsigning["ownerid"];
 
@@ -85,6 +86,8 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
 
                             new CRMHandler().CreateSignicatResult(documentsigningRef,
                                 documentsigningtask.ToEntityReference(), documentstatus.resulturi, name, service);
+
+                            new CRMHandler().CreateTransaction(orgname, method.Value, senderRef, service);
 
                             if (!saveonlymerged)
                             {

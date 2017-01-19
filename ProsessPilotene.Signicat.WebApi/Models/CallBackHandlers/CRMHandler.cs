@@ -14,6 +14,7 @@ using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using Microsoft.Xrm.Sdk.Discovery;
 using Microsoft.Xrm.Sdk.Query;
+using PP.Signicat.CredentialManager.Models;
 
 namespace PP.Signicat.WebApi.Models.CallBackHandlers
 {
@@ -43,7 +44,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                 QueryExpression query = new QueryExpression("pp_documentsigning");
                 query.ColumnSet = new ColumnSet("pp_saveindocumentlocation", "pp_saveonlymerged", "pp_accountid",
                     "pp_opportunityid", "pp_salesorderid", "pp_quoteid", "pp_incidentid", "pp_contractid",
-                    "pp_sendcopy", "ownerid");
+                    "pp_sendcopy", "ownerid", "pp_signing");
                 query.Criteria.AddCondition("statuscode", ConditionOperator.Equal, 778380000); //Sent
                 query.Criteria.AddCondition("pp_requestid", ConditionOperator.Equal, requestid);
                 var result = service.RetrieveMultiple(query);
@@ -71,7 +72,8 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
             try
             {
                 QueryExpression query = new QueryExpression("pp_signicatdocurl");
-                query.ColumnSet = new ColumnSet("pp_sdsurl", "pp_name", "pp_documentsigningid", "pp_customerid", "pp_customerid");
+                query.ColumnSet = new ColumnSet("pp_sdsurl", "pp_name", "pp_documentsigningid", "pp_customerid",
+                    "pp_customerid");
                 query.Criteria.AddCondition("statuscode", ConditionOperator.Equal, status);
                 query.Criteria.AddCondition("pp_documentsigningid", ConditionOperator.Equal, docsignRef.Id);
                 var result = service.RetrieveMultiple(query);
@@ -265,7 +267,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
 
                 foreach (var task in tasks.Entities)
                 {
-                    var customer = (EntityReference)task.Attributes["pp_customerid"];
+                    var customer = (EntityReference) task.Attributes["pp_customerid"];
                     SendEmail(docsignRef, senderRef, padesurl, name, customer, lcid, service);
                 }
             }
@@ -286,8 +288,8 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                 Entity toParty = new Entity("activityparty");
                 toParty["partyid"] = new EntityReference(customer.LogicalName, customer.Id);
 
-                var listfrom = new List<Entity>() { fromParty };
-                var listto = new List<Entity>() { toParty };
+                var listfrom = new List<Entity>() {fromParty};
+                var listto = new List<Entity>() {toParty};
 
                 // Create an e-mail message.
                 Entity email = new Entity("email");
@@ -331,7 +333,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                     IssueSend = true
                 };
 
-                SendEmailResponse sendEmailresp = (SendEmailResponse)service.Execute(sendEmailreq);
+                SendEmailResponse sendEmailresp = (SendEmailResponse) service.Execute(sendEmailreq);
             }
             catch (Exception ex)
             {
@@ -340,7 +342,8 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
         }
 
 
-        internal void DeactivateSignicatResults(IOrderedEnumerable<IGrouping<string, ResultObject>> groups, IOrganizationService service)
+        internal void DeactivateSignicatResults(IOrderedEnumerable<IGrouping<string, ResultObject>> groups,
+            IOrganizationService service)
         {
             foreach (var group in groups)
             {
@@ -374,9 +377,95 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
             var userSettings = service.RetrieveMultiple(userSettingsQuery);
             if (userSettings.Entities.Count > 0)
             {
-                return (int)userSettings.Entities[0]["uilanguageid"];
+                return (int) userSettings.Entities[0]["uilanguageid"];
             }
             return 0;
+        }
+
+        public void CreateTransaction(string orgname, int method, EntityReference senderRef,
+            IOrganizationService service)
+        {
+            try
+            {
+                var subscription = new SubscriptionHandler().GetSubscription("signicatcrm", orgname);
+                if (subscription == null)
+                    return;
+                
+                var period = DateTime.Now.Month.ToString() + "-" + DateTime.Now.Year.ToString();
+                var transaction = new TransactionHandler().GetTransaction(orgname, period);
+
+                if (transaction != null)
+                {
+                    var crmunique = GetUniqueSignersCount(senderRef, service);
+
+                    var total = transaction.countertotal;
+                    var bankid = transaction.counterbankid;
+                    var npid = transaction.counternpid;
+                    var social = transaction.countersocial;
+                    var handwritten = transaction.counterhandwritten;
+                    var unique = transaction.counteruniqueusers;
+
+                    var newtransaction = new TransactionModel();
+                    newtransaction.subscription = transaction.subscription;
+                    newtransaction.period = transaction.period;
+                    newtransaction.countertotal = total + 1;
+                    newtransaction.counteruniqueusers = crmunique;
+
+                    if (method == 1) //Bankid
+                        newtransaction.counterbankid = bankid + 1;
+                    if (method == 2) //npid
+                        newtransaction.counternpid = npid + 1;
+                    if (method == 3) //Social
+                        newtransaction.countersocial = social + 1;
+                    if (method == 4) //Handwritten
+                        newtransaction.counterhandwritten = handwritten + 1;
+
+                    new TransactionHandler().UpdateTransactions(newtransaction);
+                }
+
+                if (transaction == null)
+                {
+                    var newtransaction = new TransactionModel();
+                    newtransaction.period = period;
+                    newtransaction.subscription = orgname;
+                    newtransaction.customer = subscription.customer;
+                    newtransaction.countertotal = 1;
+                    newtransaction.counteruniqueusers = 1;
+
+                    if (method == 1) //Bankid
+                        newtransaction.counterbankid = 1;
+                    if (method == 2) //npid
+                        newtransaction.counternpid = 1;
+                    if (method == 3) //Social
+                        newtransaction.countersocial = 1;
+                    if (method == 4) //Handwritten
+                        newtransaction.counterhandwritten = 1;
+
+                    new TransactionHandler().CreateTransactions(newtransaction);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        private int GetUniqueSignersCount(EntityReference senderRef, IOrganizationService service)
+        {
+            try
+            {
+                var query = new QueryExpression("pp_documentsigning");
+                query.ColumnSet = new ColumnSet(false);
+                query.Criteria.AddCondition("ownerid", ConditionOperator.Equal, senderRef.Id);
+                query.Distinct = true;
+
+                var results = service.RetrieveMultiple(query);
+                return results.Entities.Count;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

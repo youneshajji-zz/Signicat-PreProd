@@ -10,7 +10,7 @@ namespace PP.Signicat.CredentialManager.Models
     public class SubscriptionHandler
     {
         private const string PassPhrase = "SignicatPassPhrase";
-        internal SubscriptionModel CreateSubscription(SubscriptionModel credentials)
+        public SubscriptionModel CreateSubscription(SubscriptionModel credentials)
         {
             CloudTable table = ConnectToAzureTableStorage();
 
@@ -52,7 +52,7 @@ namespace PP.Signicat.CredentialManager.Models
             }
         }
 
-        internal SubscriptionModel UpdateSubscription(SubscriptionModel credentials)
+        public SubscriptionModel UpdateSubscription(SubscriptionModel credentials)
         {
             CloudTable table = ConnectToAzureTableStorage();
 
@@ -70,6 +70,7 @@ namespace PP.Signicat.CredentialManager.Models
 
                 SubscriptionModel entity = new SubscriptionModel(credentials.customer, credentials.subscription)
                 {
+                    ETag = "*",
                     orgurl = credentials.orgurl,
                     discoveryurl = credentials.discoveryurl,
                     username = credentials.username,
@@ -83,7 +84,7 @@ namespace PP.Signicat.CredentialManager.Models
                     volumelicense = credentials.volumelicense
                 };
 
-                TableOperation insertOperation = TableOperation.Replace(entity);
+                TableOperation insertOperation = TableOperation.Merge(entity);
                 table.Execute(insertOperation);
 
                 return entity;
@@ -95,7 +96,7 @@ namespace PP.Signicat.CredentialManager.Models
         }
 
 
-        internal SubscriptionModel GetSubscription(string customer, string subscription)
+        public SubscriptionModel GetSubscription(string customer, string subscription)
         {
             try
             {
@@ -110,6 +111,8 @@ namespace PP.Signicat.CredentialManager.Models
                 //var password = new StringCipher().Decrypt(custCred.password, PassPhrase);
                 //custCred.password = password;
                 custCred.status = (Status)custCred.subscriptionstatus;
+                custCred.customer = custCred.PartitionKey;
+                custCred.subscription = custCred.RowKey;
 
                 return custCred;
 
@@ -153,6 +156,7 @@ namespace PP.Signicat.CredentialManager.Models
                     customerCred.status = (Status)item.subscriptionstatus;
                     customerCred.usercount = item.usercount;
                     customerCred.volumelicense = item.volumelicense;
+                    customerCred.Timestamp = item.Timestamp;
 
                     decryptedInventory.Add(customerCred);
                 }
@@ -197,7 +201,7 @@ namespace PP.Signicat.CredentialManager.Models
 
                 CloudTableClient client = account.CreateCloudTableClient();
 
-                CloudTable table = client.GetTableReference("CustomerCRMCredentials");
+                CloudTable table = client.GetTableReference("CustomerCRMCredentialsPreProd");
                 table.CreateIfNotExists();
                 return table;
             }

@@ -10,7 +10,7 @@ namespace PP.Signicat.CredentialManager.Models
 {
     public class TransactionHandler
     {
-        internal TransactionModel CreateTransactions(TransactionModel transaction)
+        public TransactionModel CreateTransactions(TransactionModel transaction)
         {
             CloudTable table = ConnectToAzureTableStorage();
 
@@ -37,7 +37,7 @@ namespace PP.Signicat.CredentialManager.Models
             }
         }
 
-        internal TransactionModel UpdateTransactions(TransactionModel transaction)
+        public TransactionModel UpdateTransactions(TransactionModel transaction)
         {
             CloudTable table = ConnectToAzureTableStorage();
 
@@ -45,12 +45,13 @@ namespace PP.Signicat.CredentialManager.Models
             {
                 TransactionModel entity = new TransactionModel(transaction.subscription, transaction.period)
                 {
+                    ETag = "*",
                     customer = transaction.customer,
                     countertotal = transaction.countertotal,
                     counteruniqueusers = transaction.counteruniqueusers,
                     counterbankid = transaction.counterbankid,
                     countersocial = transaction.countersocial,
-                    counternpid = transaction.counternpid,
+                    counternpid = transaction.counternpid
                 };
 
                 TableOperation insertOperation = TableOperation.Replace(entity);
@@ -64,14 +65,19 @@ namespace PP.Signicat.CredentialManager.Models
             }
         }
 
-        internal TransactionModel GetTransaction(string subscription, string period)
+        public TransactionModel GetTransaction(string subscription, string period)
         {
             try
             {
                 CloudTable table = ConnectToAzureTableStorage();
                 TableOperation retrieveOperation = TableOperation.Retrieve<TransactionModel>(subscription, period);
                 TableResult query = table.Execute(retrieveOperation);
+                
                 var transaction = (TransactionModel)query.Result;
+
+                if (transaction == null)
+                    return null;
+
                 transaction.period = period;
                 transaction.subscription = subscription;
 
@@ -112,6 +118,7 @@ namespace PP.Signicat.CredentialManager.Models
                     transaction.counterbankid = item.counterbankid;
                     transaction.countersocial = item.countersocial;
                     transaction.counternpid = item.counternpid;
+                    transaction.Timestamp = item.Timestamp;
 
                     decryptedInventory.Add(transaction);
                 }
@@ -137,7 +144,7 @@ namespace PP.Signicat.CredentialManager.Models
 
                 CloudTableClient client = account.CreateCloudTableClient();
 
-                CloudTable table = client.GetTableReference("CustomerTransactions");
+                CloudTable table = client.GetTableReference("CustomerTransactionsPreProd");
                 table.CreateIfNotExists();
                 return table;
             }
