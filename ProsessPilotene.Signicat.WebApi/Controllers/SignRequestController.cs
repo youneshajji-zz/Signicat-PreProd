@@ -261,7 +261,6 @@ namespace PP.Signicat.WebApi.Controllers
                                         taskid = request.request[0].task[i].id
                                     };
 
-
                                     client.addNotification(notifyReq);
                                 }
                             }

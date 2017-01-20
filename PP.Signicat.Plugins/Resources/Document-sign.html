@@ -539,8 +539,8 @@
         var entitylogicalname = values[0];
         var customerid = values[1];
         var email = values[2];
-        var parentaccountname = values[3];
-        var mobile = values[4];
+        var parentaccountname = (values[3] != 'null') ? values[3] : "";
+        var mobile = (values[4] != 'null') ? values[4] : "";
 
         if (customerid == '') {
             $("#search").notify($.translate.get_text('emptycustomernotify'), "warning", { clickToHide: true, autoHide: true, position: "top" });
