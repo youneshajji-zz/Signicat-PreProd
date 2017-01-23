@@ -6,6 +6,8 @@
     <input type="file" accept="application/pdf" class="form-control-file" id="filetosend" multiple data-toggle="tooltip" data-placement="top" title="Chose a file from your local computer.">
 
     <button id="send">Test callback</button>
+    
+    <button id="landing">Test landingpage</button>
 
 
 </div>
@@ -86,4 +88,28 @@
                 }
             });
         });
+
+    $("#landing").click(function () {
+        var data = {
+            lcid: 1044
+
+        };
+        $.ajax({
+            type: "GET",
+            async: true,
+            url: "http://localhost:44444/api/CallBack/Landingpage",
+            data: data,
+            contentType: "application/json",
+            success: function () {
+                $.notify("Success!", "success");
+            },
+            error: function (request, status, error) {
+                $.notify("error: " + request.error + ". Status: " + request.status, {
+                    clickToHide: true,
+                    autoHide: false,
+                    globalPosition: 'top right'
+                });
+            }
+        });
+    });
 </script>

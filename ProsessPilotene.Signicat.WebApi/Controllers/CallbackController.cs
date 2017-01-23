@@ -3,6 +3,8 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
+using System.Resources;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -32,9 +34,9 @@ namespace PP.Signicat.WebApi.Controllers
         [HttpGet]
         public HttpResponseMessage Get(int lcid)
         {
-            var viewPath = HttpContext.Current.Server.MapPath(@"~/Views/Shared/SignCallBack.cshtml");
+            var viewPath = HttpContext.Current.Server.MapPath(@Resources.Resourcenb.callbackpage);
             if (lcid == 1044)
-                viewPath = HttpContext.Current.Server.MapPath(@"~/Views/Shared/SignCallBackNB.cshtml");
+                viewPath = HttpContext.Current.Server.MapPath(@Resources.Resourcenb.callbackpage);
 
             var template = File.ReadAllText(viewPath);
             var parsedView = Razor.Parse(template);

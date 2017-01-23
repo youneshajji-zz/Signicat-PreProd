@@ -91,9 +91,9 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
 
                             if (!saveonlymerged)
                             {
-                                var title = "Single document";
+                                var title = Resources.Resourceeng.singledocument;
                                 if (lcid == 1044)
-                                    title = "Singel dokument";
+                                    title = Resources.Resourcenb.singledocument;
 
                                 var padesurl = new SignicatHandler().CreatePades(null, documentstatus.resulturi);
                                 new CRMHandler().CreateAnnotations(padesurl, name, title,
@@ -200,9 +200,9 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
 
                 var groups = docList.GroupBy(x => x.name).OrderBy(x => x.Key);
 
-                var title = "Single document";
+                var title = Resources.Resourceeng.singledocument;
                 if (lcid == 1044)
-                    title = "Singel dokument";
+                    title = Resources.Resourcenb.singledocument;
 
                 foreach (var item in groups)
                 {
@@ -244,9 +244,9 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                     var padesurl = new SignicatHandler().CreatePades(tempList, null);
                     if (padesurl != null)
                     {
-                        var mergedTitle = "Merged document";
+                        var mergedTitle = Resources.Resourceeng.merged;
                         if (lcid == 1044)
-                            mergedTitle = "Sammenslått dokument";
+                            mergedTitle = Resources.Resourcenb.merged;
 
                         new CRMHandler().CreateSignicatResult(docsignRef, null, padesurl, mergedTitle +
                             ": " + tempList[0].name, service);

@@ -29,6 +29,7 @@
         'search': ['Search in contacts or accounts...', 'Søk på kontakter eller kunder...'],
         'thname': ['Name', 'Navn'],
         'thcompany': ['Company', 'Firma'],
+        'themail': ['Email', 'Epost'],
         'thmobile': ['Mobile', 'Mobil'],
         'btnCancel': ['Cancel', 'Avbryt'],
         'btnDone': ['Done', 'OK'],
@@ -136,6 +137,7 @@
     $('#thname').html($.translate.get_text('thname'));
     $('#thcompany').html($.translate.get_text('thcompany'));
     $('#thmobile').html($.translate.get_text('thmobile'));
+    $('#themail').html($.translate.get_text('themail'));
     $('#btnCancel').html($.translate.get_text('btnCancel'));
     $('#btnDone').html($.translate.get_text('btnDone'));
 

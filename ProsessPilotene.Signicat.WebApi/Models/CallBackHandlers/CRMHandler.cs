@@ -171,9 +171,9 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                 Annotation.Attributes["mimetype"] = @"application/pdf";
 
                 if (lcid == 1044)
-                    Annotation.Attributes["notetext"] = "Dette dokumentet er signert ved bruk av Signicat teknologi.";
+                    Annotation.Attributes["notetext"] = Resources.Resourcenb.notetext;
                 else
-                    Annotation.Attributes["notetext"] = "The document is signed by using the Signicat technology.";
+                    Annotation.Attributes["notetext"] = Resources.Resourceeng.notetext;
                 Annotation.Attributes["filename"] = name + ".pdf";
 
                 service.Create(Annotation);
@@ -297,17 +297,17 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                 email["from"] = new EntityCollection(listfrom);
 
                 if (lcid == 1044)
-                    email["subject"] = "Kopi av det signerte dokumentet: " + name;
+                    email["subject"] = Resources.Resourcenb.emailsubject + ": " + name;
                 else
-                    email["subject"] = "Copy of signed document: " + name;
+                    email["subject"] = Resources.Resourceeng.emailsubject + ": " + name;
 
                 email["directioncode"] = true;
                 email["regardingobjectid"] = new EntityReference(docsignRef.LogicalName, docsignRef.Id);
 
                 if (lcid == 1044)
-                    email["description"] = "Hei, dette er en kopi av det signerte dokumentet: " + name;
+                    email["description"] = Resources.Resourcenb.emaildescription + ": " + name;
                 else
-                    email["description"] = "Hi, This is a copy of the signed document: " + name;
+                    email["description"] = Resources.Resourceeng.emaildescription + ": " + name;
 
                 var _emailId = service.Create(email);
 
