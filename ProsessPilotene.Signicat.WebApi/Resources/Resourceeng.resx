@@ -132,6 +132,18 @@
   <data name="notetext" xml:space="preserve">
     <value>The document is signed by using the Signicat technology.</value>
   </data>
+  <data name="signicatexpiration" xml:space="preserve">
+    <value>Documents are waiting for you to sign, you have 2 days left! Please find the documents in the original email.</value>
+  </data>
+  <data name="signicatmessage" xml:space="preserve">
+    <value>Message from Signicat</value>
+  </data>
+  <data name="signicatrejected" xml:space="preserve">
+    <value>Document signing has been rejected!</value>
+  </data>
+  <data name="signicatsigned" xml:space="preserve">
+    <value>A document or more are signed and will be available in Dynamics 365 shortly!</value>
+  </data>
   <data name="singledocument" xml:space="preserve">
     <value>Single document</value>
   </data>

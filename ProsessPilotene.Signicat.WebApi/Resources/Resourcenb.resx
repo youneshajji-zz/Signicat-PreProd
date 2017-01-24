@@ -132,6 +132,18 @@
   <data name="notetext" xml:space="preserve">
     <value>Dette dokumentet er signert ved bruk av Signicat teknologi.</value>
   </data>
+  <data name="signicatexpiration" xml:space="preserve">
+    <value>Dokumenter venter på signering. Du har 2 dager igjen. Vennligst finn dokumentene på den originale mailen!</value>
+  </data>
+  <data name="signicatmessage" xml:space="preserve">
+    <value>Melding fra Signicat</value>
+  </data>
+  <data name="signicatrejected" xml:space="preserve">
+    <value>Dokumentsigneringen har blitt avslått</value>
+  </data>
+  <data name="signicatsigned" xml:space="preserve">
+    <value>Et dokument eller flere har blitt signert og vil snart være tilgjengelig på Dynamics 365!</value>
+  </data>
   <data name="singledocument" xml:space="preserve">
     <value>Singel dokument</value>
   </data>

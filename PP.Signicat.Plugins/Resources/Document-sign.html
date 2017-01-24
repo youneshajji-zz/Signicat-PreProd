@@ -199,13 +199,13 @@
                                             <span class="caret"></span>
                                         </button>
                                         <ul id="searchMenu" class="dropdown-menu pull-left" role="menu">
-                                            <li>
+                                            <li id="accountli">
                                                 <a id="account" href="#">
                                                     <span class="glyphicon glyphicon-book"></span>
                                                     <span id="spanaccounts" class="label-icon">Accounts</span>
                                                 </a>
                                             </li>
-                                            <li>
+                                            <li id="contactli" class="ui-se">
                                                 <a id="contact" href="#">
                                                     <span class="glyphicon glyphicon-user"></span>
                                                     <span id="spancontacts" class="label-icon">Contacts</span>
@@ -286,7 +286,6 @@
         if (defaultparams != null) {
             var isDisabled = $("#radios-4").is(':disabled');
             var arr = defaultparams.split('|');
-            console.log(arr);
 
             $("#selectsignmetod option[value='" + arr[0] + "']").attr('selected', 'selected');
 
@@ -321,6 +320,21 @@
                 $('input:radio[name="radiosSaveInSP"][value="5"]').prop('checked', true);
                 $('input:radio[name="radiosSaveInSP"][value="6"]').prop('checked', false);
             }
+
+            if (arr[8] == 1) { //Disable all controls
+                $('#selectsignmetod').prop('disabled', true);
+                $('#radiosAuth').click(false);
+                $("#daystolive").prop('disabled', true);
+                $('#radiosSMS').click(false);
+                $('#radiosNotify').click(false);
+                $('#radiosSaveOrg').click(false);
+                $('#radiosSendCopy').click(false);
+                $('#radiosSaveInSP').click(false);
+                $('.input-group-btn').click(false);
+            }
+
+            if (arr[9] != null)
+                searchIn = arr[9];
         }
 
         $('[data-toggle="tooltip"]').tooltip();
@@ -332,19 +346,13 @@
                 return false;
             }
         });
-
-        $(".input-group-btn .dropdown-menu li a").click(function () {
-            var selText = $(this).html();
-            //working version - for single button //
-            //$('.btn:first-child').html(selText+'<span class="caret"></span>');
-
-            //working version - for multiple buttons //
-            $(this).parents('.input-group-btn').find('.btn-search').html(selText);
-        });
     });
 
     var searchIn = null;
     $('.input-group-btn .dropdown-menu li a').click(function () {
+        var selText = $(this).html();
+        $(this).parents('.input-group-btn').find('.btn-search').html(selText);
+
         searchIn = null;
         var selectedLi = $(this).attr('id');
         searchIn = selectedLi;

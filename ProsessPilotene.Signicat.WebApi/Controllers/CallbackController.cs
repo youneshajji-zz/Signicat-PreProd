@@ -34,7 +34,7 @@ namespace PP.Signicat.WebApi.Controllers
         [HttpGet]
         public HttpResponseMessage Get(int lcid)
         {
-            var viewPath = HttpContext.Current.Server.MapPath(@Resources.Resourcenb.callbackpage);
+            var viewPath = HttpContext.Current.Server.MapPath(@Resources.Resourceeng.callbackpage);
             if (lcid == 1044)
                 viewPath = HttpContext.Current.Server.MapPath(@Resources.Resourcenb.callbackpage);
 

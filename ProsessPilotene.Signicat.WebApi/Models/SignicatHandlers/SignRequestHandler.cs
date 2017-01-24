@@ -86,8 +86,8 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 var tasks = GetTasks(documentInSds, recipients, signingInfo);
                 var documents = GetDocuments(documentInSds, recipients);
 
-                if (signingInfo.notifyMe == 1)
-                    tasks = AddNotifyMe(signingInfo, tasks);
+                //if (signingInfo.notifyMe == 1)
+                //    tasks = AddNotifyMe(signingInfo, tasks);
 
                 var lang = "en";
                 if (signingInfo.LCID == 1044)
@@ -116,34 +116,35 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
         {
             try
             {
-                var message = "Message from Signicat";
-                var header = "A document or more are signed and will be available in Dynamics 365 shortly!";
+                var message = Resources.Resourceeng.signicatmessage;
+                var header = Resources.Resourceeng.signicatsigned;
 
                 if (signingInfo.LCID == 1044)
                 {
-                    message = "Melding fra Signicat";
-                    header = "Et dokument eller flere har blitt signert og vil snart være tilgjengelig på Dynamics 365!";
+                    message = Resources.Resourcenb.signicatmessage;
+                    header = Resources.Resourcenb.signicatsigned;
                 }
-
-                var notifyme = new notification
-                {
-                    header = header,
-                    message = message,
-                    notificationid = "req_com",
-                    recipient = signingInfo.senderMail,
-                    sender = "noreply@signicat.com",
-                    type = notificationtype.EMAIL,
-                    schedule = new schedule[]
-                    {
-                        new schedule
-                        {
-                            stateis = taskstatus.completed,
-                        }
-                    }
-                };
 
                 for (int i = 0; i < tasks.Length; i++)
                 {
+                    var notifyme = new notification
+                    {
+                        header = header,
+                        message = message,
+                        notificationid = "req_com_" + i,
+                        recipient = signingInfo.senderMail,
+                        sender = "noreply@signicat.com",
+                        type = notificationtype.EMAIL,
+                        schedule = new schedule[]
+                        {
+                            new schedule
+                            {
+                                stateis = taskstatus.completed,
+                            }
+                        }
+                    };
+
+
                     var tempList = tasks[i].notification.ToList();
                     tempList.Add(notifyme);
                     tasks[i].notification = tempList.ToArray();
@@ -162,6 +163,17 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
         {
             try
             {
+                var message = Resources.Resourceeng.signicatmessage;
+                var header1 = Resources.Resourceeng.signicatexpiration;
+                var header2 = Resources.Resourceeng.signicatrejected;
+
+                if (signingInfo.LCID == 1044)
+                {
+                    message = Resources.Resourcenb.signicatmessage;
+                    header1 = Resources.Resourcenb.signicatexpiration;
+                    header2 = Resources.Resourcenb.signicatrejected;
+                }
+
                 var signatures = GetSignatures(signingInfo.signingMetodText);
                 var authSignatures = GetAuthSignatures(signingInfo.signingMetodText);
                 var documentactions = GetDocumentActions(documentInSds, recipients);
@@ -198,8 +210,24 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                         {
                             new notification
                             {
-                                header = "Message from Signicat",
-                                message = "Documents are waiting for you to sign, you have 2 days left! Please find the documents in the original email.",
+                                    header = Resources.Resourcenb.signicatsigned,
+                                    message = message,
+                                    notificationid = "req_com_" + i,
+                                    recipient = signingInfo.senderMail,
+                                    sender = "noreply@signicat.com",
+                                    type = notificationtype.EMAIL,
+                                    schedule = new []
+                                {
+                                    new schedule
+                                    {
+                                        stateis = taskstatus.completed,
+                                    }
+                                }
+                            },
+                            new notification
+                            {
+                                header = message,
+                                message = header1,
                                 notificationid = "req_exp_" + i,
                                 recipient = recipients[i].email,
                                 sender = "noreply@signicat.com",
@@ -216,8 +244,8 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                             },
                             new notification
                             {
-                                header = "Message from Signicat",
-                                message = "Document signing has been rejected!",
+                                header = message,
+                                message = header2,
                                 notificationid = "req_rej_" + i,
                                 recipient = recipients[i].email,
                                 sender = "noreply@signicat.com",
@@ -285,7 +313,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 };
                 return authsignature;
             }
-            
+
             return null;
         }
 

@@ -106,6 +106,42 @@ namespace PP.Signicat.WebApi.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Documents are waiting for you to sign, you have 2 days left! Please find the documents in the original email..
+        /// </summary>
+        public static string signicatexpiration {
+            get {
+                return ResourceManager.GetString("signicatexpiration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message from Signicat.
+        /// </summary>
+        public static string signicatmessage {
+            get {
+                return ResourceManager.GetString("signicatmessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document signing has been rejected!.
+        /// </summary>
+        public static string signicatrejected {
+            get {
+                return ResourceManager.GetString("signicatrejected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A document or more are signed and will be available in Dynamics 365 shortly!.
+        /// </summary>
+        public static string signicatsigned {
+            get {
+                return ResourceManager.GetString("signicatsigned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Single document.
         /// </summary>
         public static string singledocument {
