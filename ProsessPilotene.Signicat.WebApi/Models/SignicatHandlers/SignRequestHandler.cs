@@ -193,8 +193,8 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                     {
                         id = "task_" + i + "_" + nr, // Any identifier you'd like
                         subjectref = "sub_" + i, // Any identifier you'd like
-                        bundle = false,
-                        bundleSpecified = true,
+                        bundle = true,
+                        //bundleSpecified = true,
                         daystolive = signingInfo.daysToLive,
                         documentaction = documentactions,
                         signature = signatures,
@@ -291,57 +291,56 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 return authsignature;
             }
 
-            if (signingInfoSigningMetodText == "nbid")
-            {
-                var authsignature = new[]
-                {
-                    new authenticationbasedsignature
-                    {
-                                        method = new method[]
-                                        {
-                                            new method
-                                            {
-                                                handwritten = true,
-                                               Value = "nbid"
-                                            },
-                                            new method
-                                            {
-                                               Value = "nbid-mobil"
-                                            }
-                                        }
-                    }
-                };
-                return authsignature;
-            }
+            ////if (signingInfoSigningMetodText == "nbid")
+            ////{
+            ////    var authsignature = new[]
+            ////    {
+            ////        new authenticationbasedsignature
+            ////        {
+            ////                            method = new method[]
+            ////                            {
+            ////                                new method
+            ////                                {
+            ////                                    handwritten = true,
+            ////                                   Value = "nbid"
+            ////                                },
+            ////                                new method
+            ////                                {
+            ////                                   Value = "nbid-mobil"
+            ////                                }
+            ////                            }
+            ////        }
+            ////    };
+            //    return authsignature;
+            //}
 
             return null;
         }
 
         private signature[] GetSignatures(string signingInfoSigningMetodText)
         {
-            //if (signingInfoSigningMetodText == "nbid")
-            //{
-            //    var signature = new[]
-            //    {
-            //        new signature
-            //        {
-            //            responsive = true,
-            //                            method = new method[]
-            //                            {
-            //                                new method
-            //                                {
-            //                                    handwritten = true,
-            //                                   Value = "nbid-sign"
-            //                                },
-            //                                new method
-            //                                {
-            //                                   Value = "nbid-mobil-sign"
-            //                                }
-            //                            }
-            //        }
-            //    };
-            //    return signature;
-            //}
+            if (signingInfoSigningMetodText == "nbid")
+            {
+                var signature = new[]
+                {
+                    new signature
+                    {
+                        responsive = true,
+                                        method = new []
+                                        {
+                                            new method
+                                            {
+                                               Value = "nbid-sign"
+                                            },
+                                            new method
+                                            {
+                                               Value = "nbid-mobil-sign"
+                                            }
+                                        }
+                    }
+                };
+                return signature;
+            }
 
             if (signingInfoSigningMetodText == "handwritten")
             {
@@ -400,6 +399,9 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 {
                     var docact = new documentaction
                     {
+                        sendresulttoarchive = false,
+                        sendresulttoarchiveSpecified = false,
+                        optional = false,
                         type = documentactiontype.sign,
                         //documentref = "doc_" + i
                         documentref = documentInSds[i].id
