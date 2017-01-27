@@ -323,7 +323,7 @@
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
-    <None Include="Service References\SignicatPreProdService\DocumentService.wsdl" />
+    <None Include="Service References\SignicatPreProdService\DocumentService1.wsdl" />
     <None Include="Service References\SignicatPreProdService\WordAddInSignicat.SignicatPreProdService.addNotificationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -345,6 +345,12 @@
     <None Include="Service References\SignicatPreProdService\WordAddInSignicat.SignicatPreProdService.createRequestResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SignicatPreProdService\WordAddInSignicat.SignicatPreProdService.createusersessionresponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SignicatPreProdService\WordAddInSignicat.SignicatPreProdService.createUserSessionResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SignicatPreProdService\WordAddInSignicat.SignicatPreProdService.deleterequestresponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -361,6 +367,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SignicatPreProdService\WordAddInSignicat.SignicatPreProdService.findTasksResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SignicatPreProdService\WordAddInSignicat.SignicatPreProdService.getPackagingTaskStatusResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SignicatPreProdService\WordAddInSignicat.SignicatPreProdService.getRequestHistoryResponse.datasource">
@@ -385,6 +394,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SignicatPreProdService\WordAddInSignicat.SignicatPreProdService.getTaskResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SignicatPreProdService\WordAddInSignicat.SignicatPreProdService.packagingtaskstatusinfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SignicatPreProdService\WordAddInSignicat.SignicatPreProdService.setClientStatusResponse.datasource">

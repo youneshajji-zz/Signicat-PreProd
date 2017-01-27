@@ -12,17 +12,8 @@ namespace WordAddInSignicat.SignicatPreProdService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", ConfigurationName="SignicatPreProdService.DocumentEndPoint")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", ConfigurationName="SignicatPreProdService.DocumentEndPoint")]
     public interface DocumentEndPoint {
-        
-        // CODEGEN: Generating message contract since the operation setClientStatus is neither RPC nor document wrapped.
-        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(documentdata))]
-        WordAddInSignicat.SignicatPreProdService.setClientStatusResponse setClientStatus(WordAddInSignicat.SignicatPreProdService.setClientStatus request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.setClientStatusResponse> setClientStatusAsync(WordAddInSignicat.SignicatPreProdService.setClientStatus request);
         
         // CODEGEN: Generating message contract since the operation createArtifact is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
@@ -32,6 +23,15 @@ namespace WordAddInSignicat.SignicatPreProdService {
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.createArtifactResponse1> createArtifactAsync(WordAddInSignicat.SignicatPreProdService.createArtifact request);
+        
+        // CODEGEN: Generating message contract since the operation setClientStatus is neither RPC nor document wrapped.
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(documentdata))]
+        WordAddInSignicat.SignicatPreProdService.setClientStatusResponse setClientStatus(WordAddInSignicat.SignicatPreProdService.setClientStatus request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.setClientStatusResponse> setClientStatusAsync(WordAddInSignicat.SignicatPreProdService.setClientStatus request);
         
         // CODEGEN: Generating message contract since the operation addNotification is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
@@ -51,6 +51,15 @@ namespace WordAddInSignicat.SignicatPreProdService {
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.getTaskCountResponse1> getTaskCountAsync(WordAddInSignicat.SignicatPreProdService.getTaskCount request);
         
+        // CODEGEN: Generating message contract since the operation getPackagingTaskStatus is neither RPC nor document wrapped.
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(documentdata))]
+        WordAddInSignicat.SignicatPreProdService.getPackagingTaskStatusResponse getPackagingTaskStatus(WordAddInSignicat.SignicatPreProdService.getPackagingTaskStatus request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.getPackagingTaskStatusResponse> getPackagingTaskStatusAsync(WordAddInSignicat.SignicatPreProdService.getPackagingTaskStatus request);
+        
         // CODEGEN: Generating message contract since the operation deleteRequest is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -59,6 +68,15 @@ namespace WordAddInSignicat.SignicatPreProdService {
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.deleteRequestResponse1> deleteRequestAsync(WordAddInSignicat.SignicatPreProdService.deleteRequest request);
+        
+        // CODEGEN: Generating message contract since the operation createUserSession is neither RPC nor document wrapped.
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(documentdata))]
+        WordAddInSignicat.SignicatPreProdService.createUserSessionResponse1 createUserSession(WordAddInSignicat.SignicatPreProdService.createUserSession request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.createUserSessionResponse1> createUserSessionAsync(WordAddInSignicat.SignicatPreProdService.createUserSession request);
         
         // CODEGEN: Generating message contract since the operation getTask is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
@@ -105,15 +123,6 @@ namespace WordAddInSignicat.SignicatPreProdService {
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.findTasksResponse> findTasksAsync(WordAddInSignicat.SignicatPreProdService.findTasks request);
         
-        // CODEGEN: Generating message contract since the operation getStatus is neither RPC nor document wrapped.
-        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(documentdata))]
-        WordAddInSignicat.SignicatPreProdService.getStatusResponse getStatus(WordAddInSignicat.SignicatPreProdService.getStatus request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.getStatusResponse> getStatusAsync(WordAddInSignicat.SignicatPreProdService.getStatus request);
-        
         // CODEGEN: Generating message contract since the operation disableNotification is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -123,14 +132,14 @@ namespace WordAddInSignicat.SignicatPreProdService {
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.disableNotificationResponse> disableNotificationAsync(WordAddInSignicat.SignicatPreProdService.disableNotification request);
         
-        // CODEGEN: Generating message contract since the operation getRequestHistory is neither RPC nor document wrapped.
+        // CODEGEN: Generating message contract since the operation getStatus is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(documentdata))]
-        WordAddInSignicat.SignicatPreProdService.getRequestHistoryResponse getRequestHistory(WordAddInSignicat.SignicatPreProdService.getRequestHistory request);
+        WordAddInSignicat.SignicatPreProdService.getStatusResponse getStatus(WordAddInSignicat.SignicatPreProdService.getStatus request);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.getRequestHistoryResponse> getRequestHistoryAsync(WordAddInSignicat.SignicatPreProdService.getRequestHistory request);
+        System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.getStatusResponse> getStatusAsync(WordAddInSignicat.SignicatPreProdService.getStatus request);
         
         // CODEGEN: Generating message contract since the operation addTask is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
@@ -140,15 +149,24 @@ namespace WordAddInSignicat.SignicatPreProdService {
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.addTaskResponse1> addTaskAsync(WordAddInSignicat.SignicatPreProdService.addTask request);
+        
+        // CODEGEN: Generating message contract since the operation getRequestHistory is neither RPC nor document wrapped.
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(documentdata))]
+        WordAddInSignicat.SignicatPreProdService.getRequestHistoryResponse getRequestHistory(WordAddInSignicat.SignicatPreProdService.getRequestHistory request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.getRequestHistoryResponse> getRequestHistoryAsync(WordAddInSignicat.SignicatPreProdService.getRequestHistory request);
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
-    public partial class setclientstatusrequest : object, System.ComponentModel.INotifyPropertyChanged {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class createartifactrequest : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string serviceField;
         
@@ -157,8 +175,6 @@ namespace WordAddInSignicat.SignicatPreProdService {
         private string requestidField;
         
         private string taskidField;
-        
-        private string clientstatusField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -208,18 +224,6 @@ namespace WordAddInSignicat.SignicatPreProdService {
             }
         }
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("client-status", Order=4)]
-        public string clientstatus {
-            get {
-                return this.clientstatusField;
-            }
-            set {
-                this.clientstatusField = value;
-                this.RaisePropertyChanged("clientstatus");
-            }
-        }
-        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -231,11 +235,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="document-data", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="document-data", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class documentdata : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string mimetypeField;
@@ -291,11 +295,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class @event : object, System.ComponentModel.INotifyPropertyChanged {
         
         private eventtype event1Field;
@@ -351,9 +355,9 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="event-type", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="event-type", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public enum eventtype {
         
         /// <remarks/>
@@ -409,11 +413,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="document-status", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="document-status", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class documentstatus : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string originaluriField;
@@ -483,11 +487,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="form-param", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="form-param", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class formparam : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string nameField;
@@ -529,11 +533,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="task-status-info", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="task-status-info", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class taskstatusinfo : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string requestidField;
@@ -631,9 +635,9 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="task-status", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="task-status", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public enum taskstatus {
         
         /// <remarks/>
@@ -647,14 +651,17 @@ namespace WordAddInSignicat.SignicatPreProdService {
         
         /// <remarks/>
         expired,
+        
+        /// <remarks/>
+        deleted,
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="task-info", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="task-info", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class taskinfo : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string idField;
@@ -1018,11 +1025,467 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="packaging-task-document", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class packagingtaskdocument : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string taskidField;
+        
+        private string documentidField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute("task-id")]
+        public string taskid {
+            get {
+                return this.taskidField;
+            }
+            set {
+                this.taskidField = value;
+                this.RaisePropertyChanged("taskid");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute("document-id")]
+        public string documentid {
+            get {
+                return this.documentidField;
+            }
+            set {
+                this.documentidField = value;
+                this.RaisePropertyChanged("documentid");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="packaging-task", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class packagingtask : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private notification[] packagingnotificationField;
+        
+        private packagingtaskdocument[] packagingtaskdocumentField;
+        
+        private string packagingtaskidField;
+        
+        private string methodField;
+        
+        private bool sendtoarchiveField;
+        
+        private bool sendtoarchiveFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("packaging-notification", Order=0)]
+        public notification[] packagingnotification {
+            get {
+                return this.packagingnotificationField;
+            }
+            set {
+                this.packagingnotificationField = value;
+                this.RaisePropertyChanged("packagingnotification");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("packaging-task-document", Order=1)]
+        public packagingtaskdocument[] packagingtaskdocument {
+            get {
+                return this.packagingtaskdocumentField;
+            }
+            set {
+                this.packagingtaskdocumentField = value;
+                this.RaisePropertyChanged("packagingtaskdocument");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute("packaging-task-id")]
+        public string packagingtaskid {
+            get {
+                return this.packagingtaskidField;
+            }
+            set {
+                this.packagingtaskidField = value;
+                this.RaisePropertyChanged("packagingtaskid");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string method {
+            get {
+                return this.methodField;
+            }
+            set {
+                this.methodField = value;
+                this.RaisePropertyChanged("method");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute("send-to-archive")]
+        public bool sendtoarchive {
+            get {
+                return this.sendtoarchiveField;
+            }
+            set {
+                this.sendtoarchiveField = value;
+                this.RaisePropertyChanged("sendtoarchive");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool sendtoarchiveSpecified {
+            get {
+                return this.sendtoarchiveFieldSpecified;
+            }
+            set {
+                this.sendtoarchiveFieldSpecified = value;
+                this.RaisePropertyChanged("sendtoarchiveSpecified");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class notification : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string recipientField;
+        
+        private string senderField;
+        
+        private string headerField;
+        
+        private string messageField;
+        
+        private schedule[] scheduleField;
+        
+        private notificationtype typeField;
+        
+        private string notificationidField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string recipient {
+            get {
+                return this.recipientField;
+            }
+            set {
+                this.recipientField = value;
+                this.RaisePropertyChanged("recipient");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string sender {
+            get {
+                return this.senderField;
+            }
+            set {
+                this.senderField = value;
+                this.RaisePropertyChanged("sender");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string header {
+            get {
+                return this.headerField;
+            }
+            set {
+                this.headerField = value;
+                this.RaisePropertyChanged("header");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string message {
+            get {
+                return this.messageField;
+            }
+            set {
+                this.messageField = value;
+                this.RaisePropertyChanged("message");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("schedule", IsNullable=true, Order=4)]
+        public schedule[] schedule {
+            get {
+                return this.scheduleField;
+            }
+            set {
+                this.scheduleField = value;
+                this.RaisePropertyChanged("schedule");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public notificationtype type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+                this.RaisePropertyChanged("type");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute("notification-id")]
+        public string notificationid {
+            get {
+                return this.notificationidField;
+            }
+            set {
+                this.notificationidField = value;
+                this.RaisePropertyChanged("notificationid");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class schedule : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private taskstatus stateisField;
+        
+        private System.DateTime waituntilField;
+        
+        private bool waituntilFieldSpecified;
+        
+        private wait waitField;
+        
+        private string daysofweekField;
+        
+        private string timeofdayField;
+        
+        private string timezoneField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("state-is", Order=0)]
+        public taskstatus stateis {
+            get {
+                return this.stateisField;
+            }
+            set {
+                this.stateisField = value;
+                this.RaisePropertyChanged("stateis");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("wait-until", Order=1)]
+        public System.DateTime waituntil {
+            get {
+                return this.waituntilField;
+            }
+            set {
+                this.waituntilField = value;
+                this.RaisePropertyChanged("waituntil");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool waituntilSpecified {
+            get {
+                return this.waituntilFieldSpecified;
+            }
+            set {
+                this.waituntilFieldSpecified = value;
+                this.RaisePropertyChanged("waituntilSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public wait wait {
+            get {
+                return this.waitField;
+            }
+            set {
+                this.waitField = value;
+                this.RaisePropertyChanged("wait");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("days-of-week", Order=3)]
+        public string daysofweek {
+            get {
+                return this.daysofweekField;
+            }
+            set {
+                this.daysofweekField = value;
+                this.RaisePropertyChanged("daysofweek");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("time-of-day", Order=4)]
+        public string timeofday {
+            get {
+                return this.timeofdayField;
+            }
+            set {
+                this.timeofdayField = value;
+                this.RaisePropertyChanged("timeofday");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string timezone {
+            get {
+                return this.timezoneField;
+            }
+            set {
+                this.timezoneField = value;
+                this.RaisePropertyChanged("timezone");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class wait : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string daysField;
+        
+        private string hoursField;
+        
+        private string minutesField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="integer")]
+        public string days {
+            get {
+                return this.daysField;
+            }
+            set {
+                this.daysField = value;
+                this.RaisePropertyChanged("days");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="integer")]
+        public string hours {
+            get {
+                return this.hoursField;
+            }
+            set {
+                this.hoursField = value;
+                this.RaisePropertyChanged("hours");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="integer")]
+        public string minutes {
+            get {
+                return this.minutesField;
+            }
+            set {
+                this.minutesField = value;
+                this.RaisePropertyChanged("minutes");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="notification-type", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public enum notificationtype {
+        
+        /// <remarks/>
+        SMS,
+        
+        /// <remarks/>
+        EMAIL,
+        
+        /// <remarks/>
+        URL,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class sender : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string uniqueidField;
@@ -1078,11 +1541,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class request : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string profileField;
@@ -1108,6 +1571,8 @@ namespace WordAddInSignicat.SignicatPreProdService {
         private string sdoformatField;
         
         private string accountField;
+        
+        private packagingtask[] packagingtaskField;
         
         public request() {
             this.sdoformatField = "native";
@@ -1258,6 +1723,18 @@ namespace WordAddInSignicat.SignicatPreProdService {
             }
         }
         
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("packaging-task", Order=11)]
+        public packagingtask[] packagingtask {
+            get {
+                return this.packagingtaskField;
+            }
+            set {
+                this.packagingtaskField = value;
+                this.RaisePropertyChanged("packagingtask");
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -1269,11 +1746,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class subject : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string nationalidField;
@@ -1399,11 +1876,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class attribute : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string nameField;
@@ -1448,13 +1925,14 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(uploaddocument))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(resultdocument))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(archivedocument))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(packagingresultdocument))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(provideddocument))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(sdsdocument))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class document : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string externalreferenceField;
@@ -1524,11 +2002,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class form : object, System.ComponentModel.INotifyPropertyChanged {
         
         private formparam[] inputparamField;
@@ -1570,11 +2048,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="upload-document", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="upload-document", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class uploaddocument : document {
         
         private string descriptionField;
@@ -1621,11 +2099,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="result-document", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="result-document", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class resultdocument : document {
         
         private string reftaskidField;
@@ -1658,11 +2136,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="archive-document", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="archive-document", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class archivedocument : document {
         
         private string refarchiveidField;
@@ -1681,11 +2159,34 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="provided-document", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="packaging-result-document", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class packagingresultdocument : document {
+        
+        private string refpackagingtaskidField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute("ref-packaging-task-id")]
+        public string refpackagingtaskid {
+            get {
+                return this.refpackagingtaskidField;
+            }
+            set {
+                this.refpackagingtaskidField = value;
+                this.RaisePropertyChanged("refpackagingtaskid");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="provided-document", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class provideddocument : document {
         
         private byte[] dataField;
@@ -1760,11 +2261,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="sds-document", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="sds-document", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class sdsdocument : document {
         
         private string descriptionField;
@@ -1825,11 +2326,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class task : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string subjectrefField;
@@ -1848,8 +2349,6 @@ namespace WordAddInSignicat.SignicatPreProdService {
         
         private authentication authenticationField;
         
-        private signature[] signatureField;
-        
         private string ontaskpostponeField;
         
         private string ontaskcompleteField;
@@ -1857,6 +2356,16 @@ namespace WordAddInSignicat.SignicatPreProdService {
         private string ontaskcancelField;
         
         private string[] dependsontaskField;
+        
+        private string profileField;
+        
+        private string languageField;
+        
+        private string configurationField;
+        
+        private signature[] signatureField;
+        
+        private authenticationbasedsignature[] authenticationbasedsignatureField;
         
         private string idField;
         
@@ -1961,19 +2470,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("signature", IsNullable=true, Order=7)]
-        public signature[] signature {
-            get {
-                return this.signatureField;
-            }
-            set {
-                this.signatureField = value;
-                this.RaisePropertyChanged("signature");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("on-task-postpone", Order=8)]
+        [System.Xml.Serialization.XmlElementAttribute("on-task-postpone", Order=7)]
         public string ontaskpostpone {
             get {
                 return this.ontaskpostponeField;
@@ -1985,7 +2482,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("on-task-complete", Order=9)]
+        [System.Xml.Serialization.XmlElementAttribute("on-task-complete", Order=8)]
         public string ontaskcomplete {
             get {
                 return this.ontaskcompleteField;
@@ -1997,7 +2494,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("on-task-cancel", Order=10)]
+        [System.Xml.Serialization.XmlElementAttribute("on-task-cancel", Order=9)]
         public string ontaskcancel {
             get {
                 return this.ontaskcancelField;
@@ -2009,7 +2506,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("depends-on-task", Order=11)]
+        [System.Xml.Serialization.XmlElementAttribute("depends-on-task", Order=10)]
         public string[] dependsontask {
             get {
                 return this.dependsontaskField;
@@ -2017,6 +2514,66 @@ namespace WordAddInSignicat.SignicatPreProdService {
             set {
                 this.dependsontaskField = value;
                 this.RaisePropertyChanged("dependsontask");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public string profile {
+            get {
+                return this.profileField;
+            }
+            set {
+                this.profileField = value;
+                this.RaisePropertyChanged("profile");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
+        public string language {
+            get {
+                return this.languageField;
+            }
+            set {
+                this.languageField = value;
+                this.RaisePropertyChanged("language");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
+        public string configuration {
+            get {
+                return this.configurationField;
+            }
+            set {
+                this.configurationField = value;
+                this.RaisePropertyChanged("configuration");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("signature", IsNullable=true, Order=14)]
+        public signature[] signature {
+            get {
+                return this.signatureField;
+            }
+            set {
+                this.signatureField = value;
+                this.RaisePropertyChanged("signature");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("authentication-based-signature", Order=15)]
+        public authenticationbasedsignature[] authenticationbasedsignature {
+            get {
+                return this.authenticationbasedsignatureField;
+            }
+            set {
+                this.authenticationbasedsignatureField = value;
+                this.RaisePropertyChanged("authenticationbasedsignature");
             }
         }
         
@@ -2067,11 +2624,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class dialog : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string titleField;
@@ -2113,11 +2670,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="document-action", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="document-action", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class documentaction : object, System.ComponentModel.INotifyPropertyChanged {
         
         private dialog dialogField;
@@ -2271,9 +2828,9 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="document-action-type", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="document-action-type", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public enum documentactiontype {
         
         /// <remarks/>
@@ -2287,319 +2844,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
-    public partial class notification : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string recipientField;
-        
-        private string senderField;
-        
-        private string headerField;
-        
-        private string messageField;
-        
-        private schedule[] scheduleField;
-        
-        private notificationtype typeField;
-        
-        private string notificationidField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string recipient {
-            get {
-                return this.recipientField;
-            }
-            set {
-                this.recipientField = value;
-                this.RaisePropertyChanged("recipient");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string sender {
-            get {
-                return this.senderField;
-            }
-            set {
-                this.senderField = value;
-                this.RaisePropertyChanged("sender");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string header {
-            get {
-                return this.headerField;
-            }
-            set {
-                this.headerField = value;
-                this.RaisePropertyChanged("header");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public string message {
-            get {
-                return this.messageField;
-            }
-            set {
-                this.messageField = value;
-                this.RaisePropertyChanged("message");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("schedule", IsNullable=true, Order=4)]
-        public schedule[] schedule {
-            get {
-                return this.scheduleField;
-            }
-            set {
-                this.scheduleField = value;
-                this.RaisePropertyChanged("schedule");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public notificationtype type {
-            get {
-                return this.typeField;
-            }
-            set {
-                this.typeField = value;
-                this.RaisePropertyChanged("type");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute("notification-id")]
-        public string notificationid {
-            get {
-                return this.notificationidField;
-            }
-            set {
-                this.notificationidField = value;
-                this.RaisePropertyChanged("notificationid");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
-    public partial class schedule : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private taskstatus stateisField;
-        
-        private System.DateTime waituntilField;
-        
-        private bool waituntilFieldSpecified;
-        
-        private wait waitField;
-        
-        private string daysofweekField;
-        
-        private string timeofdayField;
-        
-        private string timezoneField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("state-is", Order=0)]
-        public taskstatus stateis {
-            get {
-                return this.stateisField;
-            }
-            set {
-                this.stateisField = value;
-                this.RaisePropertyChanged("stateis");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("wait-until", Order=1)]
-        public System.DateTime waituntil {
-            get {
-                return this.waituntilField;
-            }
-            set {
-                this.waituntilField = value;
-                this.RaisePropertyChanged("waituntil");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool waituntilSpecified {
-            get {
-                return this.waituntilFieldSpecified;
-            }
-            set {
-                this.waituntilFieldSpecified = value;
-                this.RaisePropertyChanged("waituntilSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public wait wait {
-            get {
-                return this.waitField;
-            }
-            set {
-                this.waitField = value;
-                this.RaisePropertyChanged("wait");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("days-of-week", Order=3)]
-        public string daysofweek {
-            get {
-                return this.daysofweekField;
-            }
-            set {
-                this.daysofweekField = value;
-                this.RaisePropertyChanged("daysofweek");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("time-of-day", Order=4)]
-        public string timeofday {
-            get {
-                return this.timeofdayField;
-            }
-            set {
-                this.timeofdayField = value;
-                this.RaisePropertyChanged("timeofday");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public string timezone {
-            get {
-                return this.timezoneField;
-            }
-            set {
-                this.timezoneField = value;
-                this.RaisePropertyChanged("timezone");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
-    public partial class wait : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string daysField;
-        
-        private string hoursField;
-        
-        private string minutesField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="integer")]
-        public string days {
-            get {
-                return this.daysField;
-            }
-            set {
-                this.daysField = value;
-                this.RaisePropertyChanged("days");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="integer")]
-        public string hours {
-            get {
-                return this.hoursField;
-            }
-            set {
-                this.hoursField = value;
-                this.RaisePropertyChanged("hours");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="integer")]
-        public string minutes {
-            get {
-                return this.minutesField;
-            }
-            set {
-                this.minutesField = value;
-                this.RaisePropertyChanged("minutes");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="notification-type", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
-    public enum notificationtype {
-        
-        /// <remarks/>
-        SMS,
-        
-        /// <remarks/>
-        EMAIL,
-        
-        /// <remarks/>
-        URL,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class authentication : object, System.ComponentModel.INotifyPropertyChanged {
         
         private dialog dialogField;
@@ -2669,16 +2918,164 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class signature : object, System.ComponentModel.INotifyPropertyChanged {
         
         private dialog dialogField;
         
-        private string[] methodField;
+        private method[] methodField;
+        
+        private string ifauthenticationField;
+        
+        private bool responsiveField;
+        
+        private bool responsiveFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public dialog dialog {
+            get {
+                return this.dialogField;
+            }
+            set {
+                this.dialogField = value;
+                this.RaisePropertyChanged("dialog");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("method", Order=1)]
+        public method[] method {
+            get {
+                return this.methodField;
+            }
+            set {
+                this.methodField = value;
+                this.RaisePropertyChanged("method");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute("if-authentication")]
+        public string ifauthentication {
+            get {
+                return this.ifauthenticationField;
+            }
+            set {
+                this.ifauthenticationField = value;
+                this.RaisePropertyChanged("ifauthentication");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool responsive {
+            get {
+                return this.responsiveField;
+            }
+            set {
+                this.responsiveField = value;
+                this.RaisePropertyChanged("responsive");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool responsiveSpecified {
+            get {
+                return this.responsiveFieldSpecified;
+            }
+            set {
+                this.responsiveFieldSpecified = value;
+                this.RaisePropertyChanged("responsiveSpecified");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class method : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private bool handwrittenField;
+        
+        private bool handwrittenFieldSpecified;
+        
+        private string valueField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool handwritten {
+            get {
+                return this.handwrittenField;
+            }
+            set {
+                this.handwrittenField = value;
+                this.RaisePropertyChanged("handwritten");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool handwrittenSpecified {
+            get {
+                return this.handwrittenFieldSpecified;
+            }
+            set {
+                this.handwrittenFieldSpecified = value;
+                this.RaisePropertyChanged("handwrittenSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+                this.RaisePropertyChanged("Value");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="authentication-based-signature", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class authenticationbasedsignature : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private dialog dialogField;
+        
+        private method[] methodField;
         
         private string ifauthenticationField;
         
@@ -2696,7 +3093,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("method", Order=1)]
-        public string[] method {
+        public method[] method {
             get {
                 return this.methodField;
             }
@@ -2729,11 +3126,309 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="task-filter-criteria", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="session-task-info", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class sessiontaskinfo : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string requestidField;
+        
+        private string taskidField;
+        
+        private string orderField;
+        
+        private string descriptionField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute("request-id")]
+        public string requestid {
+            get {
+                return this.requestidField;
+            }
+            set {
+                this.requestidField = value;
+                this.RaisePropertyChanged("requestid");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute("task-id")]
+        public string taskid {
+            get {
+                return this.taskidField;
+            }
+            set {
+                this.taskidField = value;
+                this.RaisePropertyChanged("taskid");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="integer")]
+        public string order {
+            get {
+                return this.orderField;
+            }
+            set {
+                this.orderField = value;
+                this.RaisePropertyChanged("order");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+                this.RaisePropertyChanged("description");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="user-session", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class usersession : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string languageField;
+        
+        private string onsessionpostponeField;
+        
+        private string onsessioncompleteField;
+        
+        private string onsessioncancelField;
+        
+        private sessiontaskinfo[] sessiontaskField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string language {
+            get {
+                return this.languageField;
+            }
+            set {
+                this.languageField = value;
+                this.RaisePropertyChanged("language");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("on-session-postpone", Order=1)]
+        public string onsessionpostpone {
+            get {
+                return this.onsessionpostponeField;
+            }
+            set {
+                this.onsessionpostponeField = value;
+                this.RaisePropertyChanged("onsessionpostpone");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("on-session-complete", Order=2)]
+        public string onsessioncomplete {
+            get {
+                return this.onsessioncompleteField;
+            }
+            set {
+                this.onsessioncompleteField = value;
+                this.RaisePropertyChanged("onsessioncomplete");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("on-session-cancel", Order=3)]
+        public string onsessioncancel {
+            get {
+                return this.onsessioncancelField;
+            }
+            set {
+                this.onsessioncancelField = value;
+                this.RaisePropertyChanged("onsessioncancel");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("session-task", Order=4)]
+        public sessiontaskinfo[] sessiontask {
+            get {
+                return this.sessiontaskField;
+            }
+            set {
+                this.sessiontaskField = value;
+                this.RaisePropertyChanged("sessiontask");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="packaging-document-status", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class packagingdocumentstatus : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string resulturiField;
+        
+        private string idField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("result-uri", Order=0)]
+        public string resulturi {
+            get {
+                return this.resulturiField;
+            }
+            set {
+                this.resulturiField = value;
+                this.RaisePropertyChanged("resulturi");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+                this.RaisePropertyChanged("id");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="packaging-task-status-info", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class packagingtaskstatusinfo : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string requestidField;
+        
+        private string packagingtaskidField;
+        
+        private packagingtaskstatus packagingtaskstatusField;
+        
+        private packagingdocumentstatus[] packagingdocumentstatusField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("request-id", Order=0)]
+        public string requestid {
+            get {
+                return this.requestidField;
+            }
+            set {
+                this.requestidField = value;
+                this.RaisePropertyChanged("requestid");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("packaging-task-id", Order=1)]
+        public string packagingtaskid {
+            get {
+                return this.packagingtaskidField;
+            }
+            set {
+                this.packagingtaskidField = value;
+                this.RaisePropertyChanged("packagingtaskid");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("packaging-task-status", Order=2)]
+        public packagingtaskstatus packagingtaskstatus {
+            get {
+                return this.packagingtaskstatusField;
+            }
+            set {
+                this.packagingtaskstatusField = value;
+                this.RaisePropertyChanged("packagingtaskstatus");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("packaging-document-status", Order=3)]
+        public packagingdocumentstatus[] packagingdocumentstatus {
+            get {
+                return this.packagingdocumentstatusField;
+            }
+            set {
+                this.packagingdocumentstatusField = value;
+                this.RaisePropertyChanged("packagingdocumentstatus");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="packaging-task-status", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public enum packagingtaskstatus {
+        
+        /// <remarks/>
+        created,
+        
+        /// <remarks/>
+        failed,
+        
+        /// <remarks/>
+        completed,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="task-filter-criteria", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class taskfiltercriteria : object, System.ComponentModel.INotifyPropertyChanged {
         
         private taskfilterfield fieldField;
@@ -2810,9 +3505,9 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="task-filter-field", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="task-filter-field", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public enum taskfilterfield {
         
         /// <remarks/>
@@ -2904,9 +3599,9 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="logical-operator", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="logical-operator", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public enum logicaloperator {
         
         /// <remarks/>
@@ -2929,11 +3624,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="task-filter", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="task-filter", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class taskfilter : object, System.ComponentModel.INotifyPropertyChanged {
         
         private taskfiltercriteria[] criteriaField;
@@ -3016,21 +3711,35 @@ namespace WordAddInSignicat.SignicatPreProdService {
         }
     }
     
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class setClientStatus {
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class createartifactresponse : object, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="set-client-status-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("set-client-status-request")]
-        public WordAddInSignicat.SignicatPreProdService.setclientstatusrequest setclientstatusrequest;
+        private string artifactField;
         
-        public setClientStatus() {
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string artifact {
+            get {
+                return this.artifactField;
+            }
+            set {
+                this.artifactField = value;
+                this.RaisePropertyChanged("artifact");
+            }
         }
         
-        public setClientStatus(WordAddInSignicat.SignicatPreProdService.setclientstatusrequest setclientstatusrequest) {
-            this.setclientstatusrequest = setclientstatusrequest;
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
         }
     }
     
@@ -3038,19 +3747,45 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class setClientStatusResponse {
+    public partial class createArtifact {
         
-        public setClientStatusResponse() {
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="create-artifact-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("create-artifact-request")]
+        public WordAddInSignicat.SignicatPreProdService.createartifactrequest createartifactrequest;
+        
+        public createArtifact() {
+        }
+        
+        public createArtifact(WordAddInSignicat.SignicatPreProdService.createartifactrequest createartifactrequest) {
+            this.createartifactrequest = createartifactrequest;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class createArtifactResponse1 {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="create-artifact-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("create-artifact-response")]
+        public WordAddInSignicat.SignicatPreProdService.createartifactresponse createartifactresponse;
+        
+        public createArtifactResponse1() {
+        }
+        
+        public createArtifactResponse1(WordAddInSignicat.SignicatPreProdService.createartifactresponse createartifactresponse) {
+            this.createartifactresponse = createartifactresponse;
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
-    public partial class createartifactrequest : object, System.ComponentModel.INotifyPropertyChanged {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class setclientstatusrequest : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string serviceField;
         
@@ -3059,6 +3794,8 @@ namespace WordAddInSignicat.SignicatPreProdService {
         private string requestidField;
         
         private string taskidField;
+        
+        private string clientstatusField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -3108,35 +3845,15 @@ namespace WordAddInSignicat.SignicatPreProdService {
             }
         }
         
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
-    public partial class createartifactresponse : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string artifactField;
-        
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string artifact {
+        [System.Xml.Serialization.XmlElementAttribute("client-status", Order=4)]
+        public string clientstatus {
             get {
-                return this.artifactField;
+                return this.clientstatusField;
             }
             set {
-                this.artifactField = value;
-                this.RaisePropertyChanged("artifact");
+                this.clientstatusField = value;
+                this.RaisePropertyChanged("clientstatus");
             }
         }
         
@@ -3154,17 +3871,17 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class createArtifact {
+    public partial class setClientStatus {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="create-artifact-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("create-artifact-request")]
-        public WordAddInSignicat.SignicatPreProdService.createartifactrequest createartifactrequest;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="set-client-status-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("set-client-status-request")]
+        public WordAddInSignicat.SignicatPreProdService.setclientstatusrequest setclientstatusrequest;
         
-        public createArtifact() {
+        public setClientStatus() {
         }
         
-        public createArtifact(WordAddInSignicat.SignicatPreProdService.createartifactrequest createartifactrequest) {
-            this.createartifactrequest = createartifactrequest;
+        public setClientStatus(WordAddInSignicat.SignicatPreProdService.setclientstatusrequest setclientstatusrequest) {
+            this.setclientstatusrequest = setclientstatusrequest;
         }
     }
     
@@ -3172,26 +3889,18 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class createArtifactResponse1 {
+    public partial class setClientStatusResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="create-artifact-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("create-artifact-response")]
-        public WordAddInSignicat.SignicatPreProdService.createartifactresponse createartifactresponse;
-        
-        public createArtifactResponse1() {
-        }
-        
-        public createArtifactResponse1(WordAddInSignicat.SignicatPreProdService.createartifactresponse createartifactresponse) {
-            this.createartifactresponse = createartifactresponse;
+        public setClientStatusResponse() {
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class addnotificationrequest : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string serviceField;
@@ -3280,7 +3989,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class addNotification {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="add-notification-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="add-notification-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("add-notification-request")]
         public WordAddInSignicat.SignicatPreProdService.addnotificationrequest addnotificationrequest;
         
@@ -3303,11 +4012,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class gettaskcountrequest : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string serviceField;
@@ -3363,11 +4072,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class gettaskcountresponse : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string countField;
@@ -3400,7 +4109,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class getTaskCount {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-task-count-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-task-count-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("get-task-count-request")]
         public WordAddInSignicat.SignicatPreProdService.gettaskcountrequest gettaskcountrequest;
         
@@ -3418,7 +4127,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class getTaskCountResponse1 {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-task-count-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-task-count-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("get-task-count-response")]
         public WordAddInSignicat.SignicatPreProdService.gettaskcountresponse gettaskcountresponse;
         
@@ -3431,11 +4140,108 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class getpackagingtaskstatusrequest : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string serviceField;
+        
+        private string passwordField;
+        
+        private string[] requestidField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string service {
+            get {
+                return this.serviceField;
+            }
+            set {
+                this.serviceField = value;
+                this.RaisePropertyChanged("service");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                this.passwordField = value;
+                this.RaisePropertyChanged("password");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("request-id", Order=2)]
+        public string[] requestid {
+            get {
+                return this.requestidField;
+            }
+            set {
+                this.requestidField = value;
+                this.RaisePropertyChanged("requestid");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getPackagingTaskStatus {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-packaging-task-status-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("get-packaging-task-status-request")]
+        public WordAddInSignicat.SignicatPreProdService.getpackagingtaskstatusrequest getpackagingtaskstatusrequest;
+        
+        public getPackagingTaskStatus() {
+        }
+        
+        public getPackagingTaskStatus(WordAddInSignicat.SignicatPreProdService.getpackagingtaskstatusrequest getpackagingtaskstatusrequest) {
+            this.getpackagingtaskstatusrequest = getpackagingtaskstatusrequest;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getPackagingTaskStatusResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-packaging-task-status-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
+        [System.Xml.Serialization.XmlArrayAttribute("get-packaging-task-status-response")]
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
+        public WordAddInSignicat.SignicatPreProdService.packagingtaskstatusinfo[] getpackagingtaskstatusresponse1;
+        
+        public getPackagingTaskStatusResponse() {
+        }
+        
+        public getPackagingTaskStatusResponse(WordAddInSignicat.SignicatPreProdService.packagingtaskstatusinfo[] getpackagingtaskstatusresponse1) {
+            this.getpackagingtaskstatusresponse1 = getpackagingtaskstatusresponse1;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class deleterequestrequest : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string serviceField;
@@ -3491,11 +4297,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class deleterequestresponse : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int deletedField;
@@ -3528,7 +4334,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class deleteRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="delete-request-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="delete-request-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("delete-request-request")]
         public WordAddInSignicat.SignicatPreProdService.deleterequestrequest deleterequestrequest;
         
@@ -3546,7 +4352,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class deleteRequestResponse1 {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="delete-request-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="delete-request-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("delete-request-response")]
         public WordAddInSignicat.SignicatPreProdService.deleterequestresponse deleterequestresponse;
         
@@ -3559,11 +4365,153 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class createusersessionrequest : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string serviceField;
+        
+        private string passwordField;
+        
+        private usersession usersessionField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string service {
+            get {
+                return this.serviceField;
+            }
+            set {
+                this.serviceField = value;
+                this.RaisePropertyChanged("service");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                this.passwordField = value;
+                this.RaisePropertyChanged("password");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("user-session", Order=2)]
+        public usersession usersession {
+            get {
+                return this.usersessionField;
+            }
+            set {
+                this.usersessionField = value;
+                this.RaisePropertyChanged("usersession");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class createusersessionresponse : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string usersessionidField;
+        
+        private string artifactField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("user-session-id", Order=0)]
+        public string usersessionid {
+            get {
+                return this.usersessionidField;
+            }
+            set {
+                this.usersessionidField = value;
+                this.RaisePropertyChanged("usersessionid");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string artifact {
+            get {
+                return this.artifactField;
+            }
+            set {
+                this.artifactField = value;
+                this.RaisePropertyChanged("artifact");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class createUserSession {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="create-usersession-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("create-usersession-request")]
+        public WordAddInSignicat.SignicatPreProdService.createusersessionrequest createusersessionrequest;
+        
+        public createUserSession() {
+        }
+        
+        public createUserSession(WordAddInSignicat.SignicatPreProdService.createusersessionrequest createusersessionrequest) {
+            this.createusersessionrequest = createusersessionrequest;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class createUserSessionResponse1 {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="create-usersession-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("create-usersession-response")]
+        public WordAddInSignicat.SignicatPreProdService.createusersessionresponse createusersessionresponse;
+        
+        public createUserSessionResponse1() {
+        }
+        
+        public createUserSessionResponse1(WordAddInSignicat.SignicatPreProdService.createusersessionresponse createusersessionresponse) {
+            this.createusersessionresponse = createusersessionresponse;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class gettaskrequest : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string serviceField;
@@ -3633,11 +4581,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class gettaskresponse : object, System.ComponentModel.INotifyPropertyChanged {
         
         private task taskField;
@@ -3670,7 +4618,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class getTask {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-task-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-task-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("get-task-request")]
         public WordAddInSignicat.SignicatPreProdService.gettaskrequest gettaskrequest;
         
@@ -3688,7 +4636,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class getTaskResponse1 {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-task-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-task-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("get-task-response")]
         public WordAddInSignicat.SignicatPreProdService.gettaskresponse gettaskresponse;
         
@@ -3701,11 +4649,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class createrequestrequest : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string serviceField;
@@ -3761,11 +4709,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class createrequestresponse : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string[] requestidField;
@@ -3812,7 +4760,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class createRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="create-request-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="create-request-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("create-request-request")]
         public WordAddInSignicat.SignicatPreProdService.createrequestrequest createrequestrequest;
         
@@ -3830,7 +4778,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class createRequestResponse1 {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="create-request-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="create-request-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("create-request-response")]
         public WordAddInSignicat.SignicatPreProdService.createrequestresponse createrequestresponse;
         
@@ -3843,11 +4791,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class getrequestrequest : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string serviceField;
@@ -3903,11 +4851,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class getrequestresponse : object, System.ComponentModel.INotifyPropertyChanged {
         
         private request requestField;
@@ -3940,7 +4888,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class getRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-request-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-request-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("get-request-request")]
         public WordAddInSignicat.SignicatPreProdService.getrequestrequest getrequestrequest;
         
@@ -3958,7 +4906,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class getRequestResponse1 {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-request-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-request-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("get-request-response")]
         public WordAddInSignicat.SignicatPreProdService.getrequestresponse getrequestresponse;
         
@@ -3971,11 +4919,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class disabletaskrequest : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string serviceField;
@@ -4050,7 +4998,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class disableTask {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="disable-task-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="disable-task-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("disable-task-request")]
         public WordAddInSignicat.SignicatPreProdService.disabletaskrequest disabletaskrequest;
         
@@ -4073,11 +5021,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class findtasksrequest : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string serviceField;
@@ -4227,7 +5175,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class findTasks {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="find-tasks-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="find-tasks-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("find-tasks-request")]
         public WordAddInSignicat.SignicatPreProdService.findtasksrequest findtasksrequest;
         
@@ -4245,7 +5193,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class findTasksResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="find-tasks-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="find-tasks-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
         [System.Xml.Serialization.XmlArrayAttribute("find-tasks-response")]
         [System.Xml.Serialization.XmlArrayItemAttribute("task")]
         public WordAddInSignicat.SignicatPreProdService.taskinfo[] findtasksresponse1;
@@ -4259,108 +5207,11 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
-    public partial class getstatusrequest : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string serviceField;
-        
-        private string passwordField;
-        
-        private string[] requestidField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string service {
-            get {
-                return this.serviceField;
-            }
-            set {
-                this.serviceField = value;
-                this.RaisePropertyChanged("service");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string password {
-            get {
-                return this.passwordField;
-            }
-            set {
-                this.passwordField = value;
-                this.RaisePropertyChanged("password");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("request-id", Order=2)]
-        public string[] requestid {
-            get {
-                return this.requestidField;
-            }
-            set {
-                this.requestidField = value;
-                this.RaisePropertyChanged("requestid");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class getStatus {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-status-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("get-status-request")]
-        public WordAddInSignicat.SignicatPreProdService.getstatusrequest getstatusrequest;
-        
-        public getStatus() {
-        }
-        
-        public getStatus(WordAddInSignicat.SignicatPreProdService.getstatusrequest getstatusrequest) {
-            this.getstatusrequest = getstatusrequest;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class getStatusResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-status-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
-        [System.Xml.Serialization.XmlArrayAttribute("get-status-response")]
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public WordAddInSignicat.SignicatPreProdService.taskstatusinfo[] getstatusresponse1;
-        
-        public getStatusResponse() {
-        }
-        
-        public getStatusResponse(WordAddInSignicat.SignicatPreProdService.taskstatusinfo[] getstatusresponse1) {
-            this.getstatusresponse1 = getstatusresponse1;
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class disablenotificationrequest : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string serviceField;
@@ -4449,7 +5300,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class disableNotification {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="disable-notification-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="disable-notification-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("disable-notification-request")]
         public WordAddInSignicat.SignicatPreProdService.disablenotificationrequest disablenotificationrequest;
         
@@ -4472,11 +5323,250 @@ namespace WordAddInSignicat.SignicatPreProdService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class getstatusrequest : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string serviceField;
+        
+        private string passwordField;
+        
+        private string[] requestidField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string service {
+            get {
+                return this.serviceField;
+            }
+            set {
+                this.serviceField = value;
+                this.RaisePropertyChanged("service");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                this.passwordField = value;
+                this.RaisePropertyChanged("password");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("request-id", Order=2)]
+        public string[] requestid {
+            get {
+                return this.requestidField;
+            }
+            set {
+                this.requestidField = value;
+                this.RaisePropertyChanged("requestid");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getStatus {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-status-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("get-status-request")]
+        public WordAddInSignicat.SignicatPreProdService.getstatusrequest getstatusrequest;
+        
+        public getStatus() {
+        }
+        
+        public getStatus(WordAddInSignicat.SignicatPreProdService.getstatusrequest getstatusrequest) {
+            this.getstatusrequest = getstatusrequest;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getStatusResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-status-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
+        [System.Xml.Serialization.XmlArrayAttribute("get-status-response")]
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
+        public WordAddInSignicat.SignicatPreProdService.taskstatusinfo[] getstatusresponse1;
+        
+        public getStatusResponse() {
+        }
+        
+        public getStatusResponse(WordAddInSignicat.SignicatPreProdService.taskstatusinfo[] getstatusresponse1) {
+            this.getstatusresponse1 = getstatusresponse1;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class addtaskrequest : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string serviceField;
+        
+        private string passwordField;
+        
+        private string requestidField;
+        
+        private task taskField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string service {
+            get {
+                return this.serviceField;
+            }
+            set {
+                this.serviceField = value;
+                this.RaisePropertyChanged("service");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                this.passwordField = value;
+                this.RaisePropertyChanged("password");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("request-id", Order=2)]
+        public string requestid {
+            get {
+                return this.requestidField;
+            }
+            set {
+                this.requestidField = value;
+                this.RaisePropertyChanged("requestid");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public task task {
+            get {
+                return this.taskField;
+            }
+            set {
+                this.taskField = value;
+                this.RaisePropertyChanged("task");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
+    public partial class addtaskresponse : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string artifactField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string artifact {
+            get {
+                return this.artifactField;
+            }
+            set {
+                this.artifactField = value;
+                this.RaisePropertyChanged("artifact");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class addTask {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="add-task-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("add-task-request")]
+        public WordAddInSignicat.SignicatPreProdService.addtaskrequest addtaskrequest;
+        
+        public addTask() {
+        }
+        
+        public addTask(WordAddInSignicat.SignicatPreProdService.addtaskrequest addtaskrequest) {
+            this.addtaskrequest = addtaskrequest;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class addTaskResponse1 {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="add-task-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("add-task-response")]
+        public WordAddInSignicat.SignicatPreProdService.addtaskresponse addtaskresponse;
+        
+        public addTaskResponse1() {
+        }
+        
+        public addTaskResponse1(WordAddInSignicat.SignicatPreProdService.addtaskresponse addtaskresponse) {
+            this.addtaskresponse = addtaskresponse;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v3")]
     public partial class getrequesthistoryrequest : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string serviceField;
@@ -4551,7 +5641,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class getRequestHistory {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-request-history-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-request-history-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("get-request-history-request")]
         public WordAddInSignicat.SignicatPreProdService.getrequesthistoryrequest getrequesthistoryrequest;
         
@@ -4569,7 +5659,7 @@ namespace WordAddInSignicat.SignicatPreProdService {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class getRequestHistoryResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-request-history-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="get-request-history-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v3", Order=0)]
         [System.Xml.Serialization.XmlArrayAttribute("get-request-history-response")]
         public WordAddInSignicat.SignicatPreProdService.@event[] getrequesthistoryresponse1;
         
@@ -4578,148 +5668,6 @@ namespace WordAddInSignicat.SignicatPreProdService {
         
         public getRequestHistoryResponse(WordAddInSignicat.SignicatPreProdService.@event[] getrequesthistoryresponse1) {
             this.getrequesthistoryresponse1 = getrequesthistoryresponse1;
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
-    public partial class addtaskrequest : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string serviceField;
-        
-        private string passwordField;
-        
-        private string requestidField;
-        
-        private task taskField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string service {
-            get {
-                return this.serviceField;
-            }
-            set {
-                this.serviceField = value;
-                this.RaisePropertyChanged("service");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string password {
-            get {
-                return this.passwordField;
-            }
-            set {
-                this.passwordField = value;
-                this.RaisePropertyChanged("password");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("request-id", Order=2)]
-        public string requestid {
-            get {
-                return this.requestidField;
-            }
-            set {
-                this.requestidField = value;
-                this.RaisePropertyChanged("requestid");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public task task {
-            get {
-                return this.taskField;
-            }
-            set {
-                this.taskField = value;
-                this.RaisePropertyChanged("task");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1085.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="https://id.signicat.com/definitions/wsdl/Document-v2")]
-    public partial class addtaskresponse : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string artifactField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string artifact {
-            get {
-                return this.artifactField;
-            }
-            set {
-                this.artifactField = value;
-                this.RaisePropertyChanged("artifact");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class addTask {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="add-task-request", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("add-task-request")]
-        public WordAddInSignicat.SignicatPreProdService.addtaskrequest addtaskrequest;
-        
-        public addTask() {
-        }
-        
-        public addTask(WordAddInSignicat.SignicatPreProdService.addtaskrequest addtaskrequest) {
-            this.addtaskrequest = addtaskrequest;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class addTaskResponse1 {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="add-task-response", Namespace="https://id.signicat.com/definitions/wsdl/Document-v2", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("add-task-response")]
-        public WordAddInSignicat.SignicatPreProdService.addtaskresponse addtaskresponse;
-        
-        public addTaskResponse1() {
-        }
-        
-        public addTaskResponse1(WordAddInSignicat.SignicatPreProdService.addtaskresponse addtaskresponse) {
-            this.addtaskresponse = addtaskresponse;
         }
     }
     
@@ -4751,28 +5699,6 @@ namespace WordAddInSignicat.SignicatPreProdService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        WordAddInSignicat.SignicatPreProdService.setClientStatusResponse WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.setClientStatus(WordAddInSignicat.SignicatPreProdService.setClientStatus request) {
-            return base.Channel.setClientStatus(request);
-        }
-        
-        public void setClientStatus(WordAddInSignicat.SignicatPreProdService.setclientstatusrequest setclientstatusrequest) {
-            WordAddInSignicat.SignicatPreProdService.setClientStatus inValue = new WordAddInSignicat.SignicatPreProdService.setClientStatus();
-            inValue.setclientstatusrequest = setclientstatusrequest;
-            WordAddInSignicat.SignicatPreProdService.setClientStatusResponse retVal = ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).setClientStatus(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.setClientStatusResponse> WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.setClientStatusAsync(WordAddInSignicat.SignicatPreProdService.setClientStatus request) {
-            return base.Channel.setClientStatusAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.setClientStatusResponse> setClientStatusAsync(WordAddInSignicat.SignicatPreProdService.setclientstatusrequest setclientstatusrequest) {
-            WordAddInSignicat.SignicatPreProdService.setClientStatus inValue = new WordAddInSignicat.SignicatPreProdService.setClientStatus();
-            inValue.setclientstatusrequest = setclientstatusrequest;
-            return ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).setClientStatusAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         WordAddInSignicat.SignicatPreProdService.createArtifactResponse1 WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.createArtifact(WordAddInSignicat.SignicatPreProdService.createArtifact request) {
             return base.Channel.createArtifact(request);
         }
@@ -4793,6 +5719,28 @@ namespace WordAddInSignicat.SignicatPreProdService {
             WordAddInSignicat.SignicatPreProdService.createArtifact inValue = new WordAddInSignicat.SignicatPreProdService.createArtifact();
             inValue.createartifactrequest = createartifactrequest;
             return ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).createArtifactAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        WordAddInSignicat.SignicatPreProdService.setClientStatusResponse WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.setClientStatus(WordAddInSignicat.SignicatPreProdService.setClientStatus request) {
+            return base.Channel.setClientStatus(request);
+        }
+        
+        public void setClientStatus(WordAddInSignicat.SignicatPreProdService.setclientstatusrequest setclientstatusrequest) {
+            WordAddInSignicat.SignicatPreProdService.setClientStatus inValue = new WordAddInSignicat.SignicatPreProdService.setClientStatus();
+            inValue.setclientstatusrequest = setclientstatusrequest;
+            WordAddInSignicat.SignicatPreProdService.setClientStatusResponse retVal = ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).setClientStatus(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.setClientStatusResponse> WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.setClientStatusAsync(WordAddInSignicat.SignicatPreProdService.setClientStatus request) {
+            return base.Channel.setClientStatusAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.setClientStatusResponse> setClientStatusAsync(WordAddInSignicat.SignicatPreProdService.setclientstatusrequest setclientstatusrequest) {
+            WordAddInSignicat.SignicatPreProdService.setClientStatus inValue = new WordAddInSignicat.SignicatPreProdService.setClientStatus();
+            inValue.setclientstatusrequest = setclientstatusrequest;
+            return ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).setClientStatusAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -4841,6 +5789,29 @@ namespace WordAddInSignicat.SignicatPreProdService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        WordAddInSignicat.SignicatPreProdService.getPackagingTaskStatusResponse WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.getPackagingTaskStatus(WordAddInSignicat.SignicatPreProdService.getPackagingTaskStatus request) {
+            return base.Channel.getPackagingTaskStatus(request);
+        }
+        
+        public WordAddInSignicat.SignicatPreProdService.packagingtaskstatusinfo[] getPackagingTaskStatus(WordAddInSignicat.SignicatPreProdService.getpackagingtaskstatusrequest getpackagingtaskstatusrequest) {
+            WordAddInSignicat.SignicatPreProdService.getPackagingTaskStatus inValue = new WordAddInSignicat.SignicatPreProdService.getPackagingTaskStatus();
+            inValue.getpackagingtaskstatusrequest = getpackagingtaskstatusrequest;
+            WordAddInSignicat.SignicatPreProdService.getPackagingTaskStatusResponse retVal = ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).getPackagingTaskStatus(inValue);
+            return retVal.getpackagingtaskstatusresponse1;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.getPackagingTaskStatusResponse> WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.getPackagingTaskStatusAsync(WordAddInSignicat.SignicatPreProdService.getPackagingTaskStatus request) {
+            return base.Channel.getPackagingTaskStatusAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.getPackagingTaskStatusResponse> getPackagingTaskStatusAsync(WordAddInSignicat.SignicatPreProdService.getpackagingtaskstatusrequest getpackagingtaskstatusrequest) {
+            WordAddInSignicat.SignicatPreProdService.getPackagingTaskStatus inValue = new WordAddInSignicat.SignicatPreProdService.getPackagingTaskStatus();
+            inValue.getpackagingtaskstatusrequest = getpackagingtaskstatusrequest;
+            return ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).getPackagingTaskStatusAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         WordAddInSignicat.SignicatPreProdService.deleteRequestResponse1 WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.deleteRequest(WordAddInSignicat.SignicatPreProdService.deleteRequest request) {
             return base.Channel.deleteRequest(request);
         }
@@ -4861,6 +5832,29 @@ namespace WordAddInSignicat.SignicatPreProdService {
             WordAddInSignicat.SignicatPreProdService.deleteRequest inValue = new WordAddInSignicat.SignicatPreProdService.deleteRequest();
             inValue.deleterequestrequest = deleterequestrequest;
             return ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).deleteRequestAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        WordAddInSignicat.SignicatPreProdService.createUserSessionResponse1 WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.createUserSession(WordAddInSignicat.SignicatPreProdService.createUserSession request) {
+            return base.Channel.createUserSession(request);
+        }
+        
+        public WordAddInSignicat.SignicatPreProdService.createusersessionresponse createUserSession(WordAddInSignicat.SignicatPreProdService.createusersessionrequest createusersessionrequest) {
+            WordAddInSignicat.SignicatPreProdService.createUserSession inValue = new WordAddInSignicat.SignicatPreProdService.createUserSession();
+            inValue.createusersessionrequest = createusersessionrequest;
+            WordAddInSignicat.SignicatPreProdService.createUserSessionResponse1 retVal = ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).createUserSession(inValue);
+            return retVal.createusersessionresponse;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.createUserSessionResponse1> WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.createUserSessionAsync(WordAddInSignicat.SignicatPreProdService.createUserSession request) {
+            return base.Channel.createUserSessionAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.createUserSessionResponse1> createUserSessionAsync(WordAddInSignicat.SignicatPreProdService.createusersessionrequest createusersessionrequest) {
+            WordAddInSignicat.SignicatPreProdService.createUserSession inValue = new WordAddInSignicat.SignicatPreProdService.createUserSession();
+            inValue.createusersessionrequest = createusersessionrequest;
+            return ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).createUserSessionAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -4978,6 +5972,28 @@ namespace WordAddInSignicat.SignicatPreProdService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        WordAddInSignicat.SignicatPreProdService.disableNotificationResponse WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.disableNotification(WordAddInSignicat.SignicatPreProdService.disableNotification request) {
+            return base.Channel.disableNotification(request);
+        }
+        
+        public void disableNotification(WordAddInSignicat.SignicatPreProdService.disablenotificationrequest disablenotificationrequest) {
+            WordAddInSignicat.SignicatPreProdService.disableNotification inValue = new WordAddInSignicat.SignicatPreProdService.disableNotification();
+            inValue.disablenotificationrequest = disablenotificationrequest;
+            WordAddInSignicat.SignicatPreProdService.disableNotificationResponse retVal = ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).disableNotification(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.disableNotificationResponse> WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.disableNotificationAsync(WordAddInSignicat.SignicatPreProdService.disableNotification request) {
+            return base.Channel.disableNotificationAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.disableNotificationResponse> disableNotificationAsync(WordAddInSignicat.SignicatPreProdService.disablenotificationrequest disablenotificationrequest) {
+            WordAddInSignicat.SignicatPreProdService.disableNotification inValue = new WordAddInSignicat.SignicatPreProdService.disableNotification();
+            inValue.disablenotificationrequest = disablenotificationrequest;
+            return ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).disableNotificationAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         WordAddInSignicat.SignicatPreProdService.getStatusResponse WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.getStatus(WordAddInSignicat.SignicatPreProdService.getStatus request) {
             return base.Channel.getStatus(request);
         }
@@ -5001,25 +6017,26 @@ namespace WordAddInSignicat.SignicatPreProdService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        WordAddInSignicat.SignicatPreProdService.disableNotificationResponse WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.disableNotification(WordAddInSignicat.SignicatPreProdService.disableNotification request) {
-            return base.Channel.disableNotification(request);
+        WordAddInSignicat.SignicatPreProdService.addTaskResponse1 WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.addTask(WordAddInSignicat.SignicatPreProdService.addTask request) {
+            return base.Channel.addTask(request);
         }
         
-        public void disableNotification(WordAddInSignicat.SignicatPreProdService.disablenotificationrequest disablenotificationrequest) {
-            WordAddInSignicat.SignicatPreProdService.disableNotification inValue = new WordAddInSignicat.SignicatPreProdService.disableNotification();
-            inValue.disablenotificationrequest = disablenotificationrequest;
-            WordAddInSignicat.SignicatPreProdService.disableNotificationResponse retVal = ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).disableNotification(inValue);
+        public WordAddInSignicat.SignicatPreProdService.addtaskresponse addTask(WordAddInSignicat.SignicatPreProdService.addtaskrequest addtaskrequest) {
+            WordAddInSignicat.SignicatPreProdService.addTask inValue = new WordAddInSignicat.SignicatPreProdService.addTask();
+            inValue.addtaskrequest = addtaskrequest;
+            WordAddInSignicat.SignicatPreProdService.addTaskResponse1 retVal = ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).addTask(inValue);
+            return retVal.addtaskresponse;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.disableNotificationResponse> WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.disableNotificationAsync(WordAddInSignicat.SignicatPreProdService.disableNotification request) {
-            return base.Channel.disableNotificationAsync(request);
+        System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.addTaskResponse1> WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.addTaskAsync(WordAddInSignicat.SignicatPreProdService.addTask request) {
+            return base.Channel.addTaskAsync(request);
         }
         
-        public System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.disableNotificationResponse> disableNotificationAsync(WordAddInSignicat.SignicatPreProdService.disablenotificationrequest disablenotificationrequest) {
-            WordAddInSignicat.SignicatPreProdService.disableNotification inValue = new WordAddInSignicat.SignicatPreProdService.disableNotification();
-            inValue.disablenotificationrequest = disablenotificationrequest;
-            return ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).disableNotificationAsync(inValue);
+        public System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.addTaskResponse1> addTaskAsync(WordAddInSignicat.SignicatPreProdService.addtaskrequest addtaskrequest) {
+            WordAddInSignicat.SignicatPreProdService.addTask inValue = new WordAddInSignicat.SignicatPreProdService.addTask();
+            inValue.addtaskrequest = addtaskrequest;
+            return ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).addTaskAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -5043,29 +6060,6 @@ namespace WordAddInSignicat.SignicatPreProdService {
             WordAddInSignicat.SignicatPreProdService.getRequestHistory inValue = new WordAddInSignicat.SignicatPreProdService.getRequestHistory();
             inValue.getrequesthistoryrequest = getrequesthistoryrequest;
             return ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).getRequestHistoryAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        WordAddInSignicat.SignicatPreProdService.addTaskResponse1 WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.addTask(WordAddInSignicat.SignicatPreProdService.addTask request) {
-            return base.Channel.addTask(request);
-        }
-        
-        public WordAddInSignicat.SignicatPreProdService.addtaskresponse addTask(WordAddInSignicat.SignicatPreProdService.addtaskrequest addtaskrequest) {
-            WordAddInSignicat.SignicatPreProdService.addTask inValue = new WordAddInSignicat.SignicatPreProdService.addTask();
-            inValue.addtaskrequest = addtaskrequest;
-            WordAddInSignicat.SignicatPreProdService.addTaskResponse1 retVal = ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).addTask(inValue);
-            return retVal.addtaskresponse;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.addTaskResponse1> WordAddInSignicat.SignicatPreProdService.DocumentEndPoint.addTaskAsync(WordAddInSignicat.SignicatPreProdService.addTask request) {
-            return base.Channel.addTaskAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<WordAddInSignicat.SignicatPreProdService.addTaskResponse1> addTaskAsync(WordAddInSignicat.SignicatPreProdService.addtaskrequest addtaskrequest) {
-            WordAddInSignicat.SignicatPreProdService.addTask inValue = new WordAddInSignicat.SignicatPreProdService.addTask();
-            inValue.addtaskrequest = addtaskrequest;
-            return ((WordAddInSignicat.SignicatPreProdService.DocumentEndPoint)(this)).addTaskAsync(inValue);
         }
     }
 }

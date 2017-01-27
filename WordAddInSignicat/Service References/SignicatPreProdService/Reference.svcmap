@@ -19,10 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="https://preprod.signicat.com/ws/documentservice-v2?wsdl " Protocol="http" SourceId="1" />
+    <MetadataSource Address="https://preprod.signicat.com/ws/documentservice-v3?wsdl " Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="DocumentService.wsdl" MetadataType="Wsdl" ID="65e87a67-d1c8-4df3-972a-46089abdb351" SourceId="1" SourceUrl="https://preprod.signicat.com/ws/documentservice-v2?wsdl" />
+    <MetadataFile FileName="DocumentService1.wsdl" MetadataType="Wsdl" ID="f0732472-aa2a-459d-9cbc-b3b330c6c4b6" SourceId="1" SourceUrl="https://preprod.signicat.com/ws/documentservice-v3?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

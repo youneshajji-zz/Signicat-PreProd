@@ -87,7 +87,6 @@
     var yesreplaced9 = $('#lblradios-9').html().replace("Yes", $.translate.get_text('boolyes'));
     var noreplaced10 = $('#lblradios-10').html().replace("No", $.translate.get_text('boolyno'));
     var yesreplaced0 = $('#lblradios-0').html().replace("Yes", $.translate.get_text('boolyes'));
-    var noreplaced1 = $('#lblradios-1').html().replace("No", $.translate.get_text('boolyno'));
     var yesreplaced2 = $('#lblradios-2').html().replace("Yes", $.translate.get_text('boolyes'));
     var noreplaced3 = $('#lblradios-3').html().replace("No", $.translate.get_text('boolyno'));
     var yesreplaced11 = $('#lblradios-11').html().replace("Yes", $.translate.get_text('boolyes'));
@@ -98,6 +97,10 @@
     var noreplaced7 = $('#lblradios-7').html().replace("No", $.translate.get_text('boolyno'));
     var yesreplaced13 = $('#lblradios-13').html().replace("Yes", $.translate.get_text('boolyes'));
     var noreplaced14 = $('#lblradios-14').html().replace("No", $.translate.get_text('boolyno'));
+
+    var str = $('#lblradios-1').html();
+    var pos = str.lastIndexOf('No');
+    var noreplaced1 = str.substring(0, pos) + $.translate.get_text('boolyno') + str.substring(pos + 2);
 
     $('#lblradios-9').html(yesreplaced9);
     $('#lblradios-10').html(noreplaced10);
@@ -153,6 +156,4 @@
     $('#lblselectfiles').attr('title', $.translate.get_text('lblselectfilestitle'));
     $('#lblsavemerged').attr('title', $.translate.get_text('lblsavemergedtitle'));
     $('#lblrecipeints').attr('title', $.translate.get_text('lblrecipeintstitle'));
-
-
 }

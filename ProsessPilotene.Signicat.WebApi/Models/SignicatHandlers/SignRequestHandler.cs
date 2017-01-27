@@ -197,7 +197,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                         //bundleSpecified = true,
                         daystolive = signingInfo.daysToLive,
                         documentaction = documentactions,
-                        signature = signatures,
+                        //signature = signatures,
                         authenticationbasedsignature = authSignatures,
                         subject = new subject
                         {
@@ -291,28 +291,28 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 return authsignature;
             }
 
-            ////if (signingInfoSigningMetodText == "nbid")
-            ////{
-            ////    var authsignature = new[]
-            ////    {
-            ////        new authenticationbasedsignature
-            ////        {
-            ////                            method = new method[]
-            ////                            {
-            ////                                new method
-            ////                                {
-            ////                                    handwritten = true,
-            ////                                   Value = "nbid"
-            ////                                },
-            ////                                new method
-            ////                                {
-            ////                                   Value = "nbid-mobil"
-            ////                                }
-            ////                            }
-            ////        }
-            ////    };
-            //    return authsignature;
-            //}
+            if (signingInfoSigningMetodText == "nbid")
+            {
+                var authsignature = new[]
+                {
+                    new authenticationbasedsignature
+                    {
+                                        method = new method[]
+                                        {
+                                            new method
+                                            {
+                                                handwritten = true,
+                                               Value = "nbid"
+                                            },
+                                            new method
+                                            {
+                                               Value = "nbid-mobil"
+                                            }
+                                        }
+                    }
+                };
+                return authsignature;
+            }
 
             return null;
         }
