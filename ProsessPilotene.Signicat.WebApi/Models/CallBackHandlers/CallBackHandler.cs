@@ -233,10 +233,10 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                         {
                             if (tempList[0].padesurl != null)
                                 new SharePointHandler().SaveInSP(regardingRef, tempList[0].padesurl,
-                                    tempList[0].name, orgname, service);
+                                    tempList[0].name, orgname, lcid, service);
                             else
                                 new SharePointHandler().SaveInSP(regardingRef, tempList[0].resulturl,
-                                    tempList[0].name, orgname, service);
+                                    tempList[0].name, orgname, lcid, service);
                         }
                         continue;
                     }
@@ -258,7 +258,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                                 tempList[0].name, lcid, service);
 
                         if (saveinsp && regardingRef != null)
-                            new SharePointHandler().SaveInSP(regardingRef, padesurl, tempList[0].name, orgname, service);
+                            new SharePointHandler().SaveInSP(regardingRef, padesurl, tempList[0].name, orgname, lcid, service);
                     }
                 }
 

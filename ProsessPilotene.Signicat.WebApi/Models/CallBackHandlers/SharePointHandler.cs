@@ -26,7 +26,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
         /// <param name="resulturi"></param>
         /// <param name="docName"></param>
         /// <param name="service"></param>
-        internal void SaveInSP(EntityReference regardingRef, string resulturi, string docName, string orgname, IOrganizationService service)
+        internal void SaveInSP(EntityReference regardingRef, string resulturi, string docName, string orgname, int lcid, IOrganizationService service)
         {
             try
             {
@@ -62,10 +62,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                     clientContext.Load(web.Lists);
                     clientContext.ExecuteQuery();
 
-                    var accountList = web.Lists.GetByTitle(listTitle);
-                    clientContext.Load(accountList);
-                    clientContext.ExecuteQuery();
-
+                    List accountList = GetAccountList(listTitle, web, clientContext, service);
 
                     var folder = accountList.RootFolder.Folders.GetByUrl(folderName);
 
@@ -88,6 +85,37 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
             }
             catch (Exception ex)
             {
+                return;
+                throw new Exception(ex.Message);
+            }
+        }
+
+        private List GetAccountList(string listTitle, Web web, ClientContext clientContext, IOrganizationService service)
+        {
+            try
+            {
+                List accountList;
+
+                clientContext.Load(web.Lists, lists => lists.Include(list => list.Title).Where(list => list.Title == listTitle));
+                clientContext.ExecuteQuery();
+
+                if (web.Lists.Count > 0)
+                {
+                    accountList = web.Lists.GetByTitle(listTitle);
+                    clientContext.Load(accountList);
+                    clientContext.ExecuteQuery();
+                }
+                else
+                {
+                    listTitle = new CRMHandler().GetSettingKeyValue(service, "spcrmroot");
+                    accountList = GetAccountList(listTitle, web, clientContext, service);
+                }
+
+                return accountList;
+            }
+            catch (Exception ex)
+            {
+                return null;
                 throw new Exception(ex.Message);
             }
         }
