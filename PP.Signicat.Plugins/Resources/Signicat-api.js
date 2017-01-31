@@ -331,10 +331,12 @@ function AddNotes(serverUrl, noteSubject, noteText, entityid, entityname, file, 
 
 function GetUserMail(userid) {
     var email = "";
+
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
         datatype: "json",
+        async: false,
         url: Xrm.Page.context.getClientUrl() + "/XRMServices/2011/OrganizationData.svc/SystemUserSet(guid'" + userid + "')?$select=InternalEMailAddress",
         beforeSend: function (XMLHttpRequest) {
             XMLHttpRequest.setRequestHeader("Accept", "application/json");

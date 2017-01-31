@@ -144,63 +144,12 @@ namespace PP.Signicat.WebApi.Controllers
                     if (uploadedDocuments == null)
                         return null;
 
-                    if (signingMetod == "1") //BankID
-                        signingInfo.signingMetodText = "nbid";
-
-                    else if (signingMetod == "2") //SMS email OTP
-                        signingInfo.signingMetodText = "scid-otp";
-
-                    else if (signingMetod == "3") //Social
-                        signingInfo.signingMetodText = "social";
-
-                    else if (signingMetod == "4") //Handwritten
-                        signingInfo.signingMetodText = "handwritten";
+                    signingInfo.signingMetodText = new SignatureHandler().GetMethod(signingMetod);
 
                     createrequestrequest request = signHandler.GetCreateRequest(uploadedDocuments, recipients,
                         signingInfo);
 
-                    // You can have request level notifications
-                    // for example to notify your system when
-                    // a request has been completed
-                    for (int i = 0; i < request.request[0].task.Length; i++)
-                    {
-                        
-                       
-                    }
-
-
-                    if (signingInfo.authMetod == "1") //BankID
-                    {
-                        for (int i = 0; i < request.request[0].task.Length; i++)
-                        {
-                            request.request[0].task[i].authentication = new authentication
-                            {
-                                method = new string[] { "nbid", "nbid-mobil" }
-                            };
-                        }
-                    }
-
-                    if (signingInfo.authMetod == "2") //SMS Email OTP
-                    {
-                        for (int i = 0; i < request.request[0].task.Length; i++)
-                        {
-                            request.request[0].task[i].authentication = new authentication
-                            {
-                                method = new string[] { "scid-otp" }
-                            };
-                        }
-                    }
-
-                    if (signingInfo.authMetod == "3") //Social
-                    {
-                        for (int i = 0; i < request.request[0].task.Length; i++)
-                        {
-                            request.request[0].task[i].authentication = new authentication
-                            {
-                                method = new string[] { "social" }
-                            };
-                        }
-                    }
+                    new SignatureHandler().AddAuthMethod(signingInfo, request);
 
                     try
                     {
@@ -218,7 +167,9 @@ namespace PP.Signicat.WebApi.Controllers
                                 response.requestid[0], request.request[0].task[i].id);
                             signHereUrlList.Add(url);
 
-                            new NotificationHandler().AddSmsNotification(response, request, signingInfo, i, url, recipients);
+                            var phonenr = request.request[0].task[i].subject.mobile;
+                            if (signingInfo.SendSMS == 1 && !string.IsNullOrWhiteSpace(phonenr))
+                                new NotificationHandler().AddSmsNotification(response, request, signingInfo, i, url, phonenr);
 
                         }
                     }
