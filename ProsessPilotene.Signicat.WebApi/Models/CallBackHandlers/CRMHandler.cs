@@ -258,7 +258,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
             }
         }
 
-        public void SendSignedMergedCopy(EntityReference docsignRef, EntityReference senderRef,
+        internal void SendSignedMergedCopy(EntityReference docsignRef, EntityReference senderRef,
             string padesurl, string name, int lcid, IOrganizationService service)
         {
             try
@@ -382,7 +382,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
             return 0;
         }
 
-        public void CreateTransaction(string orgname, int method, EntityReference senderRef,
+        internal void CreateTransaction(string orgname, int method, EntityReference senderRef,
             IOrganizationService service)
         {
             try
@@ -461,6 +461,38 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
 
                 var results = service.RetrieveMultiple(query);
                 return results.Entities.Count;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        internal void DeactivateTask(string requestId, string taskId, IOrganizationService service)
+        {
+            try
+            {
+                QueryExpression query = new QueryExpression("pp_signicatdocurl");
+                query.ColumnSet = new ColumnSet(false);
+                query.Criteria.AddCondition("new_name", ConditionOperator.Equal, taskId);
+                query.Criteria.AddCondition("pp_sdsurl", ConditionOperator.Contains, requestId);
+                var result = service.RetrieveMultiple(query);
+
+                if (result.Entities.Count == 1)
+                {
+                    var task = result.Entities[0].ToEntityReference();
+                    SetStateRequest setStateRequest = new SetStateRequest()
+                    {
+                        EntityMoniker = new EntityReference
+                        {
+                            Id = task.Id,
+                            LogicalName = task.LogicalName,
+                        },
+                        State = new OptionSetValue(1),
+                        Status = new OptionSetValue(2)
+                    };
+                    service.Execute(setStateRequest);
+                }
             }
             catch (Exception ex)
             {

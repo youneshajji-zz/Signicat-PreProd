@@ -121,7 +121,7 @@ namespace PP.Signicat.WebApi.Controllers
                 }
 
                 var signingInfo = new SigningInfo();
-                var customerorg = HttpContext.Current.Request.Params["CustomerOrg"];
+                signingInfo.customerOrg = HttpContext.Current.Request.Params["CustomerOrg"];
                 signingInfo.authMetod = HttpContext.Current.Request.Params["Authmetod"];
                 signingInfo.notifyMe = Convert.ToInt32(HttpContext.Current.Request.Params["NotifyMe"]);
                 signingInfo.senderMail = HttpContext.Current.Request.Params["SenderEmail"];
@@ -157,35 +157,15 @@ namespace PP.Signicat.WebApi.Controllers
                         signingInfo.signingMetodText = "handwritten";
 
                     createrequestrequest request = signHandler.GetCreateRequest(uploadedDocuments, recipients,
-                        signingInfo); 
+                        signingInfo);
 
                     // You can have request level notifications
                     // for example to notify your system when
                     // a request has been completed
                     for (int i = 0; i < request.request[0].task.Length; i++)
                     {
-                        //var callbackOnTaskCompleteUrl = "https://prosesspilotenesignicatwebapi-preprod.azurewebsites.net:443/api/Callback/GetSigning?orgname=" + customerorg + "&requestId=${requestId}&taskId=${taskId}";
-                        var callbackOnTaskCompleteUrl = "https://prosesspilotenesignicatwebapi-preprod.azurewebsites.net:443/api/Callback/Landingpage?lcid=" + signingInfo.LCID;
-                        var callbackNotificationUrl = "https://prosesspilotenesignicatwebapi-preprod.azurewebsites.net:443/api/Callback/GetSigning?orgname=" + customerorg;
-                        request.request[0].task[i].ontaskcomplete = callbackOnTaskCompleteUrl;
-
-                        request.request[0].task[i].notification = new[]
-                        {
-                            new notification
-                            {
-                                notificationid = "req_callback_" + i,
-                                type = notificationtype.URL,
-                                recipient = callbackNotificationUrl,
-                                message = "callbackurl",
-                                schedule = new []
-                                {
-                                    new schedule
-                                    {
-                                        stateis = taskstatus.completed
-                                    }
-                                }
-                            }
-                        };
+                        
+                       
                     }
 
 
@@ -238,32 +218,8 @@ namespace PP.Signicat.WebApi.Controllers
                                 response.requestid[0], request.request[0].task[i].id);
                             signHereUrlList.Add(url);
 
-                            var phonenr = request.request[0].task[i].subject.mobile;
+                            new NotificationHandler().AddSmsNotification(response, request, signingInfo, i, url, recipients);
 
-                            if (signingInfo.SendSMS == 1 && !string.IsNullOrWhiteSpace(phonenr))
-                            {
-                                using (var client = new DocumentEndPointClient())
-                                {
-                                    var smsnotify = new notification
-                                    {
-                                        notificationid = "send_sms_" + i,
-                                        type = notificationtype.SMS,
-                                        recipient = phonenr,
-                                        message = signingInfo.SMSText + " " + url
-                                    };
-
-                                    var notifyReq = new addnotificationrequest
-                                    {
-                                        service = "prosesspilotene",
-                                        notification = smsnotify,
-                                        password = "Bond007",
-                                        requestid = response.requestid[0],
-                                        taskid = request.request[0].task[i].id
-                                    };
-
-                                    client.addNotification(notifyReq);
-                                }
-                            }
                         }
                     }
                     catch (Exception ex)

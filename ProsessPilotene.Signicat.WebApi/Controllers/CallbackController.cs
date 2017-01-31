@@ -47,5 +47,17 @@ namespace PP.Signicat.WebApi.Controllers
             response.StatusCode = HttpStatusCode.OK;
             return response;
         }
+
+        // GET: api/Callback/DeactivateSigning
+        [ActionName("DeactivateSigning")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> Post(string orgname, string requestId, string taskId)
+        {
+            var statuscode = await new CallBackHandler().DeactivateTask(requestId, taskId, orgname);
+
+            var response = new HttpResponseMessage();
+            response.StatusCode = statuscode;
+            return response;
+        }
     }
 }

@@ -115,6 +115,15 @@ namespace PP.Signicat.WebApi.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Documents has not been signed by the reciever.
+        /// </summary>
+        public static string signicatexpired {
+            get {
+                return ResourceManager.GetString("signicatexpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Message from Signicat.
         /// </summary>
         public static string signicatmessage {

@@ -135,6 +135,9 @@
   <data name="signicatexpiration" xml:space="preserve">
     <value>Documents are waiting for you to sign, you have 2 days left! Please find the documents in the original email.</value>
   </data>
+  <data name="signicatexpired" xml:space="preserve">
+    <value>Documents has not been signed by the reciever</value>
+  </data>
   <data name="signicatmessage" xml:space="preserve">
     <value>Message from Signicat</value>
   </data>

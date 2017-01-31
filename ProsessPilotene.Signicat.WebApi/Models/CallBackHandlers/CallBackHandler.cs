@@ -10,7 +10,7 @@ using PP.Signicat.WebApi.SignicatPreProd;
 
 namespace PP.Signicat.WebApi.Models.CallBackHandlers
 {
-    public class CallBackHandler
+    internal class CallBackHandler
     {
         /// <summary>
         /// 
@@ -267,6 +267,25 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+        }
+
+        internal async Task<HttpStatusCode> DeactivateTask(string requestId, string taskId, string orgname)
+        {
+            if (string.IsNullOrEmpty((requestId)))
+                return HttpStatusCode.BadRequest;
+            try
+            {
+                var service = new CRMHandler().ConnectToCRM(orgname); //Connect to the customers CRM
+                if (service == null)
+                    return HttpStatusCode.NotFound;
+
+                new CRMHandler().DeactivateTask(requestId, taskId, service);
+                return HttpStatusCode.OK;
+            }
+            catch (Exception ex)
+            {
+                return HttpStatusCode.BadRequest;
             }
         }
     }

@@ -12,9 +12,9 @@ using PP.Signicat.WebApi.SignicatPreProd;
 
 namespace PP.Signicat.WebApi.Models.SignicatHandlers
 {
-    public class SignRequestHandler
+    internal class SignRequestHandler
     {
-        public async Task<sdsdocument[]> UploadDocument(List<HttpPostedFile> postedFiles)
+        internal async Task<sdsdocument[]> UploadDocument(List<HttpPostedFile> postedFiles)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
             }
         }
 
-        public createrequestrequest GetCreateRequest(sdsdocument[] documentInSds, List<ContactInfo> recipients, SigningInfo signingInfo)
+        internal createrequestrequest GetCreateRequest(sdsdocument[] documentInSds, List<ContactInfo> recipients, SigningInfo signingInfo)
         {
             try
             {
@@ -86,8 +86,8 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 var tasks = GetTasks(documentInSds, recipients, signingInfo);
                 var documents = GetDocuments(documentInSds, recipients);
 
-                //if (signingInfo.notifyMe == 1)
-                //    tasks = AddNotifyMe(signingInfo, tasks);
+                if (signingInfo.notifyMe == 1)
+                    tasks = new NotificationHandler().AddNotifyMe(signingInfo, tasks);
 
                 var lang = "en";
                 if (signingInfo.LCID == 1044)
@@ -112,83 +112,22 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
             }
         }
 
-        private task[] AddNotifyMe(SigningInfo signingInfo, task[] tasks)
-        {
-            try
-            {
-                var message = Resources.Resourceeng.signicatmessage;
-                var header = Resources.Resourceeng.signicatsigned;
-
-                if (signingInfo.LCID == 1044)
-                {
-                    message = Resources.Resourcenb.signicatmessage;
-                    header = Resources.Resourcenb.signicatsigned;
-                }
-
-                for (int i = 0; i < tasks.Length; i++)
-                {
-                    var notifyme = new notification
-                    {
-                        header = header,
-                        message = message,
-                        notificationid = "req_com_" + i,
-                        recipient = signingInfo.senderMail,
-                        sender = "noreply@signicat.com",
-                        type = notificationtype.EMAIL,
-                        schedule = new schedule[]
-                        {
-                            new schedule
-                            {
-                                stateis = taskstatus.completed,
-                            }
-                        }
-                    };
-
-
-                    var tempList = tasks[i].notification.ToList();
-                    tempList.Add(notifyme);
-                    tasks[i].notification = tempList.ToArray();
-                }
-
-                return tasks;
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
-        }
-
         private task[] GetTasks(sdsdocument[] documentInSds, List<ContactInfo> recipients, SigningInfo signingInfo)
         {
             try
             {
-                var message = Resources.Resourceeng.signicatmessage;
-                var header1 = Resources.Resourceeng.signicatexpiration;
-                var header2 = Resources.Resourceeng.signicatrejected;
 
-                if (signingInfo.LCID == 1044)
-                {
-                    message = Resources.Resourcenb.signicatmessage;
-                    header1 = Resources.Resourcenb.signicatexpiration;
-                    header2 = Resources.Resourcenb.signicatrejected;
-                }
-
-                var signatures = GetSignatures(signingInfo.signingMetodText);
-                var authSignatures = GetAuthSignatures(signingInfo.signingMetodText);
+                var callbackOnTaskCompleteUrl = "https://prosesspilotenesignicatwebapi-preprod.azurewebsites.net:443/api/Callback/Landingpage?lcid=" + signingInfo.LCID;
+                var signatures = new SignatureHandler().GetSignatures(signingInfo.signingMetodText);
+                var authSignatures = new SignatureHandler().GetAuthSignatures(signingInfo.signingMetodText);
                 var documentactions = GetDocumentActions(documentInSds, recipients);
                 var randomnr = new Random();
                 int nr = randomnr.Next(10000);
 
-                var expiration = 0;
-                if (signingInfo.daysToLive > 2)
-                    expiration = signingInfo.daysToLive - 2;
-                else
-                    expiration = 0;
-
                 var tasks = new task[recipients.Count];
                 for (int i = 0; i < recipients.Count; i++)
                 {
+                    var notifications = new NotificationHandler().AddNotifications(recipients[i], signingInfo, i);
                     tasks[i] = new task
                     {
                         id = "task_" + i + "_" + nr, // Any identifier you'd like
@@ -199,6 +138,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                         documentaction = documentactions,
                         //signature = signatures,
                         authenticationbasedsignature = authSignatures,
+                        ontaskcomplete = callbackOnTaskCompleteUrl,
                         subject = new subject
                         {
                             id = "sub_" + i,
@@ -206,59 +146,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                             mobile = !string.IsNullOrWhiteSpace(recipients[i].mobile) ? recipients[i].mobile : ""
                             //nationalid = recipients[i].ssn //National id mustbe inserted
                         },
-                        notification = new[]
-                        {
-                            new notification
-                            {
-                                    header = Resources.Resourcenb.signicatsigned,
-                                    message = message,
-                                    notificationid = "req_com_" + i,
-                                    recipient = signingInfo.senderMail,
-                                    sender = "noreply@signicat.com",
-                                    type = notificationtype.EMAIL,
-                                    schedule = new []
-                                {
-                                    new schedule
-                                    {
-                                        stateis = taskstatus.completed,
-                                    }
-                                }
-                            },
-                            new notification
-                            {
-                                header = message,
-                                message = header1,
-                                notificationid = "req_exp_" + i,
-                                recipient = recipients[i].email,
-                                sender = "noreply@signicat.com",
-                                type = notificationtype.EMAIL,
-                                schedule = new []
-                                {
-                                    new schedule
-                                    {
-                                        stateis = taskstatus.created,
-                                        waituntil = DateTime.Now.AddDays(expiration),
-                                        waituntilSpecified = true
-                                    }
-                                }
-                            },
-                            new notification
-                            {
-                                header = message,
-                                message = header2,
-                                notificationid = "req_rej_" + i,
-                                recipient = recipients[i].email,
-                                sender = "noreply@signicat.com",
-                                type = notificationtype.EMAIL,
-                                schedule = new schedule[]
-                                {
-                                    new schedule
-                                    {
-                                        stateis = taskstatus.rejected,
-                                    }
-                                }
-                            }
-                        }
+                        notification = notifications
                     };
                 }
                 return tasks;
@@ -270,99 +158,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
             }
         }
 
-        private authenticationbasedsignature[] GetAuthSignatures(string signingInfoSigningMetodText)
-        {
-            if (signingInfoSigningMetodText != "nbid" && signingInfoSigningMetodText != "handwritten")
-            {
-                var authsignature = new[]
-                {
-                    new authenticationbasedsignature()
-                    {
-                                        method = new method[]
-                                        {
-                                            new method
-                                            {
-                                                handwritten = true,
-                                               Value = signingInfoSigningMetodText
-                                            }
-                                        }
-                    }
-                };
-                return authsignature;
-            }
-
-            if (signingInfoSigningMetodText == "nbid")
-            {
-                var authsignature = new[]
-                {
-                    new authenticationbasedsignature
-                    {
-                                        method = new method[]
-                                        {
-                                            new method
-                                            {
-                                                handwritten = true,
-                                               Value = "nbid"
-                                            },
-                                            new method
-                                            {
-                                               Value = "nbid-mobil"
-                                            }
-                                        }
-                    }
-                };
-                return authsignature;
-            }
-
-            return null;
-        }
-
-        private signature[] GetSignatures(string signingInfoSigningMetodText)
-        {
-            if (signingInfoSigningMetodText == "nbid")
-            {
-                var signature = new[]
-                {
-                    new signature
-                    {
-                        responsive = true,
-                                        method = new []
-                                        {
-                                            new method
-                                            {
-                                               Value = "nbid-sign"
-                                            },
-                                            new method
-                                            {
-                                               Value = "nbid-mobil-sign"
-                                            }
-                                        }
-                    }
-                };
-                return signature;
-            }
-
-            if (signingInfoSigningMetodText == "handwritten")
-            {
-                var signature = new[]
-                {
-                    new signature
-                    {
-                        responsive = true,
-                                        method = new method[]
-                                        {
-                                            new method
-                                            {
-                                               handwritten = true
-                                            }
-                                        }
-                    }
-                };
-                return signature;
-            }
-
-            return null;
-        }
+       
 
         private document[] GetDocuments(sdsdocument[] documentInSds, List<ContactInfo> recipients)
         {
@@ -444,5 +240,6 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 throw new Exception(ex.Message);
             }
         }
+       
     }
 }

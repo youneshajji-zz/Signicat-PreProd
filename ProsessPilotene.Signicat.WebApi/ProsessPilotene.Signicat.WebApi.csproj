@@ -742,6 +742,8 @@
     <Compile Include="Models\CRMCredentials\StringCipher.cs" />
     <Compile Include="Models\SignicatHandlers\ContactInfo.cs" />
     <Compile Include="Models\Helpers.cs" />
+    <Compile Include="Models\SignicatHandlers\NotificationHandler.cs" />
+    <Compile Include="Models\SignicatHandlers\SignatureHandler.cs" />
     <Compile Include="Models\SignicatHandlers\SigningInfo.cs" />
     <Compile Include="Models\SignicatHandlers\SignRequestHandler.cs" />
     <Compile Include="Models\SignicatHandlers\WordSignRequest.cs" />

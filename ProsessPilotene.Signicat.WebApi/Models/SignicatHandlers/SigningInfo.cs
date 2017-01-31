@@ -2,6 +2,7 @@
 {
     public class SigningInfo
     {
+        public string customerOrg { get; set; }
         public int notifyMe { get; set; }
         public string senderMail { get; set; }
         public string authMetod { get; set; }

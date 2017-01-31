@@ -135,6 +135,9 @@
   <data name="signicatexpiration" xml:space="preserve">
     <value>Dokumenter venter på signering. Du har 2 dager igjen. Vennligst finn dokumentene på den originale mailen!</value>
   </data>
+  <data name="signicatexpired" xml:space="preserve">
+    <value>Dokumenter har ikke blitt signert av motakeren.</value>
+  </data>
   <data name="signicatmessage" xml:space="preserve">
     <value>Melding fra Signicat</value>
   </data>

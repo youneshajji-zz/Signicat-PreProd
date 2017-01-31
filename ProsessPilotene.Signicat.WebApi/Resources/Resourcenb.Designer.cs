@@ -115,6 +115,15 @@ namespace PP.Signicat.WebApi.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dokumenter har ikke blitt signert av motakeren..
+        /// </summary>
+        public static string signicatexpired {
+            get {
+                return ResourceManager.GetString("signicatexpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Melding fra Signicat.
         /// </summary>
         public static string signicatmessage {
