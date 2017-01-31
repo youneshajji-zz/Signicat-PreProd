@@ -153,7 +153,6 @@ namespace PP.Signicat.WebApi.Controllers
 
                     try
                     {
-
                         createrequestresponse response;
                         using (var client = new DocumentEndPointClient())
                         {

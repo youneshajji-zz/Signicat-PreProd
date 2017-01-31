@@ -90,6 +90,14 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="listTitle"></param>
+        /// <param name="web"></param>
+        /// <param name="clientContext"></param>
+        /// <param name="service"></param>
+        /// <returns></returns>
         private List GetAccountList(string listTitle, Web web, ClientContext clientContext, IOrganizationService service)
         {
             try
