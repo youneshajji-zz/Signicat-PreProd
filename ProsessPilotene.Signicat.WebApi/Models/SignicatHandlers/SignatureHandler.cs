@@ -21,6 +21,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                                             new method
                                             {
                                                 handwritten = true,
+                                                handwrittenSpecified = true,
                                                Value = signingInfoSigningMetodText
                                             }
                                         }
@@ -40,11 +41,13 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                                             new method
                                             {
                                                 handwritten = true,
+                                                handwrittenSpecified = true,
                                                Value = "nbid"
                                             },
                                             new method
                                             {
                                                 handwritten = true,
+                                                handwrittenSpecified = true,
                                                Value = "nbid-mobil"
                                             }
                                         }
@@ -64,14 +67,17 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                                             new method
                                             {
                                                handwritten = false,
+                                               handwrittenSpecified = false,
                                                Value = "nbid"
                                             }, new method
                                             {
                                                handwritten = true,
+                                               handwrittenSpecified = true,
                                                Value = "nbid-mobil"
                                             }, new method
                                             {
-                                               handwritten = true
+                                               handwritten = true,
+                                               handwrittenSpecified = true
                                             }
                                         }
                     }
@@ -95,10 +101,14 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                                         {
                                             new method
                                             {
+                                                handwritten = false,
+                                                handwrittenSpecified = false,
                                                Value = "nbid-sign"
                                             },
                                             new method
                                             {
+                                                handwritten = true,
+                                                handwrittenSpecified = true,
                                                Value = "nbid-mobil-sign"
                                             }
                                         }
