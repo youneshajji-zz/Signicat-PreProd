@@ -8,9 +8,9 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
 {
     internal class SignatureHandler
     {
-        internal authenticationbasedsignature[] GetAuthSignatures(string signingInfoSigningMetodText)
+        internal authenticationbasedsignature[] GetAuthSignatures(SigningInfo signingInfo)
         {
-            if (signingInfoSigningMetodText != "nbid" && signingInfoSigningMetodText != "handwritten")
+            if (signingInfo.signingMetodText != "nbid" && signingInfo.signingMetodText != "handwritten")
             {
                 var authsignature = new[]
                 {
@@ -20,9 +20,9 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                                         {
                                             new method
                                             {
-                                                handwritten = true,
-                                                handwrittenSpecified = true,
-                                               Value = signingInfoSigningMetodText
+                                                handwritten = signingInfo.isInk,
+                                                handwrittenSpecified = signingInfo.isInk,
+                                               Value = signingInfo.signingMetodText
                                             }
                                         }
                     }
@@ -30,7 +30,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 return authsignature;
             }
 
-            if (signingInfoSigningMetodText == "nbid")
+            if (signingInfo.signingMetodText == "nbid")
             {
                 var authsignature = new[]
                 {
@@ -40,14 +40,14 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                                         {
                                             new method
                                             {
-                                                handwritten = true,
-                                                handwrittenSpecified = true,
+                                                handwritten = signingInfo.isInk,
+                                                handwrittenSpecified = signingInfo.isInk,
                                                Value = "nbid"
                                             },
                                             new method
                                             {
-                                                handwritten = true,
-                                                handwrittenSpecified = true,
+                                                handwritten = signingInfo.isInk,
+                                                handwrittenSpecified = signingInfo.isInk,
                                                Value = "nbid-mobil"
                                             }
                                         }
@@ -56,7 +56,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 return authsignature;
             }
 
-            if (signingInfoSigningMetodText == "handwritten")
+            if (signingInfo.signingMetodText == "handwritten")
             {
                 var authsignature = new[]
                 {
@@ -66,8 +66,8 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                                         {
                                             new method
                                             {
-                                               handwritten = false,
-                                               handwrittenSpecified = false,
+                                               handwritten = true,
+                                               handwrittenSpecified = true,
                                                Value = "nbid"
                                             }, new method
                                             {
@@ -88,9 +88,9 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
             return null;
         }
 
-        internal signature[] GetSignatures(string signingInfoSigningMetodText)
+        internal signature[] GetSignatures(SigningInfo signingInfo)
         {
-            if (signingInfoSigningMetodText == "nbid")
+            if (signingInfo.signingMetodText == "nbid")
             {
                 var signature = new[]
                 {
@@ -101,14 +101,14 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                                         {
                                             new method
                                             {
-                                                handwritten = false,
-                                                handwrittenSpecified = false,
+                                                handwritten = signingInfo.isInk,
+                                                handwrittenSpecified = signingInfo.isInk,
                                                Value = "nbid-sign"
                                             },
                                             new method
                                             {
-                                                handwritten = true,
-                                                handwrittenSpecified = true,
+                                                handwritten = signingInfo.isInk,
+                                                handwrittenSpecified = signingInfo.isInk,
                                                Value = "nbid-mobil-sign"
                                             }
                                         }
@@ -122,13 +122,13 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
 
         public string GetMethod(string signingMetod)
         {
-            if (signingMetod == "1") //BankID
+            if (signingMetod == "1" || signingMetod == "11") //BankID
                 return "nbid";
 
-            if (signingMetod == "2") //SMS email OTP
+            if (signingMetod == "2" || signingMetod == "22") //SMS email OTP
                 return "scid-otp";
 
-            if (signingMetod == "3") //Social
+            if (signingMetod == "3" || signingMetod == "33") //Social
                 return "social";
 
             if (signingMetod == "4") //Handwritten
@@ -138,7 +138,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
 
         public void AddAuthMethod(SigningInfo signingInfo, createrequestrequest request)
         {
-            if (signingInfo.authMetod == "1") //BankID
+            if (signingInfo.authMetod == "1" || signingInfo.authMetod == "11") //BankID
             {
                 for (int i = 0; i < request.request[0].task.Length; i++)
                 {
@@ -149,7 +149,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 }
             }
 
-            if (signingInfo.authMetod == "2") //SMS Email OTP
+            if (signingInfo.authMetod == "2" || signingInfo.authMetod == "22") //SMS Email OTP
             {
                 for (int i = 0; i < request.request[0].task.Length; i++)
                 {
@@ -160,7 +160,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 }
             }
 
-            if (signingInfo.authMetod == "3") //Social
+            if (signingInfo.authMetod == "3" || signingInfo.authMetod == "33") //Social
             {
                 for (int i = 0; i < request.request[0].task.Length; i++)
                 {
@@ -170,6 +170,13 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                     };
                 }
             }
+        }
+
+        public bool CheckIfInk(string signingMetod)
+        {
+            if (signingMetod == "11" || signingMetod == "22" || signingMetod == "33")
+                return true;
+            return false;
         }
     }
 }

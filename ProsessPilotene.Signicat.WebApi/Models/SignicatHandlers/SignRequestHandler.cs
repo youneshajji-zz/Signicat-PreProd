@@ -118,8 +118,8 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
             {
 
                 var callbackOnTaskCompleteUrl = "https://prosesspilotenesignicatwebapi-preprod.azurewebsites.net:443/api/Callback/Landingpage?lcid=" + signingInfo.LCID;
-                var signatures = new SignatureHandler().GetSignatures(signingInfo.signingMetodText);
-                var authSignatures = new SignatureHandler().GetAuthSignatures(signingInfo.signingMetodText);
+                var signatures = new SignatureHandler().GetSignatures(signingInfo);
+                var authSignatures = new SignatureHandler().GetAuthSignatures(signingInfo);
                 var documentactions = GetDocumentActions(documentInSds, recipients);
                 var randomnr = new Random();
                 int nr = randomnr.Next(10000);

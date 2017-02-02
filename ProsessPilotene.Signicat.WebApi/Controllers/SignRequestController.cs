@@ -119,23 +119,8 @@ namespace PP.Signicat.WebApi.Controllers
                         recipients.Add(contactInfo);
                     }
                 }
-
-                var signingInfo = new SigningInfo();
-                signingInfo.customerOrg = HttpContext.Current.Request.Params["CustomerOrg"];
-                signingInfo.authMetod = HttpContext.Current.Request.Params["Authmetod"];
-                signingInfo.notifyMe = Convert.ToInt32(HttpContext.Current.Request.Params["NotifyMe"]);
-                signingInfo.senderMail = HttpContext.Current.Request.Params["SenderEmail"];
-                signingInfo.LCID = Convert.ToInt32(HttpContext.Current.Request.Params["lcid"]);
-                var signingMetod = HttpContext.Current.Request.Params["SigningMetod"];
-                signingInfo.daysToLive = Convert.ToInt32(HttpContext.Current.Request.Params["Daystolive"]);
-                signingInfo.SendSMS = Convert.ToInt32(HttpContext.Current.Request.Params["SendSMS"]);
-                signingInfo.SMSText = HttpContext.Current.Request.Params["SMSText"];
-                signingInfo.signingMetodText = "nbid";
-
-                if (signingInfo.daysToLive == 0)
-                    signingInfo.daysToLive = 60;
-                else
-                    signingInfo.daysToLive = signingInfo.daysToLive;
+                
+                var signingInfo = Helpers.GetSignInfo(HttpContext.Current.Request);
 
                 if (postedFiles.Count > 0)
                 {
@@ -144,7 +129,8 @@ namespace PP.Signicat.WebApi.Controllers
                     if (uploadedDocuments == null)
                         return null;
 
-                    signingInfo.signingMetodText = new SignatureHandler().GetMethod(signingMetod);
+                    signingInfo.signingMetodText = new SignatureHandler().GetMethod(signingInfo.signMethod);
+                    signingInfo.isInk = new SignatureHandler().CheckIfInk(signingInfo.signMethod);
 
                     createrequestrequest request = signHandler.GetCreateRequest(uploadedDocuments, recipients,
                         signingInfo);

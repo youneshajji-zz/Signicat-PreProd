@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.Xrm.Sdk;
+using PP.Signicat.WebApi.Models.SignicatHandlers;
 
 namespace PP.Signicat.WebApi.Models
 {
@@ -103,6 +104,28 @@ namespace PP.Signicat.WebApi.Models
             if (splicedUrl.Count() > 0)
                 name = splicedUrl[8];
             return name;
+        }
+
+        public static SigningInfo GetSignInfo(HttpRequest currentRequest)
+        {
+            var signingInfo = new SigningInfo();
+            signingInfo.customerOrg = currentRequest.Params["CustomerOrg"];
+            signingInfo.authMetod = currentRequest.Params["Authmetod"];
+            signingInfo.notifyMe = Convert.ToInt32(currentRequest.Params["NotifyMe"]);
+            signingInfo.senderMail = currentRequest.Params["SenderEmail"];
+            signingInfo.LCID = Convert.ToInt32(currentRequest.Params["lcid"]);
+            signingInfo.signMethod = currentRequest.Params["SigningMetod"];
+            signingInfo.daysToLive = Convert.ToInt32(currentRequest.Params["Daystolive"]);
+            signingInfo.SendSMS = Convert.ToInt32(currentRequest.Params["SendSMS"]);
+            signingInfo.SMSText = currentRequest.Params["SMSText"];
+            signingInfo.signingMetodText = "nbid";
+
+            if (signingInfo.daysToLive == 0)
+                signingInfo.daysToLive = 60;
+            else
+                signingInfo.daysToLive = signingInfo.daysToLive;
+
+            return signingInfo;
         }
     }
 

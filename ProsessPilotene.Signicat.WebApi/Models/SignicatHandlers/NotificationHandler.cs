@@ -86,7 +86,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                                 header = header,
                                 message = message2,
                                 notificationid = "req_rej_" + i,
-                                recipient = recipeint.email,
+                                recipient = signingInfo.senderMail,
                                 sender = "noreply@signicat.com",
                                 type = notificationtype.EMAIL,
                                 schedule = new schedule[]

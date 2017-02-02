@@ -5,11 +5,11 @@ function CheckDocLocation(entityid) {
         type: "GET",
         contentType: "application/json; charset=utf-8",
         datatype: "json",
+        async: false,
         url: Xrm.Page.context.getClientUrl() + "/XRMServices/2011/OrganizationData.svc/SharePointDocumentLocationSet?$filter=RegardingObjectId/Id eq (guid'" + entityid + "')",
         beforeSend: function (XMLHttpRequest) {
             XMLHttpRequest.setRequestHeader("Accept", "application/json");
         },
-        async: false,
         success: function (data, textStatus, xhr) {
             var results = data.d.results;
             //var SharePointDocumentLocationId = results[i].SharePointDocumentLocationId;
@@ -134,6 +134,7 @@ function createRecord(sdsurls, odataSetName, files, customers, saveoriginalfile,
         datatype: "json",
         url: serverUrl + ODATA_ENDPOINT + "/" + odataSetName,
         data: jsonEntity,
+        async: false,
         beforeSend: function (XMLHttpRequest) {
             //Specifying this header ensures that the results will be returned as JSON.
             XMLHttpRequest.setRequestHeader("Accept", "application/json");
@@ -174,13 +175,13 @@ function SendEmails(documentsigningid, serverUrl) {
         type: "POST",
         contentType: "application/json; charset=utf-8",
         datatype: "json",
+        async: false,
         url: serverUrl + "/XRMServices/2011/OrganizationData.svc/pp_documentsigningSet(guid'" + documentsigningid + "')",
         data: JSON.stringify(entity),
         beforeSend: function (XMLHttpRequest) {
             XMLHttpRequest.setRequestHeader("Accept", "application/json");
             XMLHttpRequest.setRequestHeader("X-HTTP-Method", "MERGE");
         },
-        async: false,
         success: function (data, textStatus, xhr) {
             //$.notify('Mails are being sent now!', "success");
         },
@@ -223,6 +224,7 @@ function CreateSignicatUrl(docsignid, sdsurl, serverUrl, customer) {
         datatype: "json",
         url: serverUrl + "/XRMServices/2011/OrganizationData.svc/pp_signicatdocurlSet",
         data: JSON.stringify(entity),
+        async: false,
         beforeSend: function (XMLHttpRequest) {
             XMLHttpRequest.setRequestHeader("Accept", "application/json");
         },
@@ -260,6 +262,7 @@ function AssociateCustomers(documentsigningid, customers, serverUrl) {
                 datatype: "json",
                 url: serverUrl + url,
                 data: JSON.stringify(association),
+                async: false,
                 beforeSend: function (XMLHttpRequest) {
                     XMLHttpRequest.setRequestHeader("Accept", "application/json");
                 },
@@ -309,6 +312,7 @@ function AddNotes(serverUrl, noteSubject, noteText, entityid, entityname, file, 
             datatype: "json",
             url: serverUrl + ODATA_ENDPOINT + ODATA_EntityCollection,
             data: jsonEntity,
+            async: false,
             beforeSend: function (XMLHttpRequest) {
                 XMLHttpRequest.setRequestHeader("Accept", "application/json");
             },
