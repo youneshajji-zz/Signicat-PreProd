@@ -101,14 +101,10 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                                         {
                                             new method
                                             {
-                                                handwritten = signingInfo.isInk,
-                                                handwrittenSpecified = signingInfo.isInk,
                                                Value = "nbid-sign"
                                             },
                                             new method
                                             {
-                                                handwritten = signingInfo.isInk,
-                                                handwrittenSpecified = signingInfo.isInk,
                                                Value = "nbid-mobil-sign"
                                             }
                                         }
@@ -122,7 +118,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
 
         public string GetMethod(string signingMetod)
         {
-            if (signingMetod == "1" || signingMetod == "11") //BankID
+            if (signingMetod == "1") //BankID
                 return "nbid";
 
             if (signingMetod == "2" || signingMetod == "22") //SMS email OTP
@@ -138,7 +134,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
 
         public void AddAuthMethod(SigningInfo signingInfo, createrequestrequest request)
         {
-            if (signingInfo.authMetod == "1" || signingInfo.authMetod == "11") //BankID
+            if (signingInfo.authMetod == "1") //BankID
             {
                 for (int i = 0; i < request.request[0].task.Length; i++)
                 {
@@ -174,7 +170,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
 
         public bool CheckIfInk(string signingMetod)
         {
-            if (signingMetod == "11" || signingMetod == "22" || signingMetod == "33")
+            if (signingMetod == "22" || signingMetod == "33")
                 return true;
             return false;
         }
