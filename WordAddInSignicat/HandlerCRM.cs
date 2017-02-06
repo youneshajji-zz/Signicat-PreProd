@@ -53,6 +53,7 @@ namespace WordAddInSignicat
                 var documentsigning = new Entity("pp_documentsigning");
                 documentsigning["pp_name"] = "Word dokument: " + docName;
                 documentsigning["pp_requestid"] = requestid;
+                documentsigning["pp_signing"] = new OptionSetValue(1); //BankID
 
                 if (saveinsp == "yes")
                     documentsigning["pp_saveindocumentlocation"] = true;

@@ -24,7 +24,7 @@ namespace WordAddInSignicat
                 {
                     using (var content = new MultipartFormDataContent())
                     {
-                        var apiurl = HandlerCRM.GetSettingKeyValue(crm, "webapiurl");
+                        var apiurl = HandlerCRM.GetSettingKeyValue(crm, "webapiurl"); 
                         client.BaseAddress = new Uri(apiurl);
                         client.DefaultRequestHeaders.Accept.Clear();
                         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/pdf"));
