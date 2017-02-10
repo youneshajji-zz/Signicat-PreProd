@@ -17,10 +17,10 @@ using List = Microsoft.Office.Interop.Word.List;
 
 namespace WordAddInSignicat
 {
-    public static class HandlerSP
+    public static class WordHandlerSP
     {
         private static string folderRelativeUrl = "";
-        public static void SendDocumentToSP(SearchObject searchValues)
+        public static void SendDocumentToSP(WordSearchObject searchValues)
         {
             try
             {
@@ -28,44 +28,58 @@ namespace WordAddInSignicat
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Cannot save document to SharePoint: " + ex.Message, "Document to SP",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (searchValues.language == 1044)
+                    MessageBox.Show(Resources.ResourceWordNb.cannotsavetosp + ex.Message, Resources.ResourceWordNb.docsp,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(Resources.ResourceWordNb.cannotsavetosp + ex.Message, Resources.ResourceWordEn.docsp,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
 
-        private static void SaveInSP(SearchObject searchValues)
+        private static void SaveInSP(WordSearchObject searchValues)
         {
             try
             {
-                var crm = ConnectToCrm.ConnectToMSCRM();
+                var crm = WordConnectToCrm.ConnectToMSCRM();
                 if (crm == null)
                     return;
 
-                var entity = HandlerCRM.FindRecordByNumber(searchValues, crm);
+                var entity = WordHandlerCRM.FindRecordByNumber(searchValues, crm);
                 if (entity == null)
-                    MessageBox.Show("Could not find a record with number: " + searchValues.searchnumber + ".",
-                        "Document to SP", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                {
+                    if (searchValues.language == 1044)
+                        MessageBox.Show(Resources.ResourceWordNb.recordnotfound + searchValues.searchnumber + ".",
+                            Resources.ResourceWordNb.docsp, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else
+                        MessageBox.Show(Resources.ResourceWordEn.recordnotfound + searchValues.searchnumber + ".",
+               Resources.ResourceWordEn.docsp, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
-                Save(entity, crm);
+                Save(entity, searchValues, crm);
             }
 
             catch (Exception ex)
             {
-                MessageBox.Show("Could not save document to SP.", "Document to SP", MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                if (searchValues.language == 1044)
+                    MessageBox.Show(Resources.ResourceWordNb.cannotsavetosp, Resources.ResourceWordNb.docsp, MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                else
+                    MessageBox.Show(Resources.ResourceWordEn.cannotsavetosp, Resources.ResourceWordEn.docsp, MessageBoxButtons.OK,
+               MessageBoxIcon.Warning);
             }
 
         }
 
-        private static void Save(Entity Entity, IOrganizationService service)
+        private static void Save(Entity Entity, WordSearchObject searchValues, IOrganizationService service)
         {
             try
             {
-                var spUsername = HandlerCRM.GetSettingKeyValue(service, "spuser");
-                var spPassword = HandlerCRM.GetSettingKeyValue(service, "sppassword");
+                var spUsername = WordHandlerCRM.GetSettingKeyValue(service, "spuser");
+                var spPassword = WordHandlerCRM.GetSettingKeyValue(service, "sppassword");
                 var currentSharePointFolderEntity = GetDocumentLocation(Entity.ToEntityReference(), "regardingobjectid", service);
-                var sharePointUrl = GetDefaultSPSiteUrlFromCRMSiteCollectionEntity(service);
+                var sharePointUrl = GetDefaultSPSiteUrlFromCRMSiteCollectionEntity(searchValues, service);
                 Document document = Globals.ThisAddIn.Application.ActiveDocument;
 
                 var fullname = document.Name.Split('.');
@@ -108,16 +122,24 @@ namespace WordAddInSignicat
                     var uploadFile = folder.Files.Add(newFile);
                     clientContext.ExecuteQuery();
 
-                    MessageBox.Show("The document is saved in SharePoint", "Saving to SharePoint",
-                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    if (searchValues.language == 1044)
+                        MessageBox.Show(Resources.ResourceWordNb.docsavedsp, Resources.ResourceWordNb.docsp,
+                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    else
+                        MessageBox.Show(Resources.ResourceWordEn.docsavedsp, Resources.ResourceWordEn.docsp,
+           MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
 
                 File.Delete(fullPath);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Cannot get setting keys from CRM: " + ex.Message, "Getting data from CRM",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (searchValues.language == 1044)
+                    MessageBox.Show(Resources.ResourceWordNb.cannotfindsetting + ex.Message, Resources.ResourceWordNb.datafromcrm,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(Resources.ResourceWordEn.cannotfindsetting + ex.Message, Resources.ResourceWordEn.datafromcrm,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -146,7 +168,7 @@ namespace WordAddInSignicat
             return document;
         }
 
-        internal static string GetDefaultSPSiteUrlFromCRMSiteCollectionEntity(IOrganizationService crm)
+        internal static string GetDefaultSPSiteUrlFromCRMSiteCollectionEntity(WordSearchObject searchValues, IOrganizationService crm)
         {
             try
             {
@@ -177,8 +199,12 @@ namespace WordAddInSignicat
                     }
                 }
                 // no SharePoint Sites defined in CRM
-                MessageBox.Show("CRM does not have any default SharePoint Sites", "Getting data from CRM",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (searchValues.language == 1044)
+                    MessageBox.Show(Resources.ResourceWordNb.spsitenotfound, Resources.ResourceWordNb.datafromcrm,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(Resources.ResourceWordEn.spsitenotfound, Resources.ResourceWordEn.datafromcrm,
+               MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {

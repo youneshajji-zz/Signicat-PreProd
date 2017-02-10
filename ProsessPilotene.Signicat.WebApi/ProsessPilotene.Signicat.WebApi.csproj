@@ -732,13 +732,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CallBackHandlers\CallBackHandler.cs" />
-    <Compile Include="Models\CallBackHandlers\CRMConnection.cs" />
-    <Compile Include="Models\CallBackHandlers\CRMHandler.cs" />
+    <Compile Include="Models\CallBackHandlers\CallBackCRMConnection.cs" />
+    <Compile Include="Models\CallBackHandlers\CallBackCrmHandler.cs" />
     <Compile Include="Models\CRMCredentials\CustomerCredentialsModel.cs" />
     <Compile Include="Models\CRMCredentials\CustomerCredentialsHandler.cs" />
     <Compile Include="Models\CallBackHandlers\DeviceIdManager.cs" />
-    <Compile Include="Models\CallBackHandlers\SharePointHandler.cs" />
-    <Compile Include="Models\CallBackHandlers\SignicatHandler.cs" />
+    <Compile Include="Models\CallBackHandlers\CallBackSharePointHandler.cs" />
+    <Compile Include="Models\CallBackHandlers\CallBackSignicatHandler.cs" />
     <Compile Include="Models\CRMCredentials\StringCipher.cs" />
     <Compile Include="Models\SignicatHandlers\ContactInfo.cs" />
     <Compile Include="Models\Helpers.cs" />

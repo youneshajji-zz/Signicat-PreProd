@@ -16,9 +16,9 @@ using System.Windows.Forms;
 
 namespace WordAddInSignicat
 {
-    public static class HandlerCRM
+    public static class WordHandlerCRM
     {
-        internal static Entity FindRecordByNumber(SearchObject searchValues, IOrganizationService crm)
+        internal static Entity FindRecordByNumber(WordSearchObject searchValues, IOrganizationService crm)
         {
             try
             {
@@ -33,12 +33,15 @@ namespace WordAddInSignicat
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Cannot find the searched record in CRM: " + ex.Message, "Document Signing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (searchValues.language == 1044)
+                    MessageBox.Show(Resources.ResourceWordNb.cannotfindsearch + ex.Message, Resources.ResourceWordNb.documentsinging, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(Resources.ResourceWordEn.cannotfindsearch + ex.Message, Resources.ResourceWordEn.documentsinging, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
 
-        internal static Guid CreatDocumentSigningInCRM(string sdsurl, string docPath, string docName, Entity entity, SearchObject searchValues, IOrganizationService crm)
+        internal static Guid CreatDocumentSigningInCRM(string sdsurl, string docPath, string docName, Entity entity, WordSearchObject searchValues, IOrganizationService crm)
         {
             try
             {
@@ -67,7 +70,7 @@ namespace WordAddInSignicat
                 var documentsigningid = crm.Create(documentsigning);
 
                 //Save doc as note in singing package
-                SavePDFInCRM(docName, docPath, documentsigningid, crm);
+                SavePDFInCRM(searchValues, docName, docPath, documentsigningid, crm);
 
                 //Create signing task
                 var documenttask = new Entity("pp_signicatdocurl");
@@ -84,7 +87,10 @@ namespace WordAddInSignicat
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Cannot create the signingpackage in CRM: " + ex.Message, "Document Signing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (searchValues.language == 1044)
+                    MessageBox.Show(Resources.ResourceWordNb.cannotcreateinsignicat + ex.Message, Resources.ResourceWordNb.documentsinging, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(Resources.ResourceWordEn.cannotcreateinsignicat + ex.Message, Resources.ResourceWordEn.documentsinging, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return Guid.Empty;
             }
         }
@@ -149,7 +155,7 @@ namespace WordAddInSignicat
             return null;
         }
 
-        internal static void SavePDFInCRM(string docName, string docPath, Guid documentsigningid, IOrganizationService crm)
+        internal static void SavePDFInCRM(WordSearchObject searchValues, string docName, string docPath, Guid documentsigningid, IOrganizationService crm)
         {
             try
             {
@@ -162,32 +168,47 @@ namespace WordAddInSignicat
                 Annotation.Attributes["subject"] = "Original: " + docName;
                 Annotation.Attributes["documentbody"] = encodedData;
                 Annotation.Attributes["mimetype"] = @"application/pdf";
-                Annotation.Attributes["notetext"] = "Dokumentet er sendt til signering.";
+                if (searchValues.language == 1044)
+                    Annotation.Attributes["notetext"] = Resources.ResourceWordNb.documentsentforsinging;
+                else
+                    Annotation.Attributes["notetext"] = Resources.ResourceWordEn.documentsentforsinging;
                 Annotation.Attributes["filename"] = docName + ".pdf";
 
                 crm.Create(Annotation);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Cannot create annotation in CRM: " + ex.Message, "Document Signing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (searchValues.language == 1044)
+                    MessageBox.Show(Resources.ResourceWordNb.cannotcreatenote + ex.Message, Resources.ResourceWordNb.documentsinging, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(Resources.ResourceWordEn.cannotcreatenote + ex.Message, Resources.ResourceWordEn.documentsinging, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        internal static void SendEmail(string sdsurl, string docName, Entity entity, Guid documentsigningid, SearchObject searchValues, IOrganizationService crm)
+        internal static void SendEmail(string sdsurl, string docName, Entity entity, Guid documentsigningid, WordSearchObject searchValues, IOrganizationService crm)
         {
             try
             {
                 var linkBtnImg = "https://ppsignicatresources.blob.core.windows.net/signicatlinkbutton/SignicatLinkButton.png";
                 var emailLogoImg = "https://ppsignicatresources.blob.core.windows.net/signicatlinkbutton/SignicatMailLogo.png";
 
-                var url = "<br/><a href='" + sdsurl + "'><img alt='Click here' src='" + linkBtnImg + "'></a>";
+                var url = "";
+                if (searchValues.language == 1044)
+                    url = "<br/><a href='" + sdsurl + "'><img alt='Click her' src='" + linkBtnImg + "'></a>";
+                else
+                    url = "<br/><a href='" + sdsurl + "'><img alt='Click here' src='" + linkBtnImg + "'></a>";
 
                 // Create an e-mail message.
                 Entity email = new Entity("email");
 
                 var senderId = GetSettingKeyValue(crm, "wordsignuser");
                 if (senderId == null)
-                    MessageBox.Show("Sender could not be found in CRM PP config! Please go to the email, specify a sender and resend again.");
+                {
+                    if (searchValues.language == 1044)
+                        MessageBox.Show(Resources.ResourceWordNb.cannotfindsender);
+                    else
+                        MessageBox.Show(Resources.ResourceWordEn.cannotfindsender);
+                }
 
                 var senderRef = crm.Retrieve("systemuser", new Guid(senderId), new ColumnSet("fullname"));
 
@@ -207,8 +228,18 @@ namespace WordAddInSignicat
                 var listto = new List<Entity>() { toParty };
                 email["to"] = new EntityCollection(listto);
 
-                var subject = "Document signing: " + docName;
-                var description = "A document has been sent to you for sginature. Click on this link to sign: ";
+                var subject = "";
+                var description = "";
+                if (searchValues.language == 1044)
+                {
+                    subject = Resources.ResourceWordNb.documentsinging + ": " + docName;
+                    description = Resources.ResourceWordNb.clicktosign;
+                }
+                else
+                {
+                    subject = Resources.ResourceWordEn.documentsinging + ": " + docName;
+                    description = Resources.ResourceWordEn.clicktosign;
+                }
 
                 email["subject"] = subject;
                 email["directioncode"] = true;
@@ -242,7 +273,10 @@ namespace WordAddInSignicat
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred in sending email: " + ex.Message, "Email sending", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (searchValues.language == 1044)
+                    MessageBox.Show(Resources.ResourceWordNb.emailerror + ex.Message, "Email sending", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(Resources.ResourceWordEn.emailerror + ex.Message, "Email sending", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -298,6 +332,19 @@ namespace WordAddInSignicat
                 MessageBox.Show("An error occurred in sending email from template: " + ex.Message, "Email sending", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+
+        internal static int RetrieveUserUiLanguageCode(IOrganizationService service, Guid userId)
+        {
+            var userSettingsQuery = new QueryExpression("usersettings");
+            userSettingsQuery.ColumnSet.AddColumns("uilanguageid", "systemuserid");
+            userSettingsQuery.Criteria.AddCondition("systemuserid", ConditionOperator.Equal, userId);
+            var userSettings = service.RetrieveMultiple(userSettingsQuery);
+            if (userSettings.Entities.Count > 0)
+            {
+                return (int)userSettings.Entities[0]["uilanguageid"];
+            }
+            return 1033;
         }
 
         internal static string GetSettingKeyValue(IOrganizationService crm, string key)

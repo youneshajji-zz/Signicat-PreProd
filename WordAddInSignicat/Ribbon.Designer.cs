@@ -84,7 +84,7 @@
             this.buttonSignicat.ScreenTip = "Sign";
             this.buttonSignicat.ShowImage = true;
             this.buttonSignicat.SuperTip = resources.GetString("buttonSignicat.SuperTip");
-            this.buttonSignicat.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonSignicat_Click);
+            this.buttonSignicat.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonSign_Click);
             // 
             // groupPdf
             // 
@@ -132,9 +132,11 @@
             // 
             // buttonSign
             // 
+            this.buttonSign.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
             this.buttonSign.Image = ((System.Drawing.Image)(resources.GetObject("buttonSign.Image")));
             this.buttonSign.Label = "Sign";
             this.buttonSign.Name = "buttonSign";
+            this.buttonSign.ScreenTip = "Sign";
             this.buttonSign.ShowImage = true;
             this.buttonSign.SuperTip = resources.GetString("buttonSign.SuperTip");
             this.buttonSign.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonSign_Click);

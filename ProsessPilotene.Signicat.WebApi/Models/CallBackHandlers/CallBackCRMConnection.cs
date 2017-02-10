@@ -12,7 +12,7 @@ using PP.Signicat.WebApi.Models.CRMCredentials;
 
 namespace PP.Signicat.WebApi.Models.CallBackHandlers
 {
-    public class CRMConnection
+    public class CallBackCRMConnection
     {
         public IOrganizationService GetOrgService(string orgname)
         {

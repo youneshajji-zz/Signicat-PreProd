@@ -42,113 +42,6 @@ namespace WordAddInSignicat
                  OpenAfterExport: true);
         }
 
-        private void buttonSignicat_Click(object sender, RibbonControlEventArgs e)
-        {
-
-            var account = "accountnumber";
-            var order = "ordernumber";
-            var quote = "quotenumber";
-            var incident = "ticketnumber";
-            var contract = "contractnumber";
-            var recievermail = "recievermailaddress";
-
-            Document document = Globals.ThisAddIn.Application.ActiveDocument;
-            //HeaderFooter objHeader = document.Sections[1].Headers[WdHeaderFooterIndex.wdHeaderFooterPrimary];
-            Object start = document.Content.Start;
-            Object end = document.Content.End;
-            //document.Range(ref start, ref end).Select();
-
-            var selectedText = Globals.ThisAddIn.Application.ActiveDocument.Range(start, end).Text;
-
-            //var headerText = objHeader.Range.Text;
-            //headerText = headerText.Replace("\r\a", "").Replace("\r", "").Replace("\a", "");
-            //var headerTextSplit = headerText.Split(' ');
-
-            selectedText = selectedText.Replace("\r\a", "").Replace("\r", "").Replace("\a", "");
-            var docText = selectedText.Split(' ');
-            string searchnumber, searchentity, searchnumberfield, senderfrom, recieverto;
-            searchnumber = searchentity = searchnumberfield = senderfrom = recieverto = "";
-
-            for (int i = 0; i < docText.Length; i++)
-            {
-                if (docText[i].ToLower().Contains(recievermail))
-                    recieverto = docText[i + 1];
-            }
-
-            for (int i = 0; i < docText.Length; i++)
-            {
-                if (docText[i].ToLower().Contains(account))
-                {
-                    searchnumber = docText[i + 1];
-                    searchentity = "account";
-                    searchnumberfield = "accountnumber";
-                    break;
-                }
-                if (docText[i].ToLower().Contains(order))
-                {
-                    searchnumber = docText[i + 1];
-                    searchentity = "salesorder";
-                    searchnumberfield = "ordernumber";
-                    break;
-                }
-                if (docText[i].ToLower().Contains(quote))
-                {
-                    searchnumber = docText[i + 1];
-                    searchentity = "quote";
-                    searchnumberfield = "quotenumber";
-                    break;
-                }
-                if (docText[i].ToLower().Contains(incident))
-                {
-                    searchnumber = docText[i + 1];
-                    searchentity = "incident";
-                    searchnumberfield = "ticketnumber";
-                    break;
-                }
-                if (docText[i].ToLower().Contains(contract))
-                {
-                    searchnumber = docText[i + 1];
-                    searchentity = "contract";
-                    searchnumberfield = "contractnumber";
-                    break;
-                }
-            }
-
-            for (int i = 0; i < docText.Length; i++)
-            {
-                if (docText[i].ToLower().Contains("saveat"))
-                {
-                    searchentity = docText[i + 1];
-                    searchnumber = docText[i + 2];
-                    if (searchentity == "account")
-                        searchnumberfield = searchentity + "accountnumber";
-                    if (searchentity == "salesorder")
-                        searchnumberfield = "ordernumber";
-                    if (searchentity == "quote")
-                        searchnumberfield = "quotenumber";
-                    if (searchentity == "incident")
-                        searchnumberfield = "ticketnumber";
-                    if (searchentity == "contract")
-                        searchnumberfield = "contractnumber";
-                    break;
-                }
-            }
-
-            SearchObject searchValues = new SearchObject();
-            searchValues.searchentity = searchentity;
-            searchValues.searchnumber = searchnumber;
-            searchValues.searchnumberfield = searchnumberfield;
-            searchValues.recievermail = recieverto;
-
-            if (string.IsNullOrWhiteSpace(searchentity) || string.IsNullOrWhiteSpace(searchnumber) || string.IsNullOrWhiteSpace(searchnumberfield))
-            {
-                MessageBox.Show("The Word template is not well constructed, please klikk help for more details!", "Document Signing", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            HandlerSigning.SendDocumentForSigning(searchValues);
-        }
-
         private void btnSaveToSP_Click(object sender, RibbonControlEventArgs e)
         {
             var account = "accountnumber";
@@ -162,12 +55,12 @@ namespace WordAddInSignicat
             Object end = document.Content.End;
 
             var selectedText = Globals.ThisAddIn.Application.ActiveDocument.Range(start, end).Text;
-            
+
             selectedText = selectedText.Replace("\r\a", "").Replace("\r", "").Replace("\a", "");
             var docText = selectedText.Split(' ');
             string searchnumber, searchentity, searchnumberfield;
-            searchnumber = searchentity = searchnumberfield =  "";
-            
+            searchnumber = searchentity = searchnumberfield = "";
+
             for (int i = 0; i < docText.Length; i++)
             {
                 if (docText[i].ToLower().Contains(account))
@@ -227,22 +120,33 @@ namespace WordAddInSignicat
                 }
             }
 
-            SearchObject searchValues = new SearchObject();
+            WordSearchObject searchValues = new WordSearchObject();
             searchValues.searchentity = searchentity;
             searchValues.searchnumber = searchnumber;
             searchValues.searchnumberfield = searchnumberfield;
 
             if (string.IsNullOrWhiteSpace(searchentity) || string.IsNullOrWhiteSpace(searchnumber) || string.IsNullOrWhiteSpace(searchnumberfield))
             {
-                MessageBox.Show("The Word template is not well constructed, please klikk help for more details!", "Document Signing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (searchValues.language == 1044)
+                    MessageBox.Show(Resources.ResourceWordNb.wordtemplaterror, Resources.ResourceWordNb.documentsinging, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(Resources.ResourceWordEn.wordtemplaterror, Resources.ResourceWordEn.documentsinging, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            HandlerSP.SendDocumentToSP(searchValues);
+            WordHandlerSP.SendDocumentToSP(searchValues);
         }
 
         private void buttonSign_Click(object sender, RibbonControlEventArgs e)
         {
+            var crm = WordConnectToCrm.ConnectToMSCRM();
+            if (crm == null)
+                return;
+
+            WordSearchObject searchValues = new WordSearchObject();
+            var senderId = WordHandlerCRM.GetSettingKeyValue(crm, "wordsignuser");
+            searchValues.language = WordHandlerCRM.RetrieveUserUiLanguageCode(crm, new Guid(senderId));
+
             var account = "accountnumber";
             var order = "ordernumber";
             var quote = "quotenumber";
@@ -332,7 +236,6 @@ namespace WordAddInSignicat
                 }
             }
 
-            SearchObject searchValues = new SearchObject();
             searchValues.searchentity = searchentity;
             searchValues.searchnumber = searchnumber;
             searchValues.searchnumberfield = searchnumberfield;
@@ -340,11 +243,14 @@ namespace WordAddInSignicat
 
             if (string.IsNullOrWhiteSpace(searchentity) || string.IsNullOrWhiteSpace(searchnumber) || string.IsNullOrWhiteSpace(searchnumberfield))
             {
-                MessageBox.Show("The Word template is not well constructed, please klikk help for more details!", "Document Signing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (searchValues.language == 1044)
+                    MessageBox.Show(Resources.ResourceWordNb.wordtemplaterror, Resources.ResourceWordNb.documentsinging, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(Resources.ResourceWordEn.wordtemplaterror, Resources.ResourceWordEn.documentsinging, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            HandlerSigning.SendDocumentForSigning(searchValues);
+            WordHandlerSigning.SendDocumentForSigning(searchValues, crm);
         }
     }
 }

@@ -21,7 +21,7 @@ using System.Xml.Linq;
 
 namespace WordAddInSignicat
 {
-    public static class ConnectToCrm
+    public static class WordConnectToCrm
     {
         //_userId = new Guid("870BEBB1-8C42-E611-80EA-5065F38BF4F1");
         public static IOrganizationService ConnectToMSCRM()

@@ -14,7 +14,7 @@ using File = System.IO.File;
 
 namespace PP.Signicat.WebApi.Models.CallBackHandlers
 {
-    internal class SharePointHandler
+    internal class CallBackSharePointHandler
     {
         private string folderRelativeUrl = "";
         private Entity SharePointSite;
@@ -32,8 +32,8 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
             {
                 folderRelativeUrl = "";
                 SharePointSite = null;
-                var spUsername = new CRMHandler().GetSettingKeyValue(service, "spuser");
-                var spPassword = new CRMHandler().GetSettingKeyValue(service, "sppassword");
+                var spUsername = new CallBackCrmHandler().GetSettingKeyValue(service, "spuser");
+                var spPassword = new CallBackCrmHandler().GetSettingKeyValue(service, "sppassword");
 
                 if (spPassword == null || spPassword == null)
                 {
@@ -42,7 +42,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                     spPassword = customerCredentials.password; //ConfigurationManager.AppSettings["Password"];
                 }
 
-                var pdfBytes = new SignicatHandler().ReadAsyncFile(resulturi);
+                var pdfBytes = new CallBackSignicatHandler().ReadAsyncFile(resulturi);
                 var currentSharePointFolderEntity = GetDocumentLocation(regardingRef, "regardingobjectid", service);
                 var sharePointUrl = GetDefaultSPSiteUrlFromCRMSiteCollectionEntity(service);
 
@@ -115,7 +115,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                 }
                 else
                 {
-                    listTitle = new CRMHandler().GetSettingKeyValue(service, "spcrmroot");
+                    listTitle = new CallBackCrmHandler().GetSettingKeyValue(service, "spcrmroot");
                     accountList = GetAccountList(listTitle, web, clientContext, service);
                 }
 

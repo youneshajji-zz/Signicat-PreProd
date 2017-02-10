@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WordAddInSignicat
 {
-    public static class Helpers
+    public static class WordHelpers
     {
         public static byte[] ReadToEnd(System.IO.Stream stream)
         {

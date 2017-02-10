@@ -18,7 +18,7 @@ using PP.Signicat.CredentialManager.Models;
 
 namespace PP.Signicat.WebApi.Models.CallBackHandlers
 {
-    internal class CRMHandler
+    internal class CallBackCrmHandler
     {
         /// <summary>
         /// 
@@ -27,7 +27,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
         /// <returns></returns>
         internal IOrganizationService ConnectToCRM(string orgname)
         {
-            return new CRMConnection().GetOrgService(orgname);
+            return new CallBackCRMConnection().GetOrgService(orgname);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
         {
             try
             {
-                var padesUrl = new SignicatHandler().CreatePades(null, resulturl);
+                var padesUrl = new CallBackSignicatHandler().CreatePades(null, resulturl);
 
                 var entity = new Entity("pp_signicatresulturl");
                 entity["pp_resulturl"] = resulturl;
@@ -154,7 +154,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
         {
             try
             {
-                var fileobj = new SignicatHandler().ReadAsyncFile(signicatUrl);
+                var fileobj = new CallBackSignicatHandler().ReadAsyncFile(signicatUrl);
                 string encodedData = Convert.ToBase64String(fileobj.Result.file);
 
                 Random rnd = new Random();
@@ -312,7 +312,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                 var _emailId = service.Create(email);
 
                 // Create email attachment
-                var fileobj = new SignicatHandler().ReadAsyncFile(padesurl);
+                var fileobj = new CallBackSignicatHandler().ReadAsyncFile(padesurl);
                 string encodedData = Convert.ToBase64String(fileobj.Result.file);
 
                 Entity _emailAttachment = new Entity("activitymimeattachment");

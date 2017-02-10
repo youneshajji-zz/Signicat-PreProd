@@ -27,15 +27,19 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
 
                 return new sdsdocument
                 {
-                    id = docName[0] + "_0",
+                    id = docName[0],
                     refsdsid = documentId,
                     description = docName[0]
                 };
             }
         }
 
-        public string CreateSignRequest(sdsdocument uploadedDocument, string customerorg)
+        public string CreateSignRequest(sdsdocument uploadedDocument, string customerorg, string language)
         {
+            var lang = "en";
+            if (language == "1044")
+                lang = "nb";
+
             var request = new createrequestrequest
             {
                 password = "Bond007",
@@ -45,7 +49,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                     new request
                     {
                         clientreference = "cliref1",
-                        language = "nb",
+                        language = lang,
                         profile = "default",
                         document = new document[]
                         {
@@ -107,7 +111,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
 
             for (int i = 0; i < request.request[0].task.Length; i++)
             {
-                var callbackOnTaskCompleteUrl = "https://prosesspilotenesignicatwebapi-preprod.azurewebsites.net:443/api/Callback/Landingpage?lcid=" + 1044;
+                var callbackOnTaskCompleteUrl = "https://prosesspilotenesignicatwebapi-preprod.azurewebsites.net:443/api/Callback/Landingpage?lcid=" + Convert.ToString(language);
                 var callbackNotificationUrl = "https://prosesspilotenesignicatwebapi-preprod.azurewebsites.net:443/api/Callback/GetSigning?orgname=" + customerorg;
                 request.request[0].task[i].ontaskcomplete = callbackOnTaskCompleteUrl;
 

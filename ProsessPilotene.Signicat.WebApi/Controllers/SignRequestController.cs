@@ -61,6 +61,7 @@ namespace PP.Signicat.WebApi.Controllers
                 {
                     var param = item.Headers.ContentDisposition.Parameters;
                     var orgname = param.First(x => x.Name == "orgname").Value;
+                    var language = param.First(x => x.Name == "language").Value;
                     var docName = item.Headers.ContentDisposition.FileName;
                     HttpPostedFile postedFile = HttpContext.Current.Request.Files[docName];
 
@@ -68,7 +69,7 @@ namespace PP.Signicat.WebApi.Controllers
                     {
                         //string orgname = "processpilots";
                         sdsdocument uploadedDocument = await wordHandler.UploadDocument(postedFile, item);
-                        var url = wordHandler.CreateSignRequest(uploadedDocument, orgname);
+                        var url = wordHandler.CreateSignRequest(uploadedDocument, orgname, language);
                         signHereUrlList.Add(url);
 
                         return signHereUrlList;

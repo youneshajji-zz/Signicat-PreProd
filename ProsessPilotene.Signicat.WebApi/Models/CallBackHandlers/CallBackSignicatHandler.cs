@@ -11,7 +11,7 @@ using PP.Signicat.WebApi.SignicatPreProd;
 
 namespace PP.Signicat.WebApi.Models.CallBackHandlers
 {
-    internal class SignicatHandler
+    internal class CallBackSignicatHandler
     {
         /// <summary>
         /// 

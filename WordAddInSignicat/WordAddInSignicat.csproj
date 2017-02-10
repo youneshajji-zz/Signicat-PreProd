@@ -34,10 +34,10 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <PublishUrl>C:\Users\YounesHadjji\Documents\Visual Studio 2015\Projects\Signicat\WordAddin-Signicat\WordAddInSignicat\publish\</PublishUrl>
+    <PublishUrl>C:\GIT\Signicat-PreProd\WordAddInSignicat\Publish-PreProd\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.10</ApplicationVersion>
+    <ApplicationVersion>1.0.0.14</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -270,11 +270,21 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="ConnectToCrm.cs" />
-    <Compile Include="HandlerCRM.cs" />
+    <Compile Include="Resources\ResourceWordEn.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceWordEn.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ResourceWordNb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceWordNb.resx</DependentUpon>
+    </Compile>
+    <Compile Include="WordConnectToCrm.cs" />
+    <Compile Include="WordHandlerCRM.cs" />
     <Compile Include="DeviceIdManager.cs" />
-    <Compile Include="HandlerSP.cs" />
-    <Compile Include="Helpers.cs" />
+    <Compile Include="WordHandlerSP.cs" />
+    <Compile Include="WordHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -288,6 +298,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Resources\ResourceWordEn.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceWordEn.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ResourceWordNb.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceWordNb.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ribbon.resx">
       <DependentUpon>Ribbon.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -312,14 +330,14 @@
     <Compile Include="Ribbon.Designer.cs">
       <DependentUpon>Ribbon.cs</DependentUpon>
     </Compile>
-    <Compile Include="SearchObject.cs" />
+    <Compile Include="WordSearchObject.cs" />
     <Compile Include="Service References\SignicatPreProdService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="HandlerSignicat.cs" />
-    <Compile Include="HandlerSigning.cs" />
+    <Compile Include="WordHandlerSignicat.cs" />
+    <Compile Include="WordHandlerSigning.cs" />
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
