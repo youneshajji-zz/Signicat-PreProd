@@ -27,7 +27,7 @@ function DocumentSign() {
 
     var url = "/WebResources/pp_documentsign.htm?Data=" + customParameters;
     var DialogOptions = new Xrm.DialogOptions();
-    DialogOptions.width = 850;
+    DialogOptions.width = 950;
     DialogOptions.height = 820;
     Xrm.Internal.openDialog(url, DialogOptions, null, null, CallbackFunction);
 
@@ -38,7 +38,7 @@ function CallbackFunction(returnValue) {
 }
 
 function OnLoad() {
-    var entitynames = GetConfigValue("entitylogicalnames");
+    var entitynames = GetConfigValue("pp_entitylogicalnames");
     var entitynameArray = entitynames.split(',');
 
     $.each(entitynameArray, function (index, value) {
@@ -59,23 +59,31 @@ function GetConfigValue(value) {
         type: "GET",
         contentType: "application/json; charset=utf-8",
         datatype: "json",
-        url: Xrm.Page.context.getClientUrl() + "/XRMServices/2011/OrganizationData.svc/pp_signicatsettingsSet?$select=pp_value&$filter=pp_name eq '" + value + "'",
+        url: Xrm.Page.context.getClientUrl() + "/XRMServices/2011/OrganizationData.svc/pp_signicatconfigSet?$select=pp_entitylogicalnames,pp_webapiurl",
         beforeSend: function (XMLHttpRequest) {
             XMLHttpRequest.setRequestHeader("Accept", "application/json");
         },
         async: false,
         success: function (data, textStatus, xhr) {
             var results = data.d.results;
-            for (var i = 0; i < results.length; i++) {
-                var pp_value = results[i].pp_value;
-                returnvalue = pp_value;
+            if (results.length == 1) {
+
+                var pp_entitylogicalnames = results[0].pp_entitylogicalnames;
+                var pp_webapiurl = results[0].pp_webapiurl;
+            
+                if (value == "pp_entitylogicalnames")
+                    returnvalue = pp_entitylogicalnames;
+
+                if (value == "pp_webapiurl")
+                    returnvalue = pp_webapiurl;
+
             }
         },
         error: function (xhr, textStatus, errorThrown) {
             if (userLCid == "1033")
-                Xrm.Page.ui.setFormNotification("Error getting setting value!: " + errorThrown, "ERROR");
+                Xrm.Page.ui.setFormNotification("Error getting config value!: " + errorThrown, "ERROR");
             if (userLCid == "1044")
-                Xrm.Page.ui.setFormNotification("Feil ved opphenting av setting verdi!: " + errorThrown, "ERROR");
+                Xrm.Page.ui.setFormNotification("Feil ved opphenting av config verdi!: " + errorThrown, "ERROR");
         }
     });
 

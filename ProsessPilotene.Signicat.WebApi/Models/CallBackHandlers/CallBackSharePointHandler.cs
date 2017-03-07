@@ -18,6 +18,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
     {
         private string folderRelativeUrl = "";
         private Entity SharePointSite;
+        private int loop = 0;
 
         /// <summary>
         /// Saving documents into sharepoint online
@@ -32,14 +33,15 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
             {
                 folderRelativeUrl = "";
                 SharePointSite = null;
-                var spUsername = new CallBackCrmHandler().GetSettingKeyValue(service, "spuser");
-                var spPassword = new CallBackCrmHandler().GetSettingKeyValue(service, "sppassword");
+                var crmconfig = new CallBackCrmHandler().GetCRMConfig(service);
+                var spUsername = crmconfig.SPUser;
+                var spPassword = crmconfig.SPpassword;
 
                 if (spPassword == null || spPassword == null)
                 {
                     var customerCredentials = new CustomerCredentialsHandler().GetCredentials(orgname);
-                    spUsername = customerCredentials.username; //ConfigurationManager.AppSettings["UserName"];
-                    spPassword = customerCredentials.password; //ConfigurationManager.AppSettings["Password"];
+                    spUsername = customerCredentials.username;
+                    spPassword = customerCredentials.password;
                 }
 
                 var pdfBytes = new CallBackSignicatHandler().ReadAsyncFile(resulturi);
@@ -62,10 +64,6 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                     clientContext.Load(web.Lists);
                     clientContext.ExecuteQuery();
 
-                    List accountList = GetAccountList(listTitle, web, clientContext, service);
-
-                    var folder = accountList.RootFolder.Folders.GetByUrl(folderName);
-
                     MemoryStream mStream = new MemoryStream();
                     mStream.Write(pdfBytes.Result.file, 0, pdfBytes.Result.file.Length);
 
@@ -75,6 +73,12 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                     flciNewFile.ContentStream = mStream;
                     flciNewFile.Url = sharePointUrl + "/" + folderRelativeUrl + docName + ".pdf";
                     flciNewFile.Overwrite = true;
+
+                    List accountList = GetAccountList(listTitle, web, clientContext, crmconfig, service);
+                    if (accountList == null)
+                        return;
+
+                    var folder = accountList.RootFolder.Folders.GetByUrl(folderName);
 
                     var uploadFile = folder.Files.Add(flciNewFile);
 
@@ -98,7 +102,8 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
         /// <param name="clientContext"></param>
         /// <param name="service"></param>
         /// <returns></returns>
-        private List GetAccountList(string listTitle, Web web, ClientContext clientContext, IOrganizationService service)
+        private List GetAccountList(string listTitle, Web web, ClientContext clientContext, CRMConfig crmconfig,
+            IOrganizationService service)
         {
             try
             {
@@ -115,8 +120,12 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                 }
                 else
                 {
-                    listTitle = new CallBackCrmHandler().GetSettingKeyValue(service, "spcrmroot");
-                    accountList = GetAccountList(listTitle, web, clientContext, service);
+                    if (loop > 1)
+                        return null;
+
+                    loop++;
+                    listTitle = GetListTitle(crmconfig, listTitle);
+                    accountList = GetAccountList(listTitle, web, clientContext, crmconfig, service);
                 }
 
                 return accountList;
@@ -128,6 +137,33 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
             }
         }
 
+        private string GetListTitle(CRMConfig crmconfig, string listTitle)
+        {
+            try
+            {
+                switch (listTitle)
+                {
+                    case "account":
+                        return crmconfig.SpAccountRoot;
+                    case "opportunity":
+                        return crmconfig.SpOpportunityRoot;
+                    case "salesorder":
+                        return crmconfig.SpOrderRoot;
+                    case "incident":
+                        return crmconfig.SpIncidentRoot;
+                    case "quote":
+                        return crmconfig.SpQuoteRoot;
+                    case "contract":
+                        return crmconfig.SpContractRoot;
+                }
+                return listTitle;
+            }
+            catch (Exception ex)
+            {
+                return listTitle;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -135,8 +171,13 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
         /// <param name="service"></param>
         private void HandleRelativeUrl(Entity parentLibrary, IOrganizationService service)
         {
-            if (!string.Compare(parentLibrary.LogicalName, "sharepointsite", StringComparison.CurrentCultureIgnoreCase).Equals(0))
-                folderRelativeUrl = parentLibrary.Attributes["relativeurl"] as string + "/" + folderRelativeUrl;
+            if (
+                !string.Compare(parentLibrary.LogicalName, "sharepointsite", StringComparison.CurrentCultureIgnoreCase)
+                    .Equals(0))
+            {
+                var parentFolder = parentLibrary.Attributes["relativeurl"] as string;
+                folderRelativeUrl = parentFolder + "/" + folderRelativeUrl;
+            }
 
             var parentLocationRef = parentLibrary.Attributes["parentsiteorlocation"] as EntityReference;
             var parentLoc = GetDocumentLocation(parentLocationRef, "sharepointdocumentlocationid", service);

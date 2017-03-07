@@ -157,7 +157,7 @@
     <value>Dokumentsignering</value>
   </data>
   <data name="emailerror" xml:space="preserve">
-    <value>En feil har oppstått ved usending av mail: </value>
+    <value>En feil har oppstått ved utsending av e-post: </value>
   </data>
   <data name="recordnotfound" xml:space="preserve">
     <value>Kunne ikke finne oppføringen: </value>

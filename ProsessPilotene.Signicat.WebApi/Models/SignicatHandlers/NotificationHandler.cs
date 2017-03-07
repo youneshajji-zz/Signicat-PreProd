@@ -14,6 +14,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
             var message1 = Resources.Resourceeng.signicatexpiration;
             var message2 = Resources.Resourceeng.signicatrejected;
             var message3 = Resources.Resourceeng.signicatexpired;
+            var message4 = Resources.Resourceeng.signicatsigned;
 
             if (signingInfo.LCID == 1044)
             {
@@ -21,6 +22,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 message1 = Resources.Resourcenb.signicatexpiration;
                 message2 = Resources.Resourcenb.signicatrejected;
                 message3 = Resources.Resourcenb.signicatexpired;
+                message4 = Resources.Resourcenb.signicatsigned;
             }
 
 
@@ -30,8 +32,6 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
             var expiration = 0;
             if (signingInfo.daysToLive > 2)
                 expiration = signingInfo.daysToLive - 2;
-            else
-                expiration = 0;
 
             return new[]
             {
@@ -129,7 +129,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                     message = signingInfo.SMSText + " " + url
                 };
 
-                var notifyReq = new addnotificationrequest
+                var notifySmsReq = new addnotificationrequest
                 {
                     service = "prosesspilotene",
                     notification = smsnotify,
@@ -138,7 +138,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                     taskid = request.request[0].task[i].id
                 };
 
-                client.addNotification(notifyReq);
+                client.addNotification(notifySmsReq);
             }
         }
 
@@ -169,22 +169,21 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                         {
                             new schedule
                             {
-                                stateis = taskstatus.completed,
+                                stateis = taskstatus.completed
                             }
                         }
                     };
 
-
-                    var tempList = tasks[i].notification.ToList();
-                    tempList.Add(notifyme);
-                    tasks[i].notification = tempList.ToArray();
+                    //This notification is replaced by plugin
+                    //var tempList = tasks[i].notification.ToList();
+                    //tempList.Add(notifyme);
+                    //tasks[i].notification = tempList.ToArray();
                 }
 
                 return tasks;
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
         }

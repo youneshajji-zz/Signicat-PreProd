@@ -22,7 +22,7 @@ namespace PP.Signicat.CredentialManager.Models
         [Display(Name = "Subscription")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please add subscription name")]
         public string subscription { get; set; } //PartitionKey
-        public string customer { get; set; }
+        public string category { get; set; }
 
         [Display(Name = "Total Signings")]
         public int countertotal { get; set; }

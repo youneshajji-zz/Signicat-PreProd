@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using PP.Signicat.WebApi.SignicatPreProd;
+using static PP.Signicat.WebApi.Models.Types;
 
 namespace PP.Signicat.WebApi.Models.SignicatHandlers
 {
@@ -10,7 +11,8 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
     {
         internal authenticationbasedsignature[] GetAuthSignatures(SigningInfo signingInfo)
         {
-            if (signingInfo.signingMetodText != "nbid" && signingInfo.signingMetodText != "handwritten")
+            if (signingInfo.signingMetodText != "nbid" && signingInfo.signingMetodText != "ink" &&
+                signingInfo.signingMetodText != "nemid")
             {
                 var authsignature = new[]
                 {
@@ -30,33 +32,33 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 return authsignature;
             }
 
-            if (signingInfo.signingMetodText == "nbid")
-            {
-                var authsignature = new[]
-                {
-                    new authenticationbasedsignature
-                    {
-                                        method = new method[]
-                                        {
-                                            new method
-                                            {
-                                                handwritten = signingInfo.isInk,
-                                                handwrittenSpecified = signingInfo.isInk,
-                                               Value = "nbid"
-                                            },
-                                            new method
-                                            {
-                                                handwritten = signingInfo.isInk,
-                                                handwrittenSpecified = signingInfo.isInk,
-                                               Value = "nbid-mobil"
-                                            }
-                                        }
-                    }
-                };
-                return authsignature;
-            }
+            //if (signingInfo.signingMetodText == "nbid")
+            //{
+            //    var authsignature = new[]
+            //    {
+            //        new authenticationbasedsignature
+            //        {
+            //                            method = new method[]
+            //                            {
+            //                                new method
+            //                                {
+            //                                    handwritten = signingInfo.isInk,
+            //                                    handwrittenSpecified = signingInfo.isInk,
+            //                                   Value = "nbid"
+            //                                },
+            //                                new method
+            //                                {
+            //                                    handwritten = signingInfo.isInk,
+            //                                    handwrittenSpecified = signingInfo.isInk,
+            //                                   Value = "nbid-mobil"
+            //                                }
+            //                            }
+            //        }
+            //    };
+            //    return authsignature;
+            //}
 
-            if (signingInfo.signingMetodText == "handwritten")
+            if (signingInfo.signingMetodText == "ink")
             {
                 var authsignature = new[]
                 {
@@ -65,16 +67,6 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                         method = new method[]
                                         {
                                             new method
-                                            {
-                                               handwritten = true,
-                                               handwrittenSpecified = true,
-                                               Value = "nbid"
-                                            }, new method
-                                            {
-                                               handwritten = true,
-                                               handwrittenSpecified = true,
-                                               Value = "nbid-mobil"
-                                            }, new method
                                             {
                                                handwritten = true,
                                                handwrittenSpecified = true
@@ -96,16 +88,41 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 {
                     new signature
                     {
-                        responsive = true,
+                        responsive = true,responsiveSpecified = true,
                                         method = new []
                                         {
                                             new method
                                             {
+                                                 handwritten = signingInfo.isInk,
+                                                handwrittenSpecified = signingInfo.isInk,
                                                Value = "nbid-sign"
                                             },
                                             new method
                                             {
+                                                 handwritten = signingInfo.isInk,
+                                                handwrittenSpecified = signingInfo.isInk,
                                                Value = "nbid-mobil-sign"
+                                            }
+                                        }
+                    }
+                };
+                return signature;
+            }
+
+            if (signingInfo.signingMetodText == "nemid")
+            {
+                var signature = new[]
+                {
+                    new signature
+                    {
+                        responsive = true,responsiveSpecified = true,
+                                        method = new []
+                                        {
+                                            new method
+                                            {
+                                                 handwritten = signingInfo.isInk,
+                                                handwrittenSpecified = signingInfo.isInk,
+                                               Value = "nemid-sign"
                                             }
                                         }
                     }
@@ -116,25 +133,34 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
             return null;
         }
 
-        public string GetMethod(string signingMetod)
+        public string GetMethod(int signingMetod)
         {
-            if (signingMetod == "1") //BankID
+            if (signingMetod == (int)SignMethod.Ink)
+                return "ink";
+
+            if (signingMetod == (int)SignMethod.BankId)
                 return "nbid";
 
-            if (signingMetod == "2" || signingMetod == "22") //SMS email OTP
+            if (signingMetod == (int)SignMethod.Tupas)
+                return "tupas";
+
+            if (signingMetod == (int)SignMethod.NemId)
+                return "nemid";
+
+            if (signingMetod == (int)SignMethod.Otp)
                 return "scid-otp";
 
-            if (signingMetod == "3" || signingMetod == "33") //Social
+            if (signingMetod == (int)SignMethod.Social)
                 return "social";
 
-            if (signingMetod == "4") //Handwritten
-                return "handwritten";
+
+
             return "nbid";
         }
 
         public void AddAuthMethod(SigningInfo signingInfo, createrequestrequest request)
         {
-            if (signingInfo.authMetod == "1") //BankID
+            if (signingInfo.authMetod == (int)AuthMethod.BankId)
             {
                 for (int i = 0; i < request.request[0].task.Length; i++)
                 {
@@ -145,7 +171,29 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 }
             }
 
-            if (signingInfo.authMetod == "2" || signingInfo.authMetod == "22") //SMS Email OTP
+            if (signingInfo.authMetod == (int)AuthMethod.Tupas)
+            {
+                for (int i = 0; i < request.request[0].task.Length; i++)
+                {
+                    request.request[0].task[i].authentication = new authentication
+                    {
+                        method = new string[] { "tupas", "tupas-mobil" }
+                    };
+                }
+            }
+
+            if (signingInfo.authMetod == (int)AuthMethod.NemId)
+            {
+                for (int i = 0; i < request.request[0].task.Length; i++)
+                {
+                    request.request[0].task[i].authentication = new authentication
+                    {
+                        method = new string[] { "nemid" }
+                    };
+                }
+            }
+
+            if (signingInfo.authMetod == (int)AuthMethod.Otp)
             {
                 for (int i = 0; i < request.request[0].task.Length; i++)
                 {
@@ -156,7 +204,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 }
             }
 
-            if (signingInfo.authMetod == "3" || signingInfo.authMetod == "33") //Social
+            if (signingInfo.authMetod == (int)AuthMethod.Social)
             {
                 for (int i = 0; i < request.request[0].task.Length; i++)
                 {
@@ -166,13 +214,6 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                     };
                 }
             }
-        }
-
-        public bool CheckIfInk(string signingMetod)
-        {
-            if (signingMetod == "22" || signingMetod == "33")
-                return true;
-            return false;
         }
     }
 }

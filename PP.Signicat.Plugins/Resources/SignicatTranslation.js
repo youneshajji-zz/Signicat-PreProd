@@ -35,13 +35,14 @@
         'btnDone': ['Done', 'OK'],
 
         //Tooltip translations
-        'lblselectsignmetodtitle': ['Chose a method for signing the documents.', 'Velg en signerings metode'],
+        'lblselectsignmetodtitle': ['Chose a method for signing the documents.', 'Velg en signerings metode.'],
+        'lblisink': ['The signing will include the Ink method in addition.', 'Signeringen vil inkludere Ink metoden i tillegg.'],
         'authtitle': ['The user will have to authenticate before seeing the document.', 'Mottakeren må autentisere seg før han kan se på dokumentet.'],
         'lbldaystolivetitle': ['How long will the documents be available for signing.', 'Hvor lenge skal dokumentet være tilgjengelig for signering'],
         'lblsendsmstitle': ['Send the link for signing in SMS to the reciever.', 'Send linken for signering via SMS til mottaker.'],
         'lblnotifytitle': ['An email will be sent to you when a document is signed.', 'Du får en epost når en mottaker har signert et dokument.'],
         'lblsaveorgtitle': ['The uploaded documents will be saved in CRM notes.', 'Det vedlagtet dokumentet vil bli lagret på notat feltet i CRM.'],
-        'lblsendcopytitle': ['The signed documents will be sent as a copy to the signatories.', 'En kopi av den signerte dokumentet blir sendt til mottaker(e) på epost.'],
+        'lblsendcopytitle': ['The signed documents will be sent as a copy to the signatories.', 'En kopi av det signerte dokumentet blir sendt til mottaker(e) på epost.'],
         'lblsaveinsptitle': ['The signed documents will be saved in the Sharepoint Document Location of the parent record.', 'Det signerte dokumentet blir lagret på SharePoint dokumentlokasjonen til morobjektet.'],
         'lblselectfilestitle': ['Chose a file from your local computer.', 'Velg en fil lokalt fra din PC.'],
         'lblsavemergedtitle': ['If NO, then all the signed documents inclusive the merged ones will be saved in CRM notes.', 'Hvis NEI, blir alle de signerte dokumentene, inklusiv de sammenslåtte, bli lagret på CRM notat feltet.'],
@@ -53,7 +54,7 @@
         'noresultnotify': ['No search results!', 'Ingen søke resultater!'],
         'emptyemailnotify': ['The customer must have an email address.', 'Mottakeren må ha en epost adresse.'],
         'customeraddednotify': ['A customer with the same email is allready added!', 'En mottaker med samme epost adresse er allrede lagt til!'],
-        'emptysubjectnotify': ['You must write a subject!', 'Du fylle ut emne!'],
+        'emptysubjectnotify': ['You must write a subject!', 'Du fylle må ut emne!'],
         'emptymessagenotify': ['You must write a message!', 'Du må fylle ut meldingen!'],
         'onlypdfnotify': ['Only PDF is allowed!', 'Kun PDF filer er tillatt!'],
         'addrecipientsnotify': ['You must add recipients!', 'Du må legge til mottakere!'],
@@ -71,7 +72,9 @@
         'errorassocnotify': ['Assosiation failed! Error: ', 'Asosieringen feilet! feil: '],
         'errornotecreatenotify': ['Error creating the note!: ', 'Feil ved opprettelse av notat!: '],
         'errorfindusernotify': ['Cannot find user!: ', 'Kan ikke finne bruker!: '],
-        'errorparampassnotify': ['No data parameter was passed to this page.', 'Ingen dataparametre har blitt sendt til denne websiden.']
+        'errorparampassnotify': ['No data parameter was passed to this page.', 'Ingen dataparametre har blitt sendt til denne websiden.'],
+        'errorfindconfig': ['Error getting config value!: ', 'Feil ved opphenting av setting verdi!: ']
+        
 
         
 
@@ -84,54 +87,58 @@
         $.translate.set_language('en');
 
 
-    var yesreplaced9 = $('#lblradios-9').html().replace("Yes", $.translate.get_text('boolyes'));
-    var noreplaced10 = $('#lblradios-10').html().replace("No", $.translate.get_text('boolyno'));
-    var yesreplaced0 = $('#lblradios-0').html().replace("Yes", $.translate.get_text('boolyes'));
-    var yesreplaced2 = $('#lblradios-2').html().replace("Yes", $.translate.get_text('boolyes'));
-    var noreplaced3 = $('#lblradios-3').html().replace("No", $.translate.get_text('boolyno'));
-    var yesreplaced11 = $('#lblradios-11').html().replace("Yes", $.translate.get_text('boolyes'));
-    var noreplaced12 = $('#lblradios-12').html().replace("No", $.translate.get_text('boolyno'));
-    var yesreplaced4 = $('#lblradios-4').html().replace("Yes", $.translate.get_text('boolyes'));
-    var noreplaced5 = $('#lblradios-5').html().replace("No", $.translate.get_text('boolyno'));
-    var yesreplaced6 = $('#lblradios-6').html().replace("Yes", $.translate.get_text('boolyes'));
-    var noreplaced7 = $('#lblradios-7').html().replace("No", $.translate.get_text('boolyno'));
-    var yesreplaced13 = $('#lblradios-13').html().replace("Yes", $.translate.get_text('boolyes'));
-    var noreplaced14 = $('#lblradios-14').html().replace("No", $.translate.get_text('boolyno'));
+    //var yesreplaced9 = $('#lblradios-9').html().replace("Yes", $.translate.get_text('boolyes'));
+    //var noreplaced10 = $('#lblradios-10').html().replace("No", $.translate.get_text('boolyno'));
+    //var yesreplaced0 = $('#lblradios-0').html().replace("Yes", $.translate.get_text('boolyes'));
+    //var yesreplaced2 = $('#lblradios-2').html().replace("Yes", $.translate.get_text('boolyes'));
+    //var noreplaced3 = $('#lblradios-3').html().replace("No", $.translate.get_text('boolyno'));
+    //var yesreplaced11 = $('#lblradios-11').html().replace("Yes", $.translate.get_text('boolyes'));
+    //var noreplaced12 = $('#lblradios-12').html().replace("No", $.translate.get_text('boolyno'));
+    //var yesreplaced4 = $('#lblradios-4').html().replace("Yes", $.translate.get_text('boolyes'));
+    //var noreplaced5 = $('#lblradios-5').html().replace("No", $.translate.get_text('boolyno'));
+    //var yesreplaced6 = $('#lblradios-6').html().replace("Yes", $.translate.get_text('boolyes'));
+    //var noreplaced7 = $('#lblradios-7').html().replace("No", $.translate.get_text('boolyno'));
+    //var yesreplaced13 = $('#lblradios-13').html().replace("Yes", $.translate.get_text('boolyes'));
+    //var noreplaced14 = $('#lblradios-14').html().replace("No", $.translate.get_text('boolyno'));
+    //var yesreplaced15 = $('#lblradios-15').html().replace("Yes", $.translate.get_text('boolyes'));
+    //var noreplaced16 = $('#lblradios-16').html().replace("No", $.translate.get_text('boolyno'));
 
-    var str = $('#lblradios-1').html();
-    var pos = str.lastIndexOf('No');
-    var noreplaced1 = str.substring(0, pos) + $.translate.get_text('boolyno') + str.substring(pos + 2);
+    //var str = $('#lblradios-1').html();
+    //var pos = str.lastIndexOf('No');
+    //var noreplaced1 = str.substring(0, pos) + $.translate.get_text('boolyno') + str.substring(pos + 2);
 
-    $('#lblradios-9').html(yesreplaced9);
-    $('#lblradios-10').html(noreplaced10);
-    $('#lblradios-0').html(yesreplaced0);
-    $('#lblradios-1').html(noreplaced1);
-    $('#lblradios-2').html(yesreplaced2);
-    $('#lblradios-3').html(noreplaced3);
-    $('#lblradios-11').html(yesreplaced11);
-    $('#lblradios-12').html(noreplaced12);
-    $('#lblradios-4').html(yesreplaced4);
-    $('#lblradios-5').html(noreplaced5);
-    $('#lblradios-6').html(yesreplaced6);
-    $('#lblradios-7').html(noreplaced7);
-    $('#lblradios-13').html(yesreplaced13);
-    $('#lblradios-14').html(noreplaced14);
+    //$('#lblradios-9').html(yesreplaced9);
+    //$('#lblradios-10').html(noreplaced10);
+    //$('#lblradios-0').html(yesreplaced0);
+    //$('#lblradios-1').html(noreplaced1);
+    //$('#lblradios-2').html(yesreplaced2);
+    //$('#lblradios-3').html(noreplaced3);
+    //$('#lblradios-11').html(yesreplaced11);
+    //$('#lblradios-12').html(noreplaced12);
+    //$('#lblradios-4').html(yesreplaced4);
+    //$('#lblradios-5').html(noreplaced5);
+    //$('#lblradios-6').html(yesreplaced6);
+    //$('#lblradios-7').html(noreplaced7);
+    //$('#lblradios-13').html(yesreplaced13);
+    //$('#lblradios-14').html(noreplaced14);
+    //$('#lblradios-15').html(yesreplaced15);
+    //$('#lblradios-16').html(noreplaced16);
 
     $('#lblselectsignmetod').text($.translate.get_text('lblselectsignmetod'));
-    $('#lblauth').text($.translate.get_text('auth'));
+    $('#lblauth div h5').text($.translate.get_text('auth'));
     $('#lbldaystolive').text($.translate.get_text('lbldaystolive'));
-    $('#lblsendsms').html($.translate.get_text('lblsendsms'));
-    $('#lblnotify').html($.translate.get_text('lblnotify'));
-    $('#lblsaveorg').html($.translate.get_text('lblsaveorg'));
-    $('#lblsendcopy').html($.translate.get_text('lblsendcopy'));
-    $('#lblsaveinsp').html($.translate.get_text('lblsaveinsp'));
+    $('#lblsendsms div h5').html($.translate.get_text('lblsendsms'));
+    $('#lblnotify div h5').html($.translate.get_text('lblnotify'));
+    $('#lblsaveorg div h5').html($.translate.get_text('lblsaveorg'));
+    $('#lblsendcopy div h5').html($.translate.get_text('lblsendcopy'));
+    $('#lblsaveinsp div h5').html($.translate.get_text('lblsaveinsp'));
     $('#lblsubject').html($.translate.get_text('lblsubject'));
     $('#subject').attr("placeholder", $.translate.get_text('subject'));
     $('#lblmessage').html($.translate.get_text('lblmessage'));
     $('#message').attr("placeholder", $.translate.get_text('message'));
     $('#lblselectfiles').html($.translate.get_text('lblselectfiles'));
     $('#fileHelp').html($.translate.get_text('fileHelp'));
-    $('#lblsavemerged').html($.translate.get_text('lblsavemerged'));
+    $('#lblsavemerged div h5').html($.translate.get_text('lblsavemerged'));
     $('#lblrecipeints').html($.translate.get_text('lblrecipeints'));
     $('#spansearch').html($.translate.get_text('spansearch'));
     $('#spanaccounts').html($.translate.get_text('spanaccounts'));
@@ -146,6 +153,7 @@
 
     //Tooltip translations
     $('#lblselectsignmetod').attr('title', $.translate.get_text('lblselectsignmetodtitle'));
+    $('#lblink').attr('title', $.translate.get_text('lblisink'));
     $('#lblauth').attr('title', $.translate.get_text('authtitle'));
     $('#lbldaystolive').attr('title', $.translate.get_text('lbldaystolivetitle'));
     $('#lblsendsms').attr('title', $.translate.get_text('lblsendsmstitle'));

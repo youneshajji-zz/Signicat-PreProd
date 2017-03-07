@@ -110,22 +110,34 @@ namespace PP.Signicat.WebApi.Models
         {
             var signingInfo = new SigningInfo();
             signingInfo.customerOrg = currentRequest.Params["CustomerOrg"];
-            signingInfo.authMetod = currentRequest.Params["Authmetod"];
-            signingInfo.notifyMe = Convert.ToInt32(currentRequest.Params["NotifyMe"]);
+            signingInfo.authMetod = Convert.ToInt32(currentRequest.Params["Authmetod"]);
+            signingInfo.notifyMe = Convert.ToBoolean(currentRequest.Params["NotifyMe"]);
             signingInfo.senderMail = currentRequest.Params["SenderEmail"];
             signingInfo.LCID = Convert.ToInt32(currentRequest.Params["lcid"]);
-            signingInfo.signMethod = currentRequest.Params["SigningMetod"];
-            signingInfo.daysToLive = Convert.ToInt32(currentRequest.Params["Daystolive"]);
-            signingInfo.SendSMS = Convert.ToInt32(currentRequest.Params["SendSMS"]);
+            signingInfo.signMethod = Convert.ToInt32(currentRequest.Params["SigningMetod"]);
+            signingInfo.SendSMS = Convert.ToBoolean(currentRequest.Params["SendSMS"]);
             signingInfo.SMSText = currentRequest.Params["SMSText"];
-            signingInfo.signingMetodText = "nbid";
+            signingInfo.isInk = Convert.ToBoolean(currentRequest.Params["Ink"]);
+            signingInfo.signingMetodText = "ink";
 
-            if (signingInfo.daysToLive == 0)
-                signingInfo.daysToLive = 60;
+            if (!string.IsNullOrWhiteSpace(currentRequest.Params["Daystolive"]))
+                signingInfo.daysToLive = Convert.ToInt32(currentRequest.Params["Daystolive"]);
             else
-                signingInfo.daysToLive = signingInfo.daysToLive;
+                signingInfo.daysToLive = 60;
 
             return signingInfo;
+        }
+
+        public static string HandleFileName(string docName)
+        {
+            //"\"Orderd Varelinjer.pdf\""
+            char[] MyChar = { '\"' };
+            if (docName.Contains("\""))
+            {
+                docName = docName.TrimStart(MyChar);
+                docName = docName.TrimEnd(MyChar);
+            }
+            return docName;
         }
     }
 

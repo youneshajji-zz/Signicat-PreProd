@@ -13,13 +13,19 @@ namespace PP.Signicat.CredentialManager.Models
 
         public SubscriptionModel() { }
 
-        [Display(Name = "Customer")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please add customer name")]
-        public string customer { get; set; } //RowKey
+        [Display(Name = "Category")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please add category name")]
+        public string category { get; set; } //PartitionKey
 
         [Display(Name = "Subscription")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please add Subscription name")]
-        public string subscription { get; set; } //PartionKey
+        public string subscription { get; set; } //RowKey
+
+        [Display(Name = "Customer")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please add customer name")]
+        public string customer { get; set; } //Customer
+
+        [Display(Name = "Partner")]
         public string partner { get; set; }
 
         [Display(Name = "Organization Url")]

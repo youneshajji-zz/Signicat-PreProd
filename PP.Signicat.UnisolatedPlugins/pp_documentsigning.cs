@@ -93,10 +93,8 @@ namespace PP.Signicat.UnisolatedPlugins
                     var user = context.InitiatingUserId;
                     var lcid = RetrieveUserUiLanguageCode(service, user);
 
-                    if (statusCode.Value != 778380000)
-                        return;
                     bool sendmail = (bool)entity.Attributes["pp_sendemail"];
-                    if (sendmail)
+                    if (sendmail && statusCode.Value == 778380000)
                     {
                         try
                         {
@@ -147,8 +145,6 @@ namespace PP.Signicat.UnisolatedPlugins
                 var linkBtnImg = "https://ppsignicatresources.blob.core.windows.net/signicatlinkbutton/SignicatLinkButton.png";
                 var emailLogoImg = "https://ppsignicatresources.blob.core.windows.net/signicatlinkbutton/SignicatMailLogo.png";
 
-                //var contcatRef = (EntityReference)task.Attributes["pp_contactid"];
-                //var accountRef = (EntityReference)task.Attributes["pp_accountid"];
                 var customerRef = (EntityReference)task.Attributes["pp_customerid"];
                 var link = task.Attributes["pp_sdsurl"].ToString();
                 var url = "";
@@ -160,9 +156,7 @@ namespace PP.Signicat.UnisolatedPlugins
                     url = "<br/><a href='" + link + "'><img alt='Click here' src='" + linkBtnImg + "'></a>";
 
 
-                //var _userId = GetSenderId(documentsigning, service);
                 var senderRef = (EntityReference)documentsigning["ownerid"];
-                //throw new InvalidPluginExecutionException("A: " + senderRef.Id);
 
                 Entity fromParty = new Entity("activityparty");
                 fromParty["partyid"] = new EntityReference("systemuser", senderRef.Id);
@@ -183,18 +177,12 @@ namespace PP.Signicat.UnisolatedPlugins
                 email["directioncode"] = true;
                 email["regardingobjectid"] = new EntityReference(documentsigning.LogicalName, documentsigning.Id);
 
-                if (description != null)
+                if (!string.IsNullOrWhiteSpace(description))
                 {
                     var newText = "<img src='" + emailLogoImg + "'/><br/><br/>";
-                    //var regex = new Regex(@"(\r\r\n\n|\r\r|\n\n)+");
-                    //newText = regex.Replace(description, "<br />" + "<br />");
-                    //regex = new Regex(@"(\r\n|\r|\n)+");
-                    //newText = regex.Replace(newText, "<br />" + "<br />");                    
                     newText += description;
                     newText += "<br/><br/><br/>" + url + "<br/><br/><br/>";
-                    if (lcid == 1033)
-                        newText += "<br/> With Regards<br/>";
-                    else if (lcid == 1044)
+                    if (lcid == 1044)
                         newText += "<br/> Med vennlig Hilsen<br/>";
                     else
                         newText += "<br/> With Regards<br/>";

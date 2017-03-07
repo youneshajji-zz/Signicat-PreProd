@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Threading.Tasks;
 using System.IO;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Web;
 using PP.Signicat.WebApi.Models;
 using System.Web.Http.Cors;
@@ -62,18 +63,28 @@ namespace PP.Signicat.WebApi.Controllers
                     var param = item.Headers.ContentDisposition.Parameters;
                     var orgname = param.First(x => x.Name == "orgname").Value;
                     var language = param.First(x => x.Name == "language").Value;
-                    var docName = item.Headers.ContentDisposition.FileName;
-                    HttpPostedFile postedFile = HttpContext.Current.Request.Files[docName];
+                    var method = param.First(x => x.Name == "method").Value;
+                    //var docName = item.Headers.ContentDisposition.FileName;
+                    //docName = Helpers.HandleFileName(docName);
+                    //docName = Encoding.UTF8.GetString(Convert.FromBase64String(docName));
 
-                    if (postedFile != null)
-                    {
-                        //string orgname = "processpilots";
-                        sdsdocument uploadedDocument = await wordHandler.UploadDocument(postedFile, item);
-                        var url = wordHandler.CreateSignRequest(uploadedDocument, orgname, language);
-                        signHereUrlList.Add(url);
+                    if (HttpContext.Current.Request.Files.Count < 1)
+                        return null;
 
-                        return signHereUrlList;
-                    }
+                    var file = HttpContext.Current.Request.Files[0];
+                    //var docName = Encoding.UTF8.GetString(Convert.FromBase64String(file.FileName));
+
+                    //HttpPostedFile postedFile = HttpContext.Current.Request.Files[docName];
+
+                    //if (postedFile != null)
+                    //{
+                    //string orgname = "processpilots";
+                    sdsdocument uploadedDocument = await wordHandler.UploadDocument(file, item);
+                    var url = wordHandler.CreateSignRequest(uploadedDocument, orgname, language, Convert.ToInt32(method));
+                    signHereUrlList.Add(url);
+
+                    return signHereUrlList;
+                    //}
                 }
             }
 
@@ -120,7 +131,7 @@ namespace PP.Signicat.WebApi.Controllers
                         recipients.Add(contactInfo);
                     }
                 }
-                
+
                 var signingInfo = Helpers.GetSignInfo(HttpContext.Current.Request);
 
                 if (postedFiles.Count > 0)
@@ -131,7 +142,7 @@ namespace PP.Signicat.WebApi.Controllers
                         return null;
 
                     signingInfo.signingMetodText = new SignatureHandler().GetMethod(signingInfo.signMethod);
-                    signingInfo.isInk = new SignatureHandler().CheckIfInk(signingInfo.signMethod);
+                    //signingInfo.isInk = new SignatureHandler().CheckIfInk(signingInfo.signMethod);
 
                     createrequestrequest request = signHandler.GetCreateRequest(uploadedDocuments, recipients,
                         signingInfo);
@@ -154,7 +165,7 @@ namespace PP.Signicat.WebApi.Controllers
                             signHereUrlList.Add(url);
 
                             var phonenr = request.request[0].task[i].subject.mobile;
-                            if (signingInfo.SendSMS == 1 && !string.IsNullOrWhiteSpace(phonenr))
+                            if (signingInfo.SendSMS && !string.IsNullOrWhiteSpace(phonenr))
                                 new NotificationHandler().AddSmsNotification(response, request, signingInfo, i, url, phonenr);
 
                         }

@@ -13,7 +13,7 @@ namespace WordAddInSignicat
 {
     public static class WordHandlerSigning
     {
-        internal static async Task SendDocumentForSigning(WordSearchObject searchValues, IOrganizationService crm)
+        internal static async Task SendDocumentForSigning(WordSearchObject searchValues, WordCRMConfig crmconfig, IOrganizationService crm)
         {
             Document document = Globals.ThisAddIn.Application.ActiveDocument;
 
@@ -34,7 +34,8 @@ namespace WordAddInSignicat
                 var orgName = ConfigurationManager.AppSettings["OrgName"];
 
                 var signicatHandler = new WordHandlerSignicat();
-                var responseMessage = await signicatHandler.SendRequest(searchValues, document, pdfName, orgName, crm);
+                var responseMessage = await signicatHandler.SendRequest(searchValues, document, pdfName, orgName,
+                    crmconfig, crm);
                 var stringResult = await responseMessage.Content.ReadAsStringAsync();
                 var result = stringResult.Split('"');
                 var sdsurl = result[1];
@@ -48,10 +49,11 @@ namespace WordAddInSignicat
                         MessageBox.Show(Resources.ResourceWordEn.recordnotfound + searchValues.searchnumber + Resources.ResourceWordEn.unassociated, Resources.ResourceWordEn.documentsinging, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
-                var documentsigningid = WordHandlerCRM.CreatDocumentSigningInCRM(sdsurl, fullPath, fullname[0], entity, searchValues, crm);
+                var documentsigningid = WordHandlerCRM.CreatDocumentSigningInCRM(sdsurl, fullPath, fullname[0], entity,
+                    searchValues, crmconfig, crm);
                 if (documentsigningid != Guid.Empty)
                 {
-                    WordHandlerCRM.SendEmail(sdsurl, fullname[0], entity, documentsigningid, searchValues, crm);
+                    WordHandlerCRM.SendEmail(sdsurl, fullname[0], entity, documentsigningid, searchValues, crmconfig, crm);
                     if (searchValues.language == 1044)
                         MessageBox.Show(Resources.ResourceWordNb.documentsent, Resources.ResourceWordNb.documentsinging, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     else

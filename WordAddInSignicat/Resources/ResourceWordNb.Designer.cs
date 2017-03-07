@@ -178,7 +178,7 @@ namespace WordAddInSignicat.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to En feil har oppstått ved usending av mail: .
+        ///   Looks up a localized string similar to En feil har oppstått ved utsending av e-post: .
         /// </summary>
         internal static string emailerror {
             get {

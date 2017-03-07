@@ -34,11 +34,19 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
             }
         }
 
-        public string CreateSignRequest(sdsdocument uploadedDocument, string customerorg, string language)
+        public string CreateSignRequest(sdsdocument uploadedDocument, string customerorg, string language, int method)
         {
             var lang = "en";
             if (language == "1044")
                 lang = "nb";
+
+            var signmethodText = new SignatureHandler().GetMethod(method);
+            var signInfo = new SigningInfo();
+            signInfo.signingMetodText = signmethodText;
+            signInfo.isInk = true;
+
+            var authMethod = new SignatureHandler().GetAuthSignatures(signInfo);
+
 
             var request = new createrequestrequest
             {
@@ -85,24 +93,25 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                                         documentref = uploadedDocument.id
                                     }
                                 },
-                                signature = new signature[]
-                                {
-                                    new signature
-                                    {
-                                        responsive = true,
-                                        method = new method[]
-                                        {
-                                            new method
-                                            {
-                                               Value = "nbid-sign"
-                                            },
-                                            new method
-                                            {
-                                               Value = "nbid-mobil-sign"
-                                            }
-                                        }
-                                    }
-                                },
+                                authenticationbasedsignature = authMethod
+                                //signature = new signature[]
+                                //{
+                                //    new signature
+                                //    {
+                                //        responsive = true,
+                                //        method = new method[]
+                                //        {
+                                //            new method
+                                //            {
+                                //               Value = "nbid-sign"
+                                //            },
+                                //            new method
+                                //            {
+                                //               Value = "nbid-mobil-sign"
+                                //            }
+                                //        }
+                                //    }
+                                //},
                             }
                         }
                     }

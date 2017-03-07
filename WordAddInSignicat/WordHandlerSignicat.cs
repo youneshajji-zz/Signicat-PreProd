@@ -16,7 +16,8 @@ namespace WordAddInSignicat
 {
     public class WordHandlerSignicat
     {
-        public async Task<HttpResponseMessage> SendRequest(WordSearchObject searchValues, Document doc, string pdfName, string orgName, IOrganizationService crm)
+        public async Task<HttpResponseMessage> SendRequest(WordSearchObject searchValues, Document doc, string pdfName,
+            string orgName, WordCRMConfig crmconfig, IOrganizationService crm)
         {
             try
             {
@@ -24,7 +25,7 @@ namespace WordAddInSignicat
                 {
                     using (var content = new MultipartFormDataContent())
                     {
-                        var apiurl = WordHandlerCRM.GetSettingKeyValue(crm, "webapiurl"); 
+                        var apiurl = crmconfig.Webapiurl;
                         client.BaseAddress = new Uri(apiurl);
                         client.DefaultRequestHeaders.Accept.Clear();
                         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/pdf"));
@@ -33,11 +34,13 @@ namespace WordAddInSignicat
                         var fileContent = new ByteArrayContent(WordHelpers.ReadToEnd(sr.BaseStream));
                         var orgname = new NameValueHeaderValue("orgname", orgName);
                         var language = new NameValueHeaderValue("language", searchValues.language.ToString());
+                        var method = new NameValueHeaderValue("method", crmconfig.Wordsigningmethod.ToString());
+                        //pdfName = Convert.ToBase64String(Encoding.UTF8.GetBytes(pdfName));
 
                         fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
                         {
                             FileName = pdfName,
-                            Parameters = { orgname, language }
+                            Parameters = { orgname, language, method }
                         };
                         fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
                         content.Add(fileContent);

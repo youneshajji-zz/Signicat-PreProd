@@ -26,10 +26,14 @@
                 data.append("file" + x, files[x]);
             }
 
-            data.append("SigningMetod", "1");
+            data.append("SigningMetod", "2");
             //data.append("Daystolive", "");
             data.append("CustomerOrg", "org11ece0c8");
             data.append("SendSMS", 0);
+            data.append("Ink", false);
+            data.append("language", 1044);
+            //data.append("orgname", "org11ece0c8");
+            //data.append("method", 4);
 
 
             //1 //BankID
@@ -62,13 +66,23 @@
         }
     });
 
+
     $("#send")
         .click(function () {
             var data = {
-                orgname: "org11ece0c8",
-                requestId: "060220175fiucwbx2ldv3wfxf8x3jpyyo5iftt23se9cu6ntvbg7kqo2nn",
-                taskId: "task_1"
+                orgname: "org8b75c370",
+                requestId: "070320173759z9c5rbsslm3yidg4kk1f0czbbow41hlkiucw27qs9w98z3",
+                taskId: "task_0_9031"
             };
+
+
+            //Account
+            //requestId: "060320174hnmnfub1m5meewks15nlwdpyoj072savscv83hw532a6fdztg",
+            //taskId: "task_0_1825
+
+            //Sak
+            //requestId: "06032017271w631kqygeffhjp8d62fbx0j7nqfc8sou73umelek2lvs5b4",
+            //taskId: "task_0_204"
 
             $.ajax({
                 type: "GET",

@@ -26,8 +26,9 @@ namespace PP.Signicat.CredentialManager.Models
                 if (credentials.status != 0)
                     status = credentials.status;
 
-                SubscriptionModel entity = new SubscriptionModel(credentials.customer, credentials.subscription)
+                SubscriptionModel entity = new SubscriptionModel(credentials.category, credentials.subscription)
                 {
+                    customer = credentials.customer,
                     orgurl = credentials.orgurl,
                     discoveryurl = credentials.discoveryurl,
                     username = credentials.username,
@@ -68,9 +69,10 @@ namespace PP.Signicat.CredentialManager.Models
                 if (credentials.status != 0)
                     status = credentials.status;
 
-                SubscriptionModel entity = new SubscriptionModel(credentials.customer, credentials.subscription)
+                SubscriptionModel entity = new SubscriptionModel(credentials.category, credentials.subscription)
                 {
                     ETag = "*",
+                    customer = credentials.customer,
                     orgurl = credentials.orgurl,
                     discoveryurl = credentials.discoveryurl,
                     username = credentials.username,
@@ -96,12 +98,12 @@ namespace PP.Signicat.CredentialManager.Models
         }
 
 
-        public SubscriptionModel GetSubscription(string customer, string subscription)
+        public SubscriptionModel GetSubscription(string category, string subscription)
         {
             try
             {
                 CloudTable table = ConnectToAzureTableStorage();
-                TableOperation retrieveOperation = TableOperation.Retrieve<SubscriptionModel>(customer, subscription);
+                TableOperation retrieveOperation = TableOperation.Retrieve<SubscriptionModel>(category, subscription);
                 TableResult query = table.Execute(retrieveOperation);
 
                 if (query.Result == null)
@@ -111,7 +113,7 @@ namespace PP.Signicat.CredentialManager.Models
                 //var password = new StringCipher().Decrypt(custCred.password, PassPhrase);
                 //custCred.password = password;
                 custCred.status = (Status)custCred.subscriptionstatus;
-                custCred.customer = custCred.PartitionKey;
+                custCred.category = custCred.PartitionKey;
                 custCred.subscription = custCred.RowKey;
 
                 return custCred;
@@ -142,11 +144,12 @@ namespace PP.Signicat.CredentialManager.Models
                     customerCred.PartitionKey = item.PartitionKey;
                     customerCred.RowKey = item.RowKey;
                     customerCred.ETag = item.ETag;
+                    customerCred.customer = item.customer;
                     customerCred.password = item.password;
                     customerCred.discoveryurl = item.discoveryurl;
                     customerCred.domain = item.domain;
                     customerCred.subscription = item.RowKey;
-                    customerCred.customer = item.PartitionKey;
+                    customerCred.category = item.PartitionKey;
                     customerCred.partner = item.partner;
                     customerCred.orgurl = item.orgurl;
                     customerCred.username = item.username;

@@ -121,7 +121,7 @@
     <value>~/Views/Shared/SignCallBack.cshtml</value>
   </data>
   <data name="emaildescription" xml:space="preserve">
-    <value>Hi, This is a copy of the signed document</value>
+    <value>This is a copy of the signed document</value>
   </data>
   <data name="emailsubject" xml:space="preserve">
     <value>Copy of signed document</value>

@@ -24,7 +24,8 @@ function CheckDocLocation(entityid) {
     return hasValue;
 }
 
-function createRecord(sdsurls, odataSetName, files, customers, saveoriginalfile, saveinsp, saveonlymerged) {
+function createRecord(sdsurls, odataSetName, files, customers, saveoriginalfile, saveinsp, 
+    saveonlymerged, auth, sendsms, notify, isink, sendcopy) {
     var obj = getDataParam();
     var entityname = obj.entityname;
     var entityid = obj.entityid;
@@ -33,63 +34,29 @@ function createRecord(sdsurls, odataSetName, files, customers, saveoriginalfile,
     var username = obj.username;
 
     var signingmetod = $("#selectsignmetod").val();
-    //var name = $("#name").val();
-    //var email = $("#email").val();
     var subject = $("#subject").val();
     var message = $("#message").val();
-    var radiovalueAuth = $("#radiosAuth input[type='radio']:checked").val();
-    var radiovalueSendCopy = $("#radiosSendCopy input[type='radio']:checked").val();
-    //var authmetod = $("#authmetod").val();
     var daystolive = $("#daystolive").val();
     var requestid = sdsurls[0].split('&').shift().split('=').pop();
-
-    var authmetod;
-    if (radiovalueAuth == 9) {
-        if (signingmetod == 1) //BankID
-            authmetod = 1;
-        if (signingmetod == 2)//Sms/E-mail
-            authmetod = 2;
-        if (signingmetod == 3)//Social
-            authmetod = 3;
-    }
-    else if (radiovalueAuth == 10)
-        authmetod = 0;
-
-    var sendcopy;
-    if (radiovalueSendCopy == 11)
-        sendcopy = true;
-    else if (radiovalueSendCopy == 12)
-        sendcopy = false;
 
     var entity = {};
     entity.pp_name = subject;
     entity.pp_signing = { Value: signingmetod };
     entity.pp_subject = subject;
     entity.pp_message = message;
-    //entity.EmailAddress = email;
     entity.statuscode = { Value: 778380000 };
-    entity.pp_authentication = { Value: authmetod };
     entity.pp_saveindocumentlocation = saveinsp;
     entity.pp_saveonlymerged = saveonlymerged;
     entity.pp_requestid = requestid;
     entity.pp_sendcopy = sendcopy;
+    entity.pp_sendsms = sendsms;
+    entity.pp_notify = notify;
+    entity.pp_saveoriginal = saveoriginalfile;
+    entity.pp_authenticationrequired = auth;
+    entity.pp_isink = isink;
 
-    if (daystolive != "")
+    if (daystolive.length != 0)
         entity.pp_daystolive = daystolive;
-
-    //var entitynames = GetConfigValue("entitylogicalnames");
-    //var entitynameArray = entitynames.split(',');
-
-    //$.each(entitynameArray, function (index, value) {
-    //    if (value.indexOf(entityname) >= 0) {
-    //        alert(value);
-    //        alert(entityname);
-    //        entity.value = {
-    //            Id: entityid,
-    //            LogicalName: entityname
-    //        }
-    //    }
-    //});
 
     if (entityname == "quote")
         entity.pp_quoteid = {
@@ -312,7 +279,7 @@ function AddNotes(serverUrl, noteSubject, noteText, entityid, entityname, file, 
             datatype: "json",
             url: serverUrl + ODATA_ENDPOINT + ODATA_EntityCollection,
             data: jsonEntity,
-            async: false,
+            async: true,
             beforeSend: function (XMLHttpRequest) {
                 XMLHttpRequest.setRequestHeader("Accept", "application/json");
             },
@@ -356,6 +323,55 @@ function GetUserMail(userid) {
         }
     });
     return email;
+}
+
+function GetSignicatConfig() {
+    var obj = {};
+    $.ajax({
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        datatype: "json",
+        url: Xrm.Page.context.getClientUrl() + "/XRMServices/2011/OrganizationData.svc/pp_signicatconfigSet?$select=" +
+            "pp_authentication,pp_daystolive,pp_disable,pp_method1,pp_method2,pp_method3,pp_method4," +
+            "pp_method5,pp_name,pp_notify,pp_saveinsp,pp_saveonlymerged,pp_saveoriginal,pp_searchin," +
+            "pp_sendcopy,pp_sendsms,pp_signing,pp_isink,pp_method6",
+        beforeSend: function (XMLHttpRequest) {
+            XMLHttpRequest.setRequestHeader("Accept", "application/json");
+        },
+        async: false,
+        success: function (data, textStatus, xhr) {
+            var results = data.d.results;
+         
+            if (results.length > 0) {
+                obj.pp_authentication = results[0].pp_authentication;
+                obj.pp_daystolive = results[0].pp_daystolive;
+                obj.pp_disable = results[0].pp_disable;
+                obj.pp_name = results[0].pp_name;
+                obj.pp_notify = results[0].pp_notify;
+                obj.pp_saveinsp = results[0].pp_saveinsp;
+                obj.pp_saveonlymerged = results[0].pp_saveonlymerged;
+                obj.pp_saveoriginal = results[0].pp_saveoriginal;
+                obj.pp_searchin = results[0].pp_searchin;
+                obj.pp_sendcopy = results[0].pp_sendcopy;
+                obj.pp_sendsms = results[0].pp_sendsms;
+                obj.pp_signing = results[0].pp_signing;
+                obj.pp_isink = results[0].pp_isink;
+
+                obj.pp_method1 = results[0].pp_method1;
+                obj.pp_method2 = results[0].pp_method2;
+                obj.pp_method3 = results[0].pp_method3;
+                obj.pp_method5 = results[0].pp_method5;
+                obj.pp_method6 = results[0].pp_method6;
+                obj.pp_method4 = results[0].pp_method4;
+            } else
+                obj = null;
+        },
+        error: function (xhr, textStatus, errorThrown) {
+                $.notify($.translate.get_text('errorfindconfig') + errorThrown, "error");
+        }
+    });
+
+    return obj;
 }
 
 function getDataParam() {

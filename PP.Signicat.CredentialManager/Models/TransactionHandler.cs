@@ -18,7 +18,7 @@ namespace PP.Signicat.CredentialManager.Models
             {
                 TransactionModel entity = new TransactionModel(transaction.subscription, transaction.period)
                 {
-                    customer = transaction.customer,
+                    category = transaction.category,
                     countertotal = transaction.countertotal,
                     counteruniqueusers = transaction.counteruniqueusers,
                     counterbankid = transaction.counterbankid,
@@ -46,7 +46,7 @@ namespace PP.Signicat.CredentialManager.Models
                 TransactionModel entity = new TransactionModel(transaction.subscription, transaction.period)
                 {
                     ETag = "*",
-                    customer = transaction.customer,
+                    category = transaction.category,
                     countertotal = transaction.countertotal,
                     counteruniqueusers = transaction.counteruniqueusers,
                     counterbankid = transaction.counterbankid,
@@ -112,7 +112,7 @@ namespace PP.Signicat.CredentialManager.Models
                     transaction.ETag = item.ETag;
                     transaction.period = item.RowKey;
                     transaction.subscription = item.PartitionKey;
-                    transaction.customer = item.customer;
+                    transaction.category = item.category;
                     transaction.countertotal = item.countertotal;
                     transaction.counteruniqueusers = item.counteruniqueusers;
                     transaction.counterbankid = item.counterbankid;

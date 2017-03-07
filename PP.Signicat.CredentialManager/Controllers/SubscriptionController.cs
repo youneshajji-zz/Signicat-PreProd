@@ -38,10 +38,10 @@ namespace PP.Signicat.CredentialManager.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit(string customer, string subscription)
+        public ActionResult Edit(string category, string subscription)
         {
             //Get credentials
-            var response = new SubscriptionHandler().GetSubscription(customer, subscription);
+            var response = new SubscriptionHandler().GetSubscription(category, subscription);
 
             if (response == null)
                 throw new NotImplementedException("Cannot find credentials");
@@ -66,7 +66,7 @@ namespace PP.Signicat.CredentialManager.Controllers
                     model = response;
                 }
             }
-            else return Edit(model.customer, model.subscription);
+            else return Edit(model.category, model.subscription);
 
             //return View(model);
             return RedirectToAction("Index");

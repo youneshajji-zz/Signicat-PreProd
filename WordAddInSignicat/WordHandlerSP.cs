@@ -76,8 +76,8 @@ namespace WordAddInSignicat
         {
             try
             {
-                var spUsername = WordHandlerCRM.GetSettingKeyValue(service, "spuser");
-                var spPassword = WordHandlerCRM.GetSettingKeyValue(service, "sppassword");
+                var spUsername = ""; //WordHandlerCRM.GetSettingKeyValue(service, "spuser");
+                var spPassword = ""; //WordHandlerCRM.GetSettingKeyValue(service, "sppassword");
                 var currentSharePointFolderEntity = GetDocumentLocation(Entity.ToEntityReference(), "regardingobjectid", service);
                 var sharePointUrl = GetDefaultSPSiteUrlFromCRMSiteCollectionEntity(searchValues, service);
                 Document document = Globals.ThisAddIn.Application.ActiveDocument;

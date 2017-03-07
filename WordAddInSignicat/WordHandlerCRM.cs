@@ -41,7 +41,8 @@ namespace WordAddInSignicat
             }
         }
 
-        internal static Guid CreatDocumentSigningInCRM(string sdsurl, string docPath, string docName, Entity entity, WordSearchObject searchValues, IOrganizationService crm)
+        internal static Guid CreatDocumentSigningInCRM(string sdsurl, string docPath, string docName, Entity entity,
+            WordSearchObject searchValues, WordCRMConfig crmconfig, IOrganizationService crm)
         {
             try
             {
@@ -49,16 +50,16 @@ namespace WordAddInSignicat
                 var taskid = parts.Last();
                 var requestid = GetRequestId(sdsurl);
 
-                var saveinsp = GetSettingKeyValue(crm, "wordsaveinsp");
+                var saveinsp = crmconfig.Wordsaveinsp;
 
 
                 //Create signing package
                 var documentsigning = new Entity("pp_documentsigning");
                 documentsigning["pp_name"] = "Word dokument: " + docName;
                 documentsigning["pp_requestid"] = requestid;
-                documentsigning["pp_signing"] = new OptionSetValue(1); //BankID
+                documentsigning["pp_signing"] = new OptionSetValue(crmconfig.Wordsigningmethod); 
 
-                if (saveinsp == "yes")
+                if (saveinsp)
                     documentsigning["pp_saveindocumentlocation"] = true;
 
                 if (entity != null)
@@ -185,7 +186,8 @@ namespace WordAddInSignicat
             }
         }
 
-        internal static void SendEmail(string sdsurl, string docName, Entity entity, Guid documentsigningid, WordSearchObject searchValues, IOrganizationService crm)
+        internal static void SendEmail(string sdsurl, string docName, Entity entity, Guid documentsigningid,
+            WordSearchObject searchValues, WordCRMConfig crmconfig, IOrganizationService crm)
         {
             try
             {
@@ -200,9 +202,8 @@ namespace WordAddInSignicat
 
                 // Create an e-mail message.
                 Entity email = new Entity("email");
-
-                var senderId = GetSettingKeyValue(crm, "wordsignuser");
-                if (senderId == null)
+                
+                if (crmconfig.Worduser == null)
                 {
                     if (searchValues.language == 1044)
                         MessageBox.Show(Resources.ResourceWordNb.cannotfindsender);
@@ -210,12 +211,10 @@ namespace WordAddInSignicat
                         MessageBox.Show(Resources.ResourceWordEn.cannotfindsender);
                 }
 
-                var senderRef = crm.Retrieve("systemuser", new Guid(senderId), new ColumnSet("fullname"));
-
-                if (senderId != null)
+                if (crmconfig.Worduser != null)
                 {
                     Entity fromParty = new Entity("activityparty");
-                    fromParty["partyid"] = new EntityReference(senderRef.LogicalName, senderRef.Id);
+                    fromParty["partyid"] = crmconfig.Worduser;
                     var listfrom = new List<Entity>() { fromParty };
                     email["from"] = new EntityCollection(listfrom);
                 }
@@ -251,7 +250,7 @@ namespace WordAddInSignicat
                     //newText += description;
                     newText += url + "<br/><br/><br/>";
                     newText += "<br/> With Regards / Med vennlig Hilsen<br/>";
-                    newText += senderRef.Attributes["fullname"];
+                    newText += crmconfig.Wordusername;
 
                     email["description"] = newText;
                 }
@@ -347,22 +346,44 @@ namespace WordAddInSignicat
             return 1033;
         }
 
-        internal static string GetSettingKeyValue(IOrganizationService crm, string key)
+        internal static WordCRMConfig GetCRMConfig(IOrganizationService crm)
         {
             try
             {
-                var query = new QueryExpression("pp_signicatsettings");
-                query.ColumnSet = new ColumnSet("pp_value");
-                query.Criteria.AddCondition("pp_name", ConditionOperator.Equal, key);
+                var query = new QueryExpression("pp_signicatconfig");
+                query.ColumnSet = new ColumnSet(true);
                 var results = crm.RetrieveMultiple(query);
 
                 if (results.Entities.Count == 1)
-                    return results.Entities[0]["pp_value"].ToString();
+                {
+                    var entity = results.Entities[0];
+
+                    var config = new WordCRMConfig();
+                    config.Worduser = entity.GetAttributeValue<EntityReference>("pp_wordsignuser");
+                    config.Entitylogicalnames = entity.GetAttributeValue<string>("pp_entitylogicalnames");
+                    config.SPUser = entity.GetAttributeValue<string>("pp_spuser");
+                    config.SPpassword = entity.GetAttributeValue<string>("pp_sppassord");
+                    config.Webapiurl = entity.GetAttributeValue<string>("pp_webapiurl");
+                    config.Wordsaveinsp = entity.GetAttributeValue<bool>("pp_wordsaveinsp");
+                    config.Wordsigningmethod = entity.GetAttributeValue<OptionSetValue>("pp_signing").Value;
+
+                    var senderRef = crm.Retrieve("systemuser", config.Worduser.Id, new ColumnSet("fullname"));
+                    config.Wordusername = senderRef.GetAttributeValue<string>("fullname");
+
+                    config.AccountNrField = entity.GetAttributeValue<string>("pp_accountnumberfield");
+                    config.OrderNrField = entity.GetAttributeValue<string>("pp_ordernumberfield");
+                    config.IncidentNrField = entity.GetAttributeValue<string>("pp_incidentnumberfield");
+                    config.QuoteNrField = entity.GetAttributeValue<string>("pp_quotenumberfield");
+                    config.ContractNrField = entity.GetAttributeValue<string>("pp_contractnumberfield");
+                    config.EmailField = entity.GetAttributeValue<string>("pp_emailfield");
+
+                    return config;
+                }
                 return null;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Cannot find the value in PP SettingKey in CRM: " + ex.Message, "Document Signing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Cannot find value in Signicat config in CRM: " + ex.Message, "Document Signing", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }

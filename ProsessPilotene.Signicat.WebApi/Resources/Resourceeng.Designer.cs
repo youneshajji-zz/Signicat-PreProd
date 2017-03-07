@@ -70,7 +70,7 @@ namespace PP.Signicat.WebApi.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hi, This is a copy of the signed document.
+        ///   Looks up a localized string similar to This is a copy of the signed document.
         /// </summary>
         public static string emaildescription {
             get {

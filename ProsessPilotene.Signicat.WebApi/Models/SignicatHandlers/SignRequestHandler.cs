@@ -86,7 +86,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 var tasks = GetTasks(documentInSds, recipients, signingInfo);
                 var documents = GetDocuments(documentInSds, recipients);
 
-                if (signingInfo.notifyMe == 1)
+                if (signingInfo.notifyMe)
                     tasks = new NotificationHandler().AddNotifyMe(signingInfo, tasks);
 
                 var lang = "en";
@@ -116,27 +116,28 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
         {
             try
             {
-
                 var callbackOnTaskCompleteUrl = "https://prosesspilotenesignicatwebapi-preprod.azurewebsites.net:443/api/Callback/Landingpage?lcid=" + signingInfo.LCID;
                 var signatures = new SignatureHandler().GetSignatures(signingInfo);
                 var authSignatures = new SignatureHandler().GetAuthSignatures(signingInfo);
                 var documentactions = GetDocumentActions(documentInSds, recipients);
                 var randomnr = new Random();
                 int nr = randomnr.Next(10000);
+                bool bundle = signingInfo.signingMetodText == "nbid";
 
                 var tasks = new task[recipients.Count];
                 for (int i = 0; i < recipients.Count; i++)
                 {
                     var notifications = new NotificationHandler().AddNotifications(recipients[i], signingInfo, i);
+
                     tasks[i] = new task
                     {
                         id = "task_" + i + "_" + nr, // Any identifier you'd like
                         subjectref = "sub_" + i, // Any identifier you'd like
                         bundle = true,
-                        //bundleSpecified = true,
+                        bundleSpecified = bundle,
                         daystolive = signingInfo.daysToLive,
                         documentaction = documentactions,
-                        //signature = signatures,
+                        signature = signatures,
                         authenticationbasedsignature = authSignatures,
                         ontaskcomplete = callbackOnTaskCompleteUrl,
                         subject = new subject
@@ -158,7 +159,7 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
             }
         }
 
-       
+
 
         private document[] GetDocuments(sdsdocument[] documentInSds, List<ContactInfo> recipients)
         {
@@ -240,6 +241,6 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                 throw new Exception(ex.Message);
             }
         }
-       
+
     }
 }

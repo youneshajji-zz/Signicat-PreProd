@@ -239,17 +239,38 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
         /// <param name="service"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        internal string GetSettingKeyValue(IOrganizationService service, string key)
+        internal CRMConfig GetCRMConfig(IOrganizationService service)
         {
             try
             {
-                var query = new QueryExpression("pp_signicatsettings");
-                query.ColumnSet = new ColumnSet("pp_value");
-                query.Criteria.AddCondition("pp_name", ConditionOperator.Equal, key);
+                var query = new QueryExpression("pp_signicatconfig");
+                query.ColumnSet = new ColumnSet("pp_spuser", "pp_sppassord", "pp_wordsignuser",
+                    "pp_spaccountroot", "pp_spquoteroot", "pp_spopportunityroot", "pp_spincidentroot",
+                    "pp_sporderroot", "pp_spcontractroot");
                 var results = service.RetrieveMultiple(query);
 
                 if (results.Entities.Count == 1)
-                    return results.Entities[0]["pp_value"].ToString();
+                {
+                    var entity = results.Entities[0];
+
+                    var config = new CRMConfig();
+                    config.SPUser = entity.GetAttributeValue<string>("pp_spuser");
+                    config.SPpassword = entity.GetAttributeValue<string>("pp_sppassord");
+                    config.SigningUser = entity.GetAttributeValue<EntityReference>("pp_wordsignuser");
+
+                    var senderRef = service.Retrieve("systemuser", config.SigningUser.Id, new ColumnSet("fullname"));
+                    config.SigningUsername = senderRef.GetAttributeValue<string>("fullname");
+
+                    //SP root folders
+                    config.SpAccountRoot = entity.GetAttributeValue<string>("pp_spaccountroot");
+                    config.SpQuoteRoot = entity.GetAttributeValue<string>("pp_spquoteroot");
+                    config.SpOpportunityRoot = entity.GetAttributeValue<string>("pp_spopportunityroot");
+                    config.SpIncidentRoot = entity.GetAttributeValue<string>("pp_spincidentroot");
+                    config.SpOrderRoot = entity.GetAttributeValue<string>("pp_sporderroot");
+                    config.SpContractRoot = entity.GetAttributeValue<string>("pp_spcontractroot");
+
+                    return config;
+                }
                 return null;
             }
             catch (Exception ex)
@@ -267,7 +288,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
 
                 foreach (var task in tasks.Entities)
                 {
-                    var customer = (EntityReference) task.Attributes["pp_customerid"];
+                    var customer = (EntityReference)task.Attributes["pp_customerid"];
                     SendEmail(docsignRef, senderRef, padesurl, name, customer, lcid, service);
                 }
             }
@@ -282,14 +303,17 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
         {
             try
             {
+                var crmConfig = new CallBackCrmHandler().GetCRMConfig(service);
+                var emailLogoImg = "https://ppsignicatresources.blob.core.windows.net/signicatlinkbutton/SignicatMailLogo.png";
+
                 Entity fromParty = new Entity("activityparty");
                 fromParty["partyid"] = new EntityReference("systemuser", senderRef.Id);
 
                 Entity toParty = new Entity("activityparty");
                 toParty["partyid"] = new EntityReference(customer.LogicalName, customer.Id);
 
-                var listfrom = new List<Entity>() {fromParty};
-                var listto = new List<Entity>() {toParty};
+                var listfrom = new List<Entity>() { fromParty };
+                var listto = new List<Entity>() { toParty };
 
                 // Create an e-mail message.
                 Entity email = new Entity("email");
@@ -303,11 +327,22 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
 
                 email["directioncode"] = true;
                 email["regardingobjectid"] = new EntityReference(docsignRef.LogicalName, docsignRef.Id);
-
+                var newText = "";
+                //newText = "<img src='" + emailLogoImg + "'/><br/><br/>";
                 if (lcid == 1044)
-                    email["description"] = Resources.Resourcenb.emaildescription + ": " + name;
+                {
+                    newText += "Hei,<br/><br/>" + Resources.Resourcenb.emaildescription + ": " + name;
+                    newText += "<br/><br/> Med vennlig Hilsen<br/>";
+                }
                 else
-                    email["description"] = Resources.Resourceeng.emaildescription + ": " + name;
+                {
+                    newText += "Hi,<br/><br/>" + Resources.Resourceeng.emaildescription + ": " + name;
+                    newText += "<br/><br/> With Regards<br/>";
+                }
+                newText += crmConfig.SigningUsername;
+                email["description"] = newText;
+
+
 
                 var _emailId = service.Create(email);
 
@@ -333,7 +368,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                     IssueSend = true
                 };
 
-                SendEmailResponse sendEmailresp = (SendEmailResponse) service.Execute(sendEmailreq);
+                SendEmailResponse sendEmailresp = (SendEmailResponse)service.Execute(sendEmailreq);
             }
             catch (Exception ex)
             {
@@ -377,7 +412,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
             var userSettings = service.RetrieveMultiple(userSettingsQuery);
             if (userSettings.Entities.Count > 0)
             {
-                return (int) userSettings.Entities[0]["uilanguageid"];
+                return (int)userSettings.Entities[0]["uilanguageid"];
             }
             return 0;
         }
@@ -390,7 +425,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                 var subscription = new SubscriptionHandler().GetSubscription("signicatcrm", orgname);
                 if (subscription == null)
                     return;
-                
+
                 var period = DateTime.Now.Month.ToString() + "-" + DateTime.Now.Year.ToString();
                 var transaction = new TransactionHandler().GetTransaction(orgname, period);
 
@@ -428,7 +463,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                     var newtransaction = new TransactionModel();
                     newtransaction.period = period;
                     newtransaction.subscription = orgname;
-                    newtransaction.customer = subscription.customer;
+                    newtransaction.category = subscription.category;
                     newtransaction.countertotal = 1;
                     newtransaction.counteruniqueusers = 1;
 

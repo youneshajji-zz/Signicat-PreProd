@@ -20,9 +20,9 @@
         <div class="col-lg-12">
 
             <div class="form-group">
-                @Html.LabelFor(model => model.customer, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.category, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-2">
-                    @Html.DisplayFor(model => model.customer, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DisplayFor(model => model.category, new { htmlAttributes = new { @class = "form-control" } })
                 </div>
 
                 @Html.LabelFor(model => model.subscription, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -48,52 +48,60 @@
             </div>*@
 
         <div class="col-lg-6">
-
+            
             <div class="form-group">
-                @Html.LabelFor(model => model.partner, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.customer, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.partner, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.partner, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.customer, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.customer, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.orgurl, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.partner, htmlAttributes: new {@class = "control-label col-md-2"})
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.orgurl, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.orgurl, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.partner, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.partner, "", new {@class = "text-danger"})
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.discoveryurl, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.orgurl, htmlAttributes: new {@class = "control-label col-md-2"})
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.discoveryurl, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.discoveryurl, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.orgurl, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.orgurl, "", new {@class = "text-danger"})
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.discoveryurl, htmlAttributes: new {@class = "control-label col-md-2"})
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.discoveryurl, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.discoveryurl, "", new {@class = "text-danger"})
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.username, htmlAttributes: new {@class = "control-label col-md-2"})
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.username, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.username, "", new {@class = "text-danger"})
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.domain, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.password, htmlAttributes: new {@class = "control-label col-md-2"})
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.domain, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.domain, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.password, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.password, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.domain, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.domain, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.domain, "", new {@class = "text-danger"})
                 </div>
             </div>
 

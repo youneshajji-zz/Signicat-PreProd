@@ -37,7 +37,7 @@
     <PublishUrl>C:\GIT\Signicat-PreProd\WordAddInSignicat\Publish-PreProd\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.14</ApplicationVersion>
+    <ApplicationVersion>1.0.0.31</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -281,6 +281,7 @@
       <DependentUpon>ResourceWordNb.resx</DependentUpon>
     </Compile>
     <Compile Include="WordConnectToCrm.cs" />
+    <Compile Include="WordCRMConfig.cs" />
     <Compile Include="WordHandlerCRM.cs" />
     <Compile Include="DeviceIdManager.cs" />
     <Compile Include="WordHandlerSP.cs" />
@@ -301,10 +302,12 @@
     <EmbeddedResource Include="Resources\ResourceWordEn.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ResourceWordEn.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ResourceWordNb.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ResourceWordNb.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon.resx">
       <DependentUpon>Ribbon.cs</DependentUpon>
