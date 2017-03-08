@@ -33,13 +33,19 @@ namespace PP.Signicat.CredentialManager.Models
         [Display(Name = "BankID")]
         public int counterbankid { get; set; }
 
+        [Display(Name = "Tupas")]
+        public int countertupas { get; set; }
+
+        [Display(Name = "NemID")]
+        public int counternemid { get; set; }
+
         [Display(Name = "Social")]
         public int countersocial { get; set; }
 
         [Display(Name = "Email/SMS")]
         public int counternpid { get; set; }
 
-        [Display(Name = "Handwritten")]
+        [Display(Name = "InkSign")]
         public int counterhandwritten { get; set; }
 
     }

@@ -187,14 +187,14 @@ namespace WordAddInSignicat
                 for (int i = 0; i < docText.Length; i++)
                 {
                     //if (docText[i].ToLower().Contains(recievermail))
-                    if (recievermail.Any(docText[i].ToLower().Contains))
+                    if (recievermail.Any(docText[i].Contains))
                         recieverto = docText[i + 1];
                 }
 
                 for (int i = 0; i < docText.Length; i++)
                 {
                     //if (docText[i].ToLower().Contains(account))
-                    if (account.Any(docText[i].ToLower().Contains))
+                    if (account.Any(docText[i].Contains))
                     {
                         searchnumber = docText[i + 1];
                         searchentity = "account";
@@ -202,7 +202,7 @@ namespace WordAddInSignicat
                         break;
                     }
                     //if (docText[i].ToLower().Contains(order))
-                    if (order.Any(docText[i].ToLower().Contains))
+                    if (order.Any(docText[i].Contains))
                     {
                         searchnumber = docText[i + 1];
                         searchentity = "salesorder";
@@ -210,7 +210,7 @@ namespace WordAddInSignicat
                         break;
                     }
                     //if (docText[i].ToLower().Contains(quote))
-                    if (quote.Any(docText[i].ToLower().Contains))
+                    if (quote.Any(docText[i].Contains))
                     {
                         searchnumber = docText[i + 1];
                         searchentity = "quote";
@@ -218,7 +218,7 @@ namespace WordAddInSignicat
                         break;
                     }
                     //if (docText[i].ToLower().Contains(incident))
-                    if (incident.Any(docText[i].ToLower().Contains))
+                    if (incident.Any(docText[i].Contains))
                     {
                         searchnumber = docText[i + 1];
                         searchentity = "incident";
@@ -226,7 +226,7 @@ namespace WordAddInSignicat
                         break;
                     }
                     //if (docText[i].ToLower().Contains(contract))
-                    if (contract.Any(docText[i].ToLower().Contains))
+                    if (contract.Any(docText[i].Contains))
                     {
                         searchnumber = docText[i + 1];
                         searchentity = "contract";

@@ -46,6 +46,8 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
             signInfo.isInk = true;
 
             var authMethod = new SignatureHandler().GetAuthSignatures(signInfo);
+            var signatures = new SignatureHandler().GetSignatures(signInfo);
+            bool bundle = signInfo.signingMetodText == "nbid";
 
 
             var request = new createrequestrequest
@@ -83,8 +85,8 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                             {
                                 id = "task_1",
                                 subjectref = "subj_1",
-                                bundleSpecified = true,
-                                bundle = false,
+                                bundle = true,
+                                bundleSpecified = bundle,
                                 documentaction = new documentaction[]
                                 {
                                     new documentaction
@@ -93,25 +95,8 @@ namespace PP.Signicat.WebApi.Models.SignicatHandlers
                                         documentref = uploadedDocument.id
                                     }
                                 },
-                                authenticationbasedsignature = authMethod
-                                //signature = new signature[]
-                                //{
-                                //    new signature
-                                //    {
-                                //        responsive = true,
-                                //        method = new method[]
-                                //        {
-                                //            new method
-                                //            {
-                                //               Value = "nbid-sign"
-                                //            },
-                                //            new method
-                                //            {
-                                //               Value = "nbid-mobil-sign"
-                                //            }
-                                //        }
-                                //    }
-                                //},
+                                authenticationbasedsignature = authMethod,
+                                signature = signatures
                             }
                         }
                     }

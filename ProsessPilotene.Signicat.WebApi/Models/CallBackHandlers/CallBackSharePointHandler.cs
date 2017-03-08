@@ -53,6 +53,7 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                 var urlSplit = folderRelativeUrl.Split('/').ToList();
                 var listTitle = urlSplit.First();
                 var folderName = urlSplit[1];
+                docName = CleanName(docName);
 
                 using (ClientContext clientContext = new ClientContext(sharePointUrl))
                 {
@@ -92,6 +93,18 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                 return;
                 throw new Exception(ex.Message);
             }
+        }
+
+        private string CleanName(string docName)
+        {
+            var mychar = new char[] {'"'};
+            if (docName.Contains("\""))
+            {
+                docName = docName.Replace(@"\", "");
+                docName = docName.TrimStart(mychar);
+                return docName;
+            }
+            return docName;
         }
 
         /// <summary>

@@ -21,9 +21,12 @@ namespace PP.Signicat.CredentialManager.Models
                     category = transaction.category,
                     countertotal = transaction.countertotal,
                     counteruniqueusers = transaction.counteruniqueusers,
+                    counterhandwritten = transaction.counterhandwritten,
                     counterbankid = transaction.counterbankid,
+                    countertupas = transaction.countertupas,
+                    counternemid = transaction.counternemid,
                     countersocial = transaction.countersocial,
-                    counternpid = transaction.counternpid,
+                    counternpid = transaction.counternpid
                 };
 
                 TableOperation insertOperation = TableOperation.Insert(entity);
@@ -49,7 +52,10 @@ namespace PP.Signicat.CredentialManager.Models
                     category = transaction.category,
                     countertotal = transaction.countertotal,
                     counteruniqueusers = transaction.counteruniqueusers,
+                    counterhandwritten = transaction.counterhandwritten,
                     counterbankid = transaction.counterbankid,
+                    countertupas = transaction.countertupas,
+                    counternemid = transaction.counternemid,
                     countersocial = transaction.countersocial,
                     counternpid = transaction.counternpid
                 };
@@ -115,7 +121,10 @@ namespace PP.Signicat.CredentialManager.Models
                     transaction.category = item.category;
                     transaction.countertotal = item.countertotal;
                     transaction.counteruniqueusers = item.counteruniqueusers;
+                    transaction.counterhandwritten = item.counterhandwritten;
                     transaction.counterbankid = item.counterbankid;
+                    transaction.countertupas = item.countertupas;
+                    transaction.counternemid = item.counternemid;
                     transaction.countersocial = item.countersocial;
                     transaction.counternpid = item.counternpid;
                     transaction.Timestamp = item.Timestamp;

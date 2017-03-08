@@ -435,6 +435,8 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
 
                     var total = transaction.countertotal;
                     var bankid = transaction.counterbankid;
+                    var tupas = transaction.countertupas;
+                    var nemid = transaction.counternemid;
                     var npid = transaction.counternpid;
                     var social = transaction.countersocial;
                     var handwritten = transaction.counterhandwritten;
@@ -446,14 +448,35 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                     newtransaction.countertotal = total + 1;
                     newtransaction.counteruniqueusers = crmunique;
 
-                    if (method == 1) //Bankid
-                        newtransaction.counterbankid = bankid + 1;
-                    if (method == 2) //npid
-                        newtransaction.counternpid = npid + 1;
-                    if (method == 3) //Social
-                        newtransaction.countersocial = social + 1;
-                    if (method == 4) //Handwritten
+                    if (method == 1) //Handwritten
                         newtransaction.counterhandwritten = handwritten + 1;
+                    else
+                        newtransaction.counterhandwritten = handwritten;
+
+                    if (method == 2) //Bankid
+                        newtransaction.counterbankid = bankid + 1;
+                    else
+                        newtransaction.counterbankid = bankid;
+
+                    if (method == 3) //Tupas
+                        newtransaction.countertupas = tupas + 1;
+                    else
+                        newtransaction.countertupas = tupas;
+
+                    if (method == 4) //NemID
+                        newtransaction.counternemid = nemid + 1;
+                    else
+                        newtransaction.counternemid = nemid;
+
+                    if (method == 5) //npid
+                        newtransaction.counternpid = npid + 1;
+                    else
+                        newtransaction.counternpid = npid;
+
+                    if (method == 6) //Social
+                        newtransaction.countersocial = social + 1;
+                    else
+                        newtransaction.countersocial = social;
 
                     new TransactionHandler().UpdateTransactions(newtransaction);
                 }
@@ -467,14 +490,18 @@ namespace PP.Signicat.WebApi.Models.CallBackHandlers
                     newtransaction.countertotal = 1;
                     newtransaction.counteruniqueusers = 1;
 
-                    if (method == 1) //Bankid
-                        newtransaction.counterbankid = 1;
-                    if (method == 2) //npid
-                        newtransaction.counternpid = 1;
-                    if (method == 3) //Social
-                        newtransaction.countersocial = 1;
-                    if (method == 4) //Handwritten
+                    if (method == 1) //Handwritten
                         newtransaction.counterhandwritten = 1;
+                    if (method == 2) //Bankid
+                        newtransaction.counterbankid = 1;
+                    if (method == 3) //Tupas
+                        newtransaction.countertupas = 1;
+                    if (method == 4) //NemID
+                        newtransaction.counternemid = 1;
+                    if (method == 5) //npid
+                        newtransaction.counternpid = 1;
+                    if (method == 6) //Social
+                        newtransaction.countersocial = 1;
 
                     new TransactionHandler().CreateTransactions(newtransaction);
                 }

@@ -2,7 +2,7 @@
 
 <h2>Transaction Details</h2>
 
-<a href="@Url.Action("Edit", "Subscription", new {customer = Model.customer, subscription = Model.subscription})" class="btn btn-info">
+<a href="@Url.Action("Edit", "Subscription", new {customer = Model.category, subscription = Model.subscription})" class="btn btn-info">
     Back
     <span class="glyphicon glyphicon-plus-backward" aria-hidden="true"></span>
 </a>
@@ -48,11 +48,32 @@
                 @Html.DisplayFor(model => model.counteruniqueusers, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.counterhandwritten, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.counterhandwritten, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.counterbankid, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.counterbankid, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.countertupas, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.countertupas, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.counternemid, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.counternemid, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
 
