@@ -409,9 +409,7 @@
         HandleTranslation(lcid);
 
         if (!docLocExists) {
-            $("#radios-4").attr('disabled', true);
-            //$("#radiosSaveInSP").notify($.translate.get_text('doclocnotify'), "warn",
-            //    { position: "left" });
+            $('#lblsaveinsp').click(false);
             $.notify($.translate.get_text('doclocnotify'), "warn",
                 { clickToHide: true, autoHide: true, position: "top" });
         }
