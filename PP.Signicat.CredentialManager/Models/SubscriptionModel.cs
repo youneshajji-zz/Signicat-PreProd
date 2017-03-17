@@ -47,9 +47,11 @@ namespace PP.Signicat.CredentialManager.Models
         [Display(Name = "Domain")]
         public string domain { get; set; }
 
+        //[DataType(DataType.Date)]
         [Display(Name = "Service started")]
         public DateTime? servicestarted { get; set; }
 
+        //[DataType(DataType.Date)]
         [Display(Name = "Service ended")]
         public DateTime? serviceended { get; set; }
 

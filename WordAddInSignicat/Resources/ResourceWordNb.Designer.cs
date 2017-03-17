@@ -187,6 +187,15 @@ namespace WordAddInSignicat.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Feil ved søk av mottaker..
+        /// </summary>
+        internal static string emailfindreciever {
+            get {
+                return ResourceManager.GetString("emailfindreciever", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kunne ikke finne oppføringen: .
         /// </summary>
         internal static string recordnotfound {

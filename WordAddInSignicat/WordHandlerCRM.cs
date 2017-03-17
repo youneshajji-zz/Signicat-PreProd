@@ -57,7 +57,7 @@ namespace WordAddInSignicat
                 var documentsigning = new Entity("pp_documentsigning");
                 documentsigning["pp_name"] = "Word dokument: " + docName;
                 documentsigning["pp_requestid"] = requestid;
-                documentsigning["pp_signing"] = new OptionSetValue(crmconfig.Wordsigningmethod); 
+                documentsigning["pp_signing"] = new OptionSetValue(crmconfig.Wordsigningmethod);
 
                 if (saveinsp)
                     documentsigning["pp_saveindocumentlocation"] = true;
@@ -202,7 +202,7 @@ namespace WordAddInSignicat
 
                 // Create an e-mail message.
                 Entity email = new Entity("email");
-                
+
                 if (crmconfig.Worduser == null)
                 {
                     if (searchValues.language == 1044)
@@ -220,12 +220,19 @@ namespace WordAddInSignicat
                 }
 
                 Entity toParty = new Entity("activityparty");
-                if (string.IsNullOrWhiteSpace(searchValues.recievermail) && entity != null)
-                    toParty["partyid"] = new EntityReference(entity.LogicalName, entity.Id);
-                else if (!string.IsNullOrWhiteSpace(searchValues.recievermail))
-                    toParty["addressused"] = searchValues.recievermail;
-                var listto = new List<Entity>() { toParty };
-                email["to"] = new EntityCollection(listto);
+                //if (string.IsNullOrWhiteSpace(searchValues.recievermail) && entity != null)
+                //    toParty["partyid"] = new EntityReference(entity.LogicalName, entity.Id);
+                if (!string.IsNullOrWhiteSpace(searchValues.recievermail))
+                {
+                    var reciever = GetCustomerByEmail(searchValues.recievermail, crm);
+                    if (reciever != null)
+                        toParty["partyid"] = reciever;
+                    else
+                        toParty["addressused"] = searchValues.recievermail;
+                    var listto = new List<Entity>() { toParty };
+                    email["to"] = new EntityCollection(listto);
+                }
+
 
                 var subject = "";
                 var description = "";

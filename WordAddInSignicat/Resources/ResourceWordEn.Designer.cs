@@ -187,6 +187,15 @@ namespace WordAddInSignicat.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error finding the reciever..
+        /// </summary>
+        internal static string emailfindreciever {
+            get {
+                return ResourceManager.GetString("emailfindreciever", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find a record with number: .
         /// </summary>
         internal static string recordnotfound {

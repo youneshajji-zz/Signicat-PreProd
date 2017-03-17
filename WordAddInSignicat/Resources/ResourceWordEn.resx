@@ -159,6 +159,9 @@
   <data name="emailerror" xml:space="preserve">
     <value>An error occurred in sending email: </value>
   </data>
+  <data name="emailfindreciever" xml:space="preserve">
+    <value>Error finding the reciever.</value>
+  </data>
   <data name="recordnotfound" xml:space="preserve">
     <value>Could not find a record with number: </value>
   </data>
